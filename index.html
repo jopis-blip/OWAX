@@ -120,7 +120,7 @@
             align-items: center;
         }
 
-        nav a {
+        nav a.nav-link {
             color: #cbd5e1;
             text-decoration: none;
             font-weight: 600;
@@ -129,7 +129,7 @@
             position: relative;
         }
 
-        nav a::after {
+        nav a.nav-link::after {
             content: '';
             position: absolute;
             bottom: -6px;
@@ -140,12 +140,36 @@
             transition: var(--transition);
         }
 
-        nav a:hover::after {
+        nav a.nav-link:hover::after {
             width: 100%;
         }
 
-        nav a:hover {
+        nav a.nav-link:hover {
             color: #ffffff;
+        }
+
+        /* VÝRAZNÉ TLAČÍTKO "NEZÁVAZNÁ POPTÁVKA" */
+        .nav-btn {
+            background: var(--brand-blue);
+            color: #ffffff !important;
+            padding: 0.6rem 1.4rem;
+            border-radius: 50px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: var(--transition);
+            box-shadow: 0 4px 12px var(--brand-blue-glow);
+            font-size: clamp(0.85rem, 0.9vw, 1rem);
+            display: inline-block;
+        }
+
+        .nav-btn::after {
+            display: none !important;
+        }
+
+        .nav-btn:hover {
+            background: var(--brand-blue-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 18px rgba(0, 56, 130, 0.4);
         }
 
         /* IKONA MENU */
@@ -483,22 +507,34 @@
             margin: 0;
         }
 
-        /* --- KONTAKT A FORMULÁŘ --- */
-        .contact-grid {
+        /* --- NOVÉ PROZDUŠNĚNÉ ROZVRŽENÍ KONTAKTŮ A FORMULÁŘE --- */
+        .contact-container {
+            margin: 0 8% clamp(2.5rem, 4vw, 4.5rem) 8%;
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: clamp(2rem, 4vw, 4rem);
-            align-items: flex-start;
+            gap: clamp(1.5rem, 3vw, 3rem);
+            align-items: stretch;
+        }
+
+        .contact-info-box {
+            background: var(--card-dark);
+            border-radius: clamp(18px, 2.5vw, 28px);
+            padding: clamp(2rem, 3.5vw, 3.5rem);
+            color: white;
+            border: 1px solid var(--border-card);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.05);
         }
 
         .contact-info-card {
             display: flex;
             align-items: center;
             gap: 1.2rem;
-            margin-bottom: 1.5rem;
+            margin-top: 1.5rem;
         }
 
-        /* STYLOVÁNÍ IKONY KONTAKTU (Využito i v mobilním menu) */
         .contact-icon {
             width: 50px;
             height: 50px;
@@ -513,11 +549,29 @@
             flex-shrink: 0;
         }
 
-        .inner-dark-card {
-            background: var(--card-inner);
-            padding: clamp(1.8rem, 3vw, 2.5rem);
-            border-radius: 22px;
-            border: 1px solid var(--border-card);
+        /* ČISTÁ SVĚTLÁ KARTA PRO FORMULÁŘ */
+        .contact-form-box {
+            background: #ffffff;
+            border-radius: clamp(18px, 2.5vw, 28px);
+            padding: clamp(2rem, 3.5vw, 3.5rem);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.06);
+            border: 1px solid #e2e8f0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .contact-form-box h3 {
+            font-size: clamp(1.3rem, 1.8vw, 1.8rem);
+            color: #0f172a;
+            font-weight: 800;
+            margin-bottom: 0.4rem;
+        }
+
+        .contact-form-box p {
+            color: #64748b;
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
         }
 
         .contact-form {
@@ -529,24 +583,24 @@
         .form-group {
             display: flex;
             flex-direction: column;
-            gap: 0.5rem;
+            gap: 0.4rem;
         }
 
         .form-group label {
-            color: #e2e8f0;
-            font-size: 0.95rem;
-            font-weight: 600;
+            color: #334155;
+            font-size: 0.9rem;
+            font-weight: 700;
         }
 
         .form-group input,
         .form-group textarea {
             width: 100%;
-            background: #1e293b;
-            border: 1px solid rgba(255, 255, 255, 0.15);
+            background: #f8fafc;
+            border: 1px solid #cbd5e1;
             border-radius: 12px;
             padding: 0.9rem 1.1rem;
-            color: #ffffff;
-            font-size: 1rem;
+            color: #0f172a;
+            font-size: 0.98rem;
             transition: var(--transition);
             outline: none;
         }
@@ -558,14 +612,14 @@
 
         .form-group input:focus,
         .form-group textarea:focus {
-            border-color: #60a5fa;
-            box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.25);
-            background: #1a2332;
+            border-color: var(--brand-blue);
+            box-shadow: 0 0 0 3px rgba(0, 86, 210, 0.15);
+            background: #ffffff;
         }
 
         .form-group textarea {
             resize: vertical;
-            min-height: 120px;
+            min-height: 110px;
         }
 
         .submit-btn {
@@ -574,7 +628,7 @@
             border: none;
             padding: 1rem 1.8rem;
             border-radius: 12px;
-            font-size: 1.05rem;
+            font-size: 1rem;
             font-weight: 700;
             cursor: pointer;
             transition: var(--transition);
@@ -583,14 +637,14 @@
             align-items: center;
             justify-content: center;
             gap: 10px;
-            margin-top: 0.5rem;
+            margin-top: 0.3rem;
             width: 100%;
         }
 
         .submit-btn:hover {
             background: var(--brand-blue-hover);
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(0, 56, 130, 0.5);
+            box-shadow: 0 6px 20px rgba(0, 56, 130, 0.3);
         }
 
         .submit-btn:disabled {
@@ -603,23 +657,23 @@
             margin-top: 1rem;
             padding: 0.8rem 1rem;
             border-radius: 10px;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             font-weight: 600;
             display: none;
         }
 
         .form-status.success {
             display: block;
-            background: rgba(34, 197, 94, 0.15);
-            color: #4ade80;
-            border: 1px solid rgba(34, 197, 94, 0.3);
+            background: #f0fdf4;
+            color: #166534;
+            border: 1px solid #bbf7d0;
         }
 
         .form-status.error {
             display: block;
-            background: rgba(239, 68, 68, 0.15);
-            color: #f87171;
-            border: 1px solid rgba(239, 68, 68, 0.3);
+            background: #fef2f2;
+            color: #991b1b;
+            border: 1px solid #fecaca;
         }
 
         /* --- FOOTER --- */
@@ -693,7 +747,7 @@
 
         /* === MEDIA QUERIES === */
         @media (min-width: 1441px) {
-            .dark-card-container, .services-grid {
+            .dark-card-container, .services-grid, .contact-container {
                 margin-left: auto;
                 margin-right: auto;
                 max-width: 1440px;
@@ -705,14 +759,12 @@
         }
 
         @media (max-width: 1024px) {
-            .case-study, .contact-grid, .about-grid {
+            .case-study, .about-grid, .contact-container {
                 grid-template-columns: 1fr;
             }
-            .dark-card-container {
-                margin: 0 5% clamp(2rem, 3vw, 3rem) 5%;
-            }
-            .services-grid {
-                margin: 0 5% clamp(2rem, 3vw, 3rem) 5%;
+            .dark-card-container, .services-grid, .contact-container {
+                margin-left: 5%;
+                margin-right: 5%;
             }
             .hero {
                 padding-left: 5%;
@@ -765,22 +817,33 @@
                 transform: translateY(0) scale(1);
             }
 
-            nav a {
+            nav a.nav-link {
                 font-size: 1rem;
                 font-weight: 600;
                 width: 100%;
                 text-align: left;
-                padding: 4px 0;
+                padding: 6px 0;
                 opacity: 0;
                 transform: translateX(-15px);
                 transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease;
             }
 
-            nav a::after {
+            nav a.nav-link::after {
                 display: none;
             }
 
-            /* STEJNÉ IKONY V ROZBALOVACÍM MENU JAKO NA HLAVNÍ STRÁNCE */
+            /* PODBARVENÉ TLAČÍTKO V MOBILNÍM MENU (ZAROVNANÉ VLEVO) */
+            nav a.nav-btn {
+                width: 100%;
+                text-align: left;
+                padding: 0.8rem 1.2rem;
+                border-radius: 12px;
+                margin-top: 0.4rem;
+                opacity: 0;
+                transform: translateX(-15px);
+                transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease;
+            }
+
             .menu-contacts {
                 display: flex;
                 flex-direction: column;
@@ -883,9 +946,9 @@
                 text-align: center;
             }
 
-            .dark-card-container {
-                margin: 0 4% 2.5rem 4%;
-                padding: 2rem 1.5rem;
+            .dark-card-container, .contact-container {
+                margin-left: 4%;
+                margin-right: 4%;
             }
 
             .services-grid {
@@ -912,7 +975,7 @@
                 <a href="#sluzby" class="nav-link">Služby</a>
                 <a href="#reference" class="nav-link">Reference</a>
                 <a href="#o-nas" class="nav-link">O nás</a>
-                <a href="#kontakt" class="nav-link">Nezávazná poptávka</a>
+                <a href="#kontakt" class="nav-btn">Nezávazná poptávka</a>
 
                 <div class="menu-contacts">
                     <a href="tel:+420123456789" class="menu-contact-item">
@@ -1077,67 +1140,69 @@
         </div>
     </section>
 
-    <!-- KONTAKT A FORMULÁŘ -->
+    <!-- KONTAKT A FORMULÁŘ (PROZDUŠNĚNÁ STRUKTURA) -->
     <section id="kontakt">
-        <div class="dark-card-container reveal">
-            <div class="contact-grid">
-                <!-- LEVÁ STRANA: KONTAKTNÍ ÚDAJE -->
-                <div>
-                    <span class="section-subtitle" style="color: #60a5fa;">Kontaktujte nás</span>
-                    <h2 style="font-size: clamp(1.8rem, 2.5vw, 2.5rem); margin-bottom: 1.2rem; color: white;">Máte projekt? Rádi vám spočítáme rozpočet</h2>
-                    <p style="color: var(--text-muted); margin-bottom: 2rem; font-size: clamp(0.9rem, 1vw, 1.05rem);">Kontaktujte nás telefonicky, e-mailem nebo zanechte zprávu ve formuláři. Ozveme se vám zpět.</p>
+        <div class="section-header reveal" style="margin-bottom: 2rem;">
+            <span class="section-subtitle">Spojte se s námi</span>
+            <h2 class="section-title">Nezávazná poptávka</h2>
+        </div>
 
-                    <div class="contact-info-card">
-                        <div class="contact-icon"><i class="fa-solid fa-phone"></i></div>
-                        <div>
-                            <p style="color: var(--text-muted); font-size: 0.85rem;">Telefon</p>
-                            <a href="tel:+420123456789" style="color: white; font-weight: 700; text-decoration: none; font-size: clamp(1rem, 1.2vw, 1.25rem);">+420 123 456 789</a>
-                        </div>
-                    </div>
+        <div class="contact-container reveal">
+            <!-- LEVÁ STRANA: KONTAKTNÍ ÚDAJE (TMAVÁ DLAŽDICE) -->
+            <div class="contact-info-box">
+                <h3 style="font-size: clamp(1.4rem, 2vw, 2rem); margin-bottom: 0.8rem; color: white;">Rádi vám spočítáme rozpočet</h3>
+                <p style="color: var(--text-muted); margin-bottom: 1rem; font-size: clamp(0.9rem, 1vw, 1.05rem);">Kontaktujte nás přímo nebo využijte rychlý poptávkový formulář.</p>
 
-                    <div class="contact-info-card">
-                        <div class="contact-icon"><i class="fa-solid fa-envelope"></i></div>
-                        <div>
-                            <p style="color: var(--text-muted); font-size: 0.85rem;">E-mail</p>
-                            <a href="mailto:info@owax.cz" style="color: white; font-weight: 700; text-decoration: none; font-size: clamp(1rem, 1.2vw, 1.25rem);">info@owax.cz</a>
-                        </div>
-                    </div>
-
-                    <div style="margin-top: 1.8rem; padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,0.1);">
-                        <p style="margin-bottom: 0.4rem; color: #f1f5f9; font-weight: 600;">Stavební firma OWAX s.r.o.</p>
-                        <p style="color: var(--text-muted); font-size: 0.9rem; display: flex; align-items: center; gap: 8px;">
-                            <i class="fa-solid fa-location-dot" style="color: #60a5fa;"></i> Praha & Středočeský kraj | IČO: 12345678
-                        </p>
+                <div class="contact-info-card">
+                    <div class="contact-icon"><i class="fa-solid fa-phone"></i></div>
+                    <div>
+                        <p style="color: var(--text-muted); font-size: 0.85rem;">Telefon</p>
+                        <a href="tel:+420123456789" style="color: white; font-weight: 700; text-decoration: none; font-size: clamp(1.05rem, 1.2vw, 1.25rem);">+420 123 456 789</a>
                     </div>
                 </div>
 
-                <!-- PRAVÁ STRANA: FUNKČNÍ KONTAKTNÍ FORMULÁŘ (AJAX) -->
-                <div class="inner-dark-card">
-                    <h3 style="margin-bottom: 0.5rem; color: white; font-size: clamp(1.2rem, 1.4vw, 1.5rem);">Napište nám</h3>
-                    <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem;">Vyplňte váš kontakt a popis požadavku, ozveme se vám co nejdříve.</p>
-
-                    <form id="contact-form" action="https://formsubmit.co/ajax/jopis@jopis.cz" method="POST" class="contact-form">
-                        <input type="hidden" name="_subject" value="Nová poptávka z webu OWAX.cz">
-                        <input type="text" name="_honey" style="display:none">
-                        <input type="hidden" name="_captcha" value="false">
-
-                        <div class="form-group">
-                            <label for="contact_info">Váš e-mail nebo telefon *</label>
-                            <input type="text" id="contact_info" name="Kontakt" placeholder="např. jan.novak@email.cz nebo 777 123 456" required>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="message">Popis požadavku / Zpráva *</label>
-                            <textarea id="message" name="Zpráva" placeholder="Popište stručně váš záměr (např. kompletní rekonstrukce bytu 2+kk v Praze, termín realizace...)" required></textarea>
-                        </div>
-
-                        <button type="submit" id="submit-btn" class="submit-btn">
-                            <i class="fa-solid fa-paper-plane"></i> Odeslat poptávku
-                        </button>
-
-                        <div id="form-status" class="form-status"></div>
-                    </form>
+                <div class="contact-info-card">
+                    <div class="contact-icon"><i class="fa-solid fa-envelope"></i></div>
+                    <div>
+                        <p style="color: var(--text-muted); font-size: 0.85rem;">E-mail</p>
+                        <a href="mailto:info@owax.cz" style="color: white; font-weight: 700; text-decoration: none; font-size: clamp(1.05rem, 1.2vw, 1.25rem);">info@owax.cz</a>
+                    </div>
                 </div>
+
+                <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,0.1);">
+                    <p style="margin-bottom: 0.3rem; color: #f1f5f9; font-weight: 600;">Stavební firma OWAX s.r.o.</p>
+                    <p style="color: var(--text-muted); font-size: 0.9rem; display: flex; align-items: center; gap: 8px;">
+                        <i class="fa-solid fa-location-dot" style="color: #60a5fa;"></i> Praha & Středočeský kraj | IČO: 12345678
+                    </p>
+                </div>
+            </div>
+
+            <!-- PRAVÁ STRANA: SVĚTLÝ ČISTÝ FORMULÁŘ -->
+            <div class="contact-form-box">
+                <h3>Napište nám</h3>
+                <p>Zanechte nám kontakt, ozveme se vám zpět.</p>
+
+                <form id="contact-form" action="https://formsubmit.co/ajax/jopis@jopis.cz" method="POST" class="contact-form">
+                    <input type="hidden" name="_subject" value="Nová poptávka z webu OWAX.cz">
+                    <input type="text" name="_honey" style="display:none">
+                    <input type="hidden" name="_captcha" value="false">
+
+                    <div class="form-group">
+                        <label for="contact_info">Váš e-mail nebo telefon *</label>
+                        <input type="text" id="contact_info" name="Kontakt" placeholder="např. jan.novak@email.cz nebo 777 123 456" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message">Popis požadavku / Zpráva *</label>
+                        <textarea id="message" name="Zpráva" placeholder="Popište stručně váš záměr (např. rekonstrukce bytu, termín...)" required></textarea>
+                    </div>
+
+                    <button type="submit" id="submit-btn" class="submit-btn">
+                        <i class="fa-solid fa-paper-plane"></i> Odeslat poptávku
+                    </button>
+
+                    <div id="form-status" class="form-status"></div>
+                </form>
             </div>
         </div>
     </section>
@@ -1170,7 +1235,7 @@
         /* === HAMBURGER MENU A DYNAMICKÁ ANIMACE === */
         const hamburgerBtn = document.getElementById('hamburger-btn');
         const navMenu = document.getElementById('nav-menu');
-        const navLinks = document.querySelectorAll('.nav-link');
+        const navLinks = document.querySelectorAll('.nav-link, .nav-btn');
 
         hamburgerBtn.addEventListener('click', () => {
             navMenu.classList.toggle('active');
