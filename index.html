@@ -493,26 +493,37 @@
             margin: 0 8% clamp(2.5rem, 4vw, 4.5rem) 8%;
         }
 
+        /* ZVĚTŠENÉ TLAČÍTKO PRO VŠECHNY PROJEKTY */
         .btn-main-portfolio {
             display: inline-flex;
             align-items: center;
-            gap: 12px;
+            gap: 16px;
             background: var(--card-dark);
             color: #ffffff;
-            border: 1px solid var(--brand-blue);
-            padding: 1rem 2.2rem;
+            border: 2px solid var(--brand-blue);
+            padding: 1.25rem 2.8rem;
             border-radius: 50px;
             text-decoration: none;
-            font-weight: 700;
-            font-size: 1rem;
+            font-weight: 800;
+            font-size: clamp(1.1rem, 1.4vw, 1.35rem);
             transition: var(--transition);
-            box-shadow: 0 10px 25px rgba(17, 24, 39, 0.15);
+            box-shadow: 0 12px 30px rgba(17, 24, 39, 0.2);
+        }
+
+        .btn-main-portfolio i {
+            font-size: clamp(1.3rem, 1.6vw, 1.6rem);
+            color: #60a5fa;
+            transition: var(--transition);
         }
 
         .btn-main-portfolio:hover {
             background: var(--brand-blue);
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px var(--brand-blue-glow);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px var(--brand-blue-glow);
+        }
+
+        .btn-main-portfolio:hover i {
+            color: #ffffff;
         }
 
         /* --- O NÁS --- */
@@ -866,7 +877,6 @@
                 display: none;
             }
 
-            /* ZAROVNANÉ A STEJNĚ VELKÉ TLAČÍTKO V MOBILNÍM MENU */
             nav a.nav-btn {
                 display: inline-block;
                 width: fit-content;
@@ -996,6 +1006,12 @@
                 margin: 0 4% 2.5rem 4%;
                 grid-template-columns: 1fr;
             }
+
+            .btn-main-portfolio {
+                width: 100%;
+                justify-content: center;
+                padding: 1.1rem 1.5rem;
+            }
         }
     </style>
 </head>
@@ -1119,7 +1135,6 @@
                         <li style="color: #e2e8f0; font-weight: 600; font-size: clamp(0.85rem, 1vw, 1rem);"><i class="fa-solid fa-check" style="color: #60a5fa; margin-right: 10px;"></i> Předáno přesně v dohodnutém termínu</li>
                     </ul>
 
-                    <!-- ODKAZ NA DETAIL PROJEKTU PODBABA -->
                     <div>
                         <a href="projekty/podbaba.html" class="btn-project-detail">
                             Detail projektu & fotogalerie <i class="fa-solid fa-arrow-right"></i>
@@ -1139,10 +1154,10 @@
             </div>
         </div>
 
-        <!-- TLAČÍTKO PRO PŘECHOD NA VŠECHNY PROJEKTY -->
+        <!-- ZVĚTŠENÉ TLAČÍTKO PRO VŠECHNY PROJEKTY -->
         <div class="main-cta-container reveal">
             <a href="projekty.html" class="btn-main-portfolio">
-                <i class="fa-solid fa-images" style="color: #60a5fa;"></i> Zobrazit všechny realizované projekty
+                <i class="fa-solid fa-images"></i> Zobrazit všechny realizované projekty
             </a>
         </div>
     </section>
@@ -1239,6 +1254,7 @@
 
                 <form id="contact-form" action="https://formsubmit.co/ajax/jopis@jopis.cz" method="POST" class="contact-form">
                     <input type="hidden" name="_subject" value="Nová poptávka z webu OWAX.cz">
+                    <input type="hidden" name="_cc" value="dav.pivonka@seznam.cz">
                     <input type="text" name="_honey" style="display:none">
                     <input type="hidden" name="_captcha" value="false">
 
