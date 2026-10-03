@@ -40,7 +40,15 @@
             padding: 0;
             box-sizing: border-box;
             font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        html {
             scroll-behavior: smooth;
+        }
+
+        /* Odsazení pro kotvy, aby se nadpisy nechytaly pod fixní hlavičku */
+        section[id], div[id] {
+            scroll-margin-top: calc(var(--header-height) + 1.5rem);
         }
 
         body {
@@ -178,6 +186,7 @@
             color: white;
             overflow: hidden;
             margin-bottom: 2rem;
+            scroll-margin-top: 0px !important;
         }
 
         .hero-content {
@@ -698,7 +707,8 @@
     <!-- NAVIGACE -->
     <header>
         <div class="header-content">
-            <a href="#top" class="logo-container" onclick="location.reload(); location.href='#top';" title="OWAX - Obnovit stránku">
+            <!-- Odkaz směřuje na hlavní doménu na vrchol úvodní stránky -->
+            <a href="/#top" class="logo-container" title="OWAX - Hlavní strana">
                 <img src="logo.png" alt="OWAX Logo" class="logo-img">
             </a>
 
@@ -749,7 +759,7 @@
     </section>
 
     <!-- SLUŽBY -->
-    <div id="sluzby">
+    <section id="sluzby">
         <div class="section-header reveal">
             <span class="section-subtitle">Co pro vás děláme</span>
             <h2 class="section-title">Kompletní stavební servis</h2>
@@ -774,10 +784,10 @@
                 <p>Snížíme vaše náklady na vytápění. Zateplujeme rodinné i bytové domy s použitím certifikovaných systémů.</p>
             </div>
         </div>
-    </div>
+    </section>
 
     <!-- REFERENCE / POROVNÁVAČ PŘED & PO -->
-    <div id="reference">
+    <section id="reference">
         <div class="section-header reveal">
             <span class="section-subtitle">Ukázka práce</span>
             <h2 class="section-title">Rekonstrukce Bytu — Podbaba, Praha 6</h2>
@@ -809,10 +819,10 @@
                 </div>
             </div>
         </div>
-    </div>
+    </section>
 
     <!-- O NÁS -->
-    <div id="o-nas">
+    <section id="o-nas">
         <div class="section-header reveal">
             <span class="section-subtitle">Kdo jsme</span>
             <h2 class="section-title">O společnosti OWAX</h2>
@@ -857,45 +867,47 @@
                 </div>
             </div>
         </div>
-    </div>
+    </section>
 
     <!-- KONTAKT -->
-    <div id="kontakt" class="dark-card-container reveal">
-        <div class="contact-grid">
-            <div>
-                <span class="section-subtitle" style="color: #60a5fa;">Napište nám</span>
-                <h2 style="font-size: clamp(1.8rem, 2.5vw, 2.5rem); margin-bottom: 1.2rem; color: white;">Máte projekt? Rádi vám spočítáme rozpočet</h2>
-                <p style="color: var(--text-muted); margin-bottom: 2.5rem; font-size: clamp(0.9rem, 1vw, 1.05rem);">Kontaktujte nás pro nezávaznou konzultaci nebo obhlídku stavby zdarma.</p>
+    <section id="kontakt">
+        <div class="dark-card-container reveal">
+            <div class="contact-grid">
+                <div>
+                    <span class="section-subtitle" style="color: #60a5fa;">Napište nám</span>
+                    <h2 style="font-size: clamp(1.8rem, 2.5vw, 2.5rem); margin-bottom: 1.2rem; color: white;">Máte projekt? Rádi vám spočítáme rozpočet</h2>
+                    <p style="color: var(--text-muted); margin-bottom: 2.5rem; font-size: clamp(0.9rem, 1vw, 1.05rem);">Kontaktujte nás pro nezávaznou konzultaci nebo obhlídku stavby zdarma.</p>
 
-                <div class="contact-info-card">
-                    <div class="contact-icon"><i class="fa-solid fa-phone"></i></div>
-                    <div>
-                        <p style="color: var(--text-muted); font-size: 0.85rem;">Telefon</p>
-                        <a href="tel:+420123456789" style="color: white; font-weight: 700; text-decoration: none; font-size: clamp(1rem, 1.2vw, 1.25rem);">+420 123 456 789</a>
+                    <div class="contact-info-card">
+                        <div class="contact-icon"><i class="fa-solid fa-phone"></i></div>
+                        <div>
+                            <p style="color: var(--text-muted); font-size: 0.85rem;">Telefon</p>
+                            <a href="tel:+420123456789" style="color: white; font-weight: 700; text-decoration: none; font-size: clamp(1rem, 1.2vw, 1.25rem);">+420 123 456 789</a>
+                        </div>
+                    </div>
+
+                    <div class="contact-info-card">
+                        <div class="contact-icon"><i class="fa-solid fa-envelope"></i></div>
+                        <div>
+                            <p style="color: var(--text-muted); font-size: 0.85rem;">E-mail</p>
+                            <a href="mailto:info@owax.cz" style="color: white; font-weight: 700; text-decoration: none; font-size: clamp(1rem, 1.2vw, 1.25rem);">info@owax.cz</a>
+                        </div>
                     </div>
                 </div>
 
-                <div class="contact-info-card">
-                    <div class="contact-icon"><i class="fa-solid fa-envelope"></i></div>
-                    <div>
-                        <p style="color: var(--text-muted); font-size: 0.85rem;">E-mail</p>
-                        <a href="mailto:info@owax.cz" style="color: white; font-weight: 700; text-decoration: none; font-size: clamp(1rem, 1.2vw, 1.25rem);">info@owax.cz</a>
-                    </div>
+                <div class="inner-dark-card">
+                    <h3 style="margin-bottom: 1.5rem; color: white; font-size: clamp(1.1rem, 1.3vw, 1.35rem);">Fakturační údaje</h3>
+                    <p style="margin-bottom: 1rem; color: #f1f5f9; font-weight: 600;">Stavební firma OWAX s.r.o.</p>
+                    <p style="margin-bottom: 0.8rem; color: var(--text-muted); display: flex; align-items: center; gap: 10px;">
+                        <i class="fa-solid fa-location-dot" style="color: #60a5fa;"></i> Praha & Středočeský kraj
+                    </p>
+                    <p style="color: var(--text-muted); display: flex; align-items: center; gap: 10px;">
+                        <i class="fa-solid fa-id-card" style="color: #60a5fa;"></i> IČO: 12345678
+                    </p>
                 </div>
-            </div>
-
-            <div class="inner-dark-card">
-                <h3 style="margin-bottom: 1.5rem; color: white; font-size: clamp(1.1rem, 1.3vw, 1.35rem);">Fakturační údaje</h3>
-                <p style="margin-bottom: 1rem; color: #f1f5f9; font-weight: 600;">Stavební firma OWAX s.r.o.</p>
-                <p style="margin-bottom: 0.8rem; color: var(--text-muted); display: flex; align-items: center; gap: 10px;">
-                    <i class="fa-solid fa-location-dot" style="color: #60a5fa;"></i> Praha & Středočeský kraj
-                </p>
-                <p style="color: var(--text-muted); display: flex; align-items: center; gap: 10px;">
-                    <i class="fa-solid fa-id-card" style="color: #60a5fa;"></i> IČO: 12345678
-                </p>
             </div>
         </div>
-    </div>
+    </section>
 
     <!-- FOOTER -->
     <footer>
