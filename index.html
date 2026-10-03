@@ -158,6 +158,7 @@
             padding: 0.65rem 1.5rem;
             border-radius: 50px;
             box-shadow: 0 4px 15px var(--brand-blue-glow);
+            text-align: center;
         }
 
         .nav-btn::after { display: none; }
@@ -166,6 +167,19 @@
             background: var(--brand-blue-hover);
             transform: translateY(-2px);
             box-shadow: 0 6px 20px rgba(0, 56, 130, 0.5);
+        }
+
+        /* Hamburger Tlačítko pro Mobil */
+        .hamburger {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.8rem;
+            cursor: pointer;
+            padding: 0.5rem;
+            z-index: 1001;
+            transition: var(--transition);
         }
 
         /* --- HERO SEKCE --- */
@@ -567,18 +581,62 @@
             }
         }
 
+        /* ROZBALOVACÍ MENU PRO MOBILY A MENŠÍ TABLETY */
         @media (max-width: 768px) {
             :root {
                 --header-height: 80px;
             }
             
-            .hero {
-                padding-top: calc(var(--header-height) + 2.5rem);
-                min-height: auto;
+            .hamburger {
+                display: block; /* Zobrazíme 3 čárky */
             }
 
             nav {
+                position: absolute;
+                top: var(--header-height);
+                left: 0;
+                width: 100%;
+                background: rgba(17, 24, 39, 0.98);
+                backdrop-filter: blur(16px);
+                flex-direction: column;
+                align-items: stretch;
+                padding: 1.5rem 2rem 2rem 2rem;
+                gap: 1.2rem;
+                border-bottom: 1px solid var(--border-card);
+                box-shadow: 0 15px 30px rgba(0,0,0,0.4);
+                
+                /* Skryté stav pro animaci */
+                opacity: 0;
+                visibility: hidden;
+                transform: translateY(-10px);
+                transition: var(--transition);
+            }
+
+            /* Trída pro aktivování/rozbalení menu přes JS */
+            nav.active {
+                opacity: 1;
+                visibility: visible;
+                transform: translateY(0);
+            }
+
+            nav a {
+                font-size: 1.1rem;
+                padding: 0.5rem 0;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            }
+
+            nav a::after {
                 display: none;
+            }
+
+            .nav-btn {
+                margin-top: 0.5rem;
+                padding: 0.8rem 1.5rem;
+            }
+
+            .hero {
+                padding-top: calc(var(--header-height) + 2.5rem);
+                min-height: auto;
             }
 
             .hero-stats {
@@ -616,11 +674,18 @@
             <a href="#top" class="logo-container" onclick="location.reload(); location.href='#top';" title="OWAX - Obnovit stránku">
                 <img src="logo.png" alt="OWAX Logo" class="logo-img">
             </a>
-            <nav>
-                <a href="#sluzby">Služby</a>
-                <a href="#reference">Reference</a>
-                <a href="#o-nas">O nás</a>
-                <a href="#kontakt" class="nav-btn">Nezávazná poptávka</a>
+
+            <!-- Hamburger ikona -->
+            <button class="hamburger" id="hamburger-btn" aria-label="Otevřít menu">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+
+            <!-- Navigace -->
+            <nav id="nav-menu">
+                <a href="#sluzby" class="nav-link">Služby</a>
+                <a href="#reference" class="nav-link">Reference</a>
+                <a href="#o-nas" class="nav-link">O nás</a>
+                <a href="#kontakt" class="nav-btn nav-link">Nezávazná poptávka</a>
             </nav>
         </div>
     </header>
@@ -769,6 +834,34 @@
     </footer>
 
     <script>
+        /* === OVLÁDÁNÍ MOBILNÍHO HAMBURGER MENU === */
+        const hamburgerBtn = document.getElementById('hamburger-btn');
+        const navMenu = document.getElementById('nav-menu');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        hamburgerBtn.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            const icon = hamburgerBtn.querySelector('i');
+            if (navMenu.classList.contains('active')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-xmark');
+            } else {
+                icon.classList.remove('fa-xmark');
+                icon.classList.add('fa-bars');
+            }
+        });
+
+        // Automatické zavření menu po kliknutí na odkaz
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+                const icon = hamburgerBtn.querySelector('i');
+                icon.classList.remove('fa-xmark');
+                icon.classList.add('fa-bars');
+            });
+        });
+
+        /* === ANIMACE PŘI SKROLOVÁNÍ === */
         function reveal() {
             var reveals = document.querySelectorAll(".reveal");
             for (var i = 0; i < reveals.length; i++) {
@@ -783,6 +876,7 @@
         window.addEventListener("scroll", reveal);
         reveal();
 
+        /* === BEFORE / AFTER SLIDER === */
         const slider = document.getElementById('ba-slider');
         const beforeImg = document.getElementById('ba-before');
         const handle = document.getElementById('ba-handle');
