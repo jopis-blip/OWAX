@@ -505,7 +505,7 @@
             margin: 0;
         }
 
-        /* --- KONTAKTY A FORMULÁŘ (TMAVÁ DLAŽDICE, SVĚTLÁ TEXTOVÁ POLE) --- */
+        /* --- KONTAKTY A FORMULÁŘ --- */
         .contact-container {
             margin: 0 8% clamp(2.5rem, 4vw, 4.5rem) 8%;
             display: grid;
@@ -822,12 +822,13 @@
                 display: none;
             }
 
+            /* UPRAVENÉ TLAČÍTKO V MOBILNÍM MENU */
             nav a.nav-btn {
-                display: block;
-                width: 100%;
+                display: inline-block;
+                width: fit-content;
                 text-align: left;
-                padding: 0.8rem 1.2rem;
-                border-radius: 12px;
+                padding: 0.6rem 1.4rem;
+                border-radius: 50px;
                 margin-top: 0.4rem;
                 opacity: 0;
                 transform: translateX(-15px);
@@ -1168,7 +1169,7 @@
                 </div>
             </div>
 
-            <!-- PRAVÁ STRANA: FORMULÁŘ (TMAVÁ DLAŽDICE + SVĚTLÁ INPUT POLE) -->
+            <!-- PRAVÁ STRANA: FORMULÁŘ -->
             <div class="contact-form-box">
                 <h3>Napište nám</h3>
                 <p>Zanechte nám e-mail a popis požadavku. Ozveme se vám co nejdříve.</p>
