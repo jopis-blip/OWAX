@@ -32,7 +32,7 @@
             --text-muted: #cbd5e1; 
             --border-card: rgba(255, 255, 255, 0.12);
             --transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-            --header-height: 95px;
+            --header-height: 95px; /* Výška hlavičky zůstává stejná */
         }
 
         * {
@@ -97,10 +97,12 @@
             align-items: center;
             text-decoration: none;
             cursor: pointer;
+            height: 100%;
         }
 
+        /* ZVĚTŠENÉ LOGO (Zmenšený odstup od okrajů hlavičky) */
         .logo-img {
-            height: clamp(60px, 5.5vw, 85px);
+            height: clamp(70px, 6.5vw, 88px); /* Výška zvětšena tak, aby zaplnila hlavičku */
             width: auto;
             object-fit: contain;
             filter: brightness(0) invert(1) drop-shadow(0 2px 8px rgba(255, 255, 255, 0.15));
@@ -109,7 +111,7 @@
         }
 
         .logo-container:hover .logo-img {
-            transform: scale(1.04);
+            transform: scale(1.03);
             filter: brightness(0) invert(1) drop-shadow(0 4px 14px rgba(0, 86, 210, 0.5));
         }
 
@@ -164,14 +166,15 @@
             box-shadow: 0 6px 20px rgba(0, 56, 130, 0.5);
         }
 
+        /* IKONA MENU */
         .hamburger {
             display: none;
             background: none;
             border: none;
             color: white;
-            font-size: 2rem;
+            font-size: 1.4rem;
             cursor: pointer;
-            padding: 0.5rem;
+            padding: 0.4rem;
             z-index: 1001;
             transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
@@ -534,7 +537,6 @@
             border: 1px solid var(--border-card);
         }
 
-        /* STYLING FORMULÁŘE & STAVOVÉ HLÁŠKY */
         .contact-form {
             display: flex;
             flex-direction: column;
@@ -614,7 +616,6 @@
             transform: none;
         }
 
-        /* Notifikace o stavu odeslání */
         .form-status {
             margin-top: 1rem;
             padding: 0.8rem 1rem;
@@ -748,7 +749,11 @@
                 display: block;
             }
 
-            /* NAVIGACE / MENU */
+            .logo-img {
+                height: clamp(60px, 8vw, 72px); /* Mobilní přizpůsobení velikosti loga */
+            }
+
+            /* MOBILNÍ MENU */
             nav {
                 position: fixed;
                 top: var(--header-height);
@@ -758,8 +763,8 @@
                 backdrop-filter: none !important;
                 -webkit-backdrop-filter: none !important;
                 flex-direction: column;
-                padding: 1.8rem 2rem 2.2rem 2rem;
-                gap: 1.2rem;
+                padding: 1rem 1.5rem 1.5rem 1.5rem;
+                gap: 0.6rem;
                 box-shadow: 0 20px 35px rgba(0, 0, 0, 0.7);
                 border-bottom: 1px solid var(--border-card);
                 align-items: flex-start;
@@ -778,11 +783,11 @@
             }
 
             nav a {
-                font-size: 1.25rem;
-                font-weight: 700;
+                font-size: 1rem;
+                font-weight: 600;
                 width: 100%;
                 text-align: left;
-                padding: 8px 0;
+                padding: 4px 0;
                 opacity: 0;
                 transform: translateX(-15px);
                 transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease;
@@ -796,22 +801,23 @@
                 background: var(--brand-blue) !important;
                 border: none !important;
                 color: #ffffff !important;
-                margin-top: 0.5rem;
-                padding: 0.95rem 1.6rem !important;
-                font-size: 1.15rem !important;
+                margin-top: 0.3rem;
+                padding: 0.6rem 1.2rem !important;
+                font-size: 0.95rem !important;
                 font-weight: 700;
                 box-shadow: 0 4px 15px var(--brand-blue-glow) !important;
                 text-align: center;
-                border-radius: 12px !important;
+                border-radius: 8px !important;
+                width: 100%;
             }
 
             .menu-contacts {
                 display: flex;
                 flex-direction: column;
-                gap: 0.9rem;
+                gap: 0.5rem;
                 width: 100%;
-                padding-top: 1.2rem;
-                margin-top: 0.6rem;
+                padding-top: 0.8rem;
+                margin-top: 0.4rem;
                 border-top: 1px solid rgba(255, 255, 255, 0.12);
                 opacity: 0;
                 transform: translateX(-15px);
@@ -821,18 +827,18 @@
             .menu-contact-item {
                 display: flex;
                 align-items: center;
-                gap: 12px;
+                gap: 10px;
                 color: #e2e8f0;
                 text-decoration: none;
-                font-size: 1.15rem;
-                font-weight: 700;
+                font-size: 0.9rem;
+                font-weight: 600;
                 transition: var(--transition);
             }
 
             .menu-contact-item i {
                 color: #60a5fa;
-                font-size: 1.3rem;
-                width: 24px;
+                font-size: 1rem;
+                width: 20px;
             }
 
             .menu-contact-item:hover {
@@ -843,8 +849,8 @@
                 display: flex;
                 justify-content: flex-start;
                 align-items: center;
-                gap: 1.8rem;
-                margin-top: 0.6rem;
+                gap: 1.2rem;
+                margin-top: 0.4rem;
                 width: 100%;
                 opacity: 0;
                 transform: translateX(-15px);
@@ -853,20 +859,20 @@
 
             .menu-socials .social-icon {
                 color: #ffffff;
-                font-size: 1.7rem;
+                font-size: 1.3rem;
                 opacity: 0.9;
                 transition: var(--transition);
                 display: flex;
                 align-items: center;
                 justify-content: center;
                 text-decoration: none;
-                width: 32px;
-                height: 32px;
+                width: 24px;
+                height: 24px;
             }
 
             .menu-socials .social-icon svg {
-                width: 26px;
-                height: 26px;
+                width: 20px;
+                height: 20px;
             }
 
             .menu-socials .social-icon:hover {
