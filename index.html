@@ -25,7 +25,7 @@
             --brand-blue: #0056d2;
             --brand-blue-hover: #003882;
             --brand-blue-glow: rgba(0, 86, 210, 0.35);
-            --bg-light: #eef2f6;
+            --bg-light-blue: #e8eef5; /* Jemný šedo-modrý tón */
             --card-bg: #ffffff;
             --text-dark: #0f172a;
             --text-muted: #475569;
@@ -239,9 +239,12 @@
             letter-spacing: -0.5px;
         }
 
-        /* --- SLUŽBY --- */
+        /* --- SLUŽBY (SVĚTLÉ POZADÍ S PŘECHODEM DO TMAVA) --- */
         #sluzby {
-            background-color: var(--bg-light);
+            /* Přechod: z tmavé nahora, přes světlou šedo-modrou, až po tmavou dole */
+            background: linear-gradient(180deg, var(--primary-black) 0%, var(--bg-light-blue) 12%, var(--bg-light-blue) 85%, var(--primary-black) 100%);
+            padding-top: 8rem;
+            padding-bottom: 10rem;
         }
 
         .services-grid {
@@ -254,8 +257,8 @@
             background: var(--card-bg);
             padding: 2.8rem 2rem;
             border-radius: 20px;
-            box-shadow: 0 15px 35px rgba(15, 23, 42, 0.08);
-            border: 1px solid rgba(0, 86, 210, 0.1);
+            box-shadow: 0 20px 40px rgba(15, 23, 42, 0.08);
+            border: 1px solid rgba(0, 86, 210, 0.12);
             transition: var(--transition);
             position: relative;
             overflow: hidden;
@@ -275,7 +278,7 @@
 
         .service-card:hover {
             transform: translateY(-8px);
-            box-shadow: 0 25px 50px rgba(0, 86, 210, 0.15);
+            box-shadow: 0 25px 50px rgba(0, 86, 210, 0.18);
             border-color: rgba(0, 86, 210, 0.3);
         }
 
@@ -316,18 +319,22 @@
             line-height: 1.7;
         }
 
-        /* --- REFERENCE --- */
+        /* --- REFERENCE (TMAVÁ SEKCE) --- */
         #reference {
-            background-color: #ffffff;
-            border-top: 1px solid #e2e8f0;
+            background-color: var(--primary-black);
+            color: #ffffff;
+        }
+
+        #reference .section-title {
+            color: #ffffff;
         }
 
         .case-study {
-            background: #ffffff;
+            background: linear-gradient(145deg, #0d1322, #050811);
             border-radius: 24px;
             overflow: hidden;
-            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.07);
-            border: 1px solid #e2e8f0;
+            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 0;
@@ -342,8 +349,8 @@
 
         .case-tag {
             display: inline-block;
-            background: #e0f2fe;
-            color: var(--brand-blue);
+            background: rgba(0, 86, 210, 0.2);
+            color: #4da1ff;
             padding: 4px 12px;
             border-radius: 20px;
             font-weight: 700;
@@ -621,14 +628,14 @@
         <div class="case-study reveal">
             <div class="case-content">
                 <span class="case-tag">Praha 6 — Podbaba</span>
-                <h3 style="font-size: 1.8rem; margin-bottom: 1rem; color: var(--text-dark);">Kompletní proměna bytového jádra & interiéru</h3>
-                <p style="color: var(--text-muted); margin-bottom: 1.5rem;">
+                <h3 style="font-size: 1.8rem; margin-bottom: 1rem; color: #ffffff;">Kompletní proměna bytového jádra & interiéru</h3>
+                <p style="color: #94a3b8; margin-bottom: 1.5rem;">
                     Během 6 týdnů jsme provedli kompletní demolici starého umakartového jádra, nové rozvody elektřiny a vody, položili velkoformátovou dlažbu a nainstalovali designové osvětlení.
                 </p>
                 <ul style="list-style: none; margin-bottom: 2rem;">
-                    <li style="margin-bottom: 8px; color: var(--text-dark); font-weight: 600;"><i class="fa-solid fa-check" style="color: var(--brand-blue); margin-right: 10px;"></i> Vyklizení a kompletní demolice</li>
-                    <li style="margin-bottom: 8px; color: var(--text-dark); font-weight: 600;"><i class="fa-solid fa-check" style="color: var(--brand-blue); margin-right: 10px;"></i> Nové štuky a odhlučněné příčky</li>
-                    <li style="color: var(--text-dark); font-weight: 600;"><i class="fa-solid fa-check" style="color: var(--brand-blue); margin-right: 10px;"></i> Předáno přesně v dohodnutém termínu</li>
+                    <li style="margin-bottom: 8px; color: #ffffff; font-weight: 600;"><i class="fa-solid fa-check" style="color: #2b88ff; margin-right: 10px;"></i> Vyklizení a kompletní demolice</li>
+                    <li style="margin-bottom: 8px; color: #ffffff; font-weight: 600;"><i class="fa-solid fa-check" style="color: #2b88ff; margin-right: 10px;"></i> Nové štuky a odhlučněné příčky</li>
+                    <li style="color: #ffffff; font-weight: 600;"><i class="fa-solid fa-check" style="color: #2b88ff; margin-right: 10px;"></i> Předáno přesně v dohodnutém termínu</li>
                 </ul>
             </div>
 
