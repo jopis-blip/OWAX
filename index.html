@@ -464,15 +464,15 @@
             will-change: left;
         }
 
-        /* Tlačítka u projektů */
+        /* UPRAVENÉ TLAČÍTKO DETAIL PROJEKTU */
         .btn-project-detail {
             display: inline-flex;
             align-items: center;
             gap: 10px;
-            background: rgba(255, 255, 255, 0.08);
+            background: rgba(255, 255, 255, 0.05);
             color: #ffffff;
             border: 1px solid var(--border-card);
-            padding: 0.75rem 1.5rem;
+            padding: 0.8rem 1.5rem;
             border-radius: 12px;
             font-weight: 700;
             font-size: 0.95rem;
@@ -493,7 +493,7 @@
             margin: 0 8% clamp(2.5rem, 4vw, 4.5rem) 8%;
         }
 
-        /* UPRAVENÉ HRANATĚJŠÍ TLAČÍTKO PRO VŠECHNY PROJEKTY */
+        /* UPRAVENÉ TLAČÍTKO VŠECHNY PROJEKTY - VYROVNANÉ OHRANIČENÍ A IKONA GALERIE */
         .btn-main-portfolio {
             display: inline-flex;
             align-items: center;
@@ -502,7 +502,7 @@
             color: #ffffff;
             border: 1px solid var(--border-card);
             padding: 1rem 2.2rem;
-            border-radius: 14px;
+            border-radius: 16px;
             text-decoration: none;
             font-weight: 800;
             font-size: clamp(1.05rem, 1.3vw, 1.25rem);
@@ -515,11 +515,11 @@
             height: 44px;
             background: rgba(0, 86, 210, 0.2);
             color: #60a5fa;
-            border-radius: 10px;
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.2rem;
+            font-size: 1.25rem;
             border: 1px solid rgba(0, 86, 210, 0.4);
             flex-shrink: 0;
             transition: var(--transition);
@@ -1166,11 +1166,11 @@
             </div>
         </div>
 
-        <!-- HRANATĚJŠÍ TLAČÍTKO PRO VŠECHNY PROJEKTY S DLAŽDICOVOU IKONOU -->
+        <!-- TLAČÍTKO VŠECHNY PROJEKTY S PŮVODNÍ GALERIJNÍ IKONOU V NOVÉM KONTEJNERU A VYROVNANÝM OHRANIČENÍM -->
         <div class="main-cta-container reveal">
             <a href="projekty.html" class="btn-main-portfolio">
                 <div class="btn-icon-box">
-                    <i class="fa-solid fa-folder-open"></i>
+                    <i class="fa-solid fa-images"></i>
                 </div>
                 Zobrazit všechny realizované projekty
             </a>
@@ -1414,7 +1414,6 @@
 
             const originalBtnHtml = submitBtn.innerHTML;
 
-            // Změna tlačítka na stav načítání
             submitBtn.disabled = true;
             submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Odesílám...';
             formStatus.className = 'form-status';
@@ -1431,7 +1430,6 @@
             })
             .then(response => {
                 if (response.ok) {
-                    // Tlačítko se změní na zelené se zprávou o úspěchu
                     submitBtn.disabled = true;
                     submitBtn.style.backgroundColor = 'var(--brand-green)';
                     submitBtn.style.borderColor = 'var(--brand-green)';
