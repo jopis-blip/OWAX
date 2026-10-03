@@ -5,12 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OWAX.cz | Stavební & Rekonstrukční práce Praha</title>
     
-    <!-- Open Graph metatagy -->
+    <!-- === POPIS A NÁHLEDY PRO SDÍLENÍ (OPEN GRAPH / FACEBOOK / WHATSAPP / MESSENGER) === -->
+    <meta name="description" content="Špičkové stavební práce, stavby na klíč a kompletní rekonstrukce v Praze a okolí. Důraz na precizní řemeslo a dodržení termínů.">
+    
     <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.owax.cz/">
     <meta property="og:title" content="OWAX.cz | Stavební & Rekonstrukční práce">
     <meta property="og:description" content="Špičkové stavební práce, stavby na klíč a kompletní rekonstrukce v Praze a okolí. Důraz na precizní řemeslo a dodržení termínů.">
-    <meta property="og:image" content="logo.png">
-    <meta property="og:url" content="https://owax.cz">
+    <meta property="og:image" content="https://www.owax.cz/logo.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+
+    <!-- === POPIS A NÁHLED PRO X (TWITTER) === -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://www.owax.cz/">
+    <meta name="twitter:title" content="OWAX.cz | Stavební & Rekonstrukční práce">
+    <meta name="twitter:description" content="Špičkové stavební práce, stavby na klíč a kompletní rekonstrukce v Praze a okolí. Důraz na precizní řemeslo a dodržení termínů.">
+    <meta name="twitter:image" content="https://www.owax.cz/logo.png">
 
     <!-- Google Fonts & FontAwesome -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -21,14 +32,14 @@
     <style>
         :root {
             --bg-page: #edf0f5; /* Světlé čisté pozadí webu */
-            --card-dark: #0b0f19; /* Tmavá hlavní barva dlaždic */
-            --card-inner: #131926; /* Vnitřní vnořené karty */
+            --card-dark: #111827; /* Světlejší elegantní tmavá pro dlaždice (z tónu hero sekce) */
+            --card-inner: #1f2937; /* Vnitřní jemné karty */
             --brand-blue: #0056d2;
             --brand-blue-hover: #003882;
             --brand-blue-glow: rgba(0, 86, 210, 0.3);
             --text-main: #ffffff;
-            --text-muted: #94a3b8;
-            --border-card: rgba(255, 255, 255, 0.08);
+            --text-muted: #9ca3af;
+            --border-card: rgba(255, 255, 255, 0.1);
             --transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
@@ -56,7 +67,7 @@
             z-index: 1000;
             transition: var(--transition);
             padding: 0.8rem 8%;
-            background: rgba(11, 15, 25, 0.95);
+            background: rgba(17, 24, 39, 0.95);
             backdrop-filter: blur(12px);
             border-bottom: 1px solid var(--border-card);
             display: flex;
@@ -141,7 +152,7 @@
             display: flex;
             align-items: center;
             padding: 0 8%;
-            background: linear-gradient(135deg, rgba(11, 15, 25, 0.96) 0%, rgba(15, 23, 42, 0.92) 100%),
+            background: linear-gradient(135deg, rgba(17, 24, 39, 0.95) 0%, rgba(31, 41, 55, 0.92) 100%),
                         url('https://images.unsplash.com/photo-1541888946425-d0fbb186a5b3?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat fixed;
             color: white;
             overflow: hidden;
@@ -185,7 +196,7 @@
 
         .hero p {
             font-size: 1.2rem;
-            color: #94a3b8;
+            color: #9ca3af;
             margin-bottom: 2.5rem;
             font-weight: 400;
         }
@@ -206,7 +217,7 @@
 
         .stat-item p {
             font-size: 0.9rem;
-            color: #94a3b8;
+            color: #9ca3af;
             margin: 0;
         }
 
@@ -234,14 +245,14 @@
             letter-spacing: -0.5px;
         }
 
-        /* --- STYL PRO TMAVÉ KARTY NA SVĚTLÉM POZADÍ --- */
+        /* --- STYL PRO JEMNÉ TMAVÉ DLAŽDICE --- */
         .dark-card-container {
             background: var(--card-dark);
             border-radius: 28px;
             padding: 3.5rem 4rem;
             color: white;
-            box-shadow: 0 20px 40px rgba(11, 15, 25, 0.08);
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 20px 40px rgba(17, 24, 39, 0.08);
+            border: 1px solid var(--border-card);
             margin: 0 8% 4rem 8%;
         }
 
@@ -257,7 +268,7 @@
             background: var(--card-dark);
             padding: 2.8rem 2rem;
             border-radius: 24px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.06);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.05);
             border: 1px solid var(--border-card);
             transition: var(--transition);
             color: white;
@@ -265,8 +276,8 @@
 
         .service-card:hover {
             transform: translateY(-8px);
-            box-shadow: 0 20px 40px rgba(0, 86, 210, 0.2);
-            border-color: rgba(0, 86, 210, 0.4);
+            box-shadow: 0 20px 40px rgba(0, 86, 210, 0.25);
+            border-color: rgba(0, 86, 210, 0.5);
         }
 
         .service-icon {
@@ -332,7 +343,7 @@
             border-radius: 20px;
             overflow: hidden;
             user-select: none;
-            background: #1e293b;
+            background: #1f2937;
             border: 1px solid var(--border-card);
         }
 
@@ -363,7 +374,7 @@
             position: absolute;
             bottom: 15px;
             padding: 6px 14px;
-            background: rgba(11, 15, 25, 0.85);
+            background: rgba(17, 24, 39, 0.85);
             color: white;
             font-size: 0.8rem;
             font-weight: 700;
@@ -394,7 +405,7 @@
             font-size: 1.1rem;
         }
 
-        /* --- KONTAKT (PŘESNĚ DLE FOTOGRAFIE) --- */
+        /* --- KONTAKT --- */
         .contact-grid {
             display: grid;
             grid-template-columns: 1.1fr 0.9fr;
@@ -431,7 +442,7 @@
 
         /* --- FOOTER --- */
         footer {
-            background: #05080f;
+            background: #0b0f19;
             color: #64748b;
             text-align: center;
             padding: 3rem 2rem 2.5rem 2rem;
