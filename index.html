@@ -20,16 +20,16 @@
 
     <style>
         :root {
-            --primary-black: #050811;
-            --secondary-black: #0d1322;
+            --primary-dark: #090d16;
             --brand-blue: #0056d2;
             --brand-blue-hover: #003882;
-            --brand-blue-glow: rgba(0, 86, 210, 0.35);
-            --bg-light-blue: #e8eef5; /* Jemný šedo-modrý tón */
-            --card-bg: #ffffff;
+            --brand-blue-glow: rgba(0, 86, 210, 0.25);
+            --bg-page: #f4f6fa;
+            --bg-card: #ffffff;
             --text-dark: #0f172a;
             --text-muted: #475569;
-            --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            --border-light: #e2e8f0;
+            --transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         * {
@@ -41,7 +41,7 @@
         }
 
         body {
-            background-color: var(--primary-black);
+            background-color: var(--bg-page);
             color: var(--text-dark);
             overflow-x: hidden;
             line-height: 1.6;
@@ -56,7 +56,7 @@
             z-index: 1000;
             transition: var(--transition);
             padding: 0.8rem 8%;
-            background: rgba(5, 8, 17, 0.92);
+            background: rgba(9, 13, 22, 0.95);
             backdrop-filter: blur(12px);
             border-bottom: 1px solid rgba(255, 255, 255, 0.08);
             display: flex;
@@ -72,7 +72,7 @@
         }
 
         .logo-img {
-            height: 68px;
+            height: 64px;
             width: auto;
             object-fit: contain;
             filter: brightness(0) invert(1) drop-shadow(0 2px 8px rgba(255, 255, 255, 0.15));
@@ -80,8 +80,8 @@
         }
 
         .logo-container:hover .logo-img {
-            transform: scale(1.05);
-            filter: brightness(0) invert(1) drop-shadow(0 4px 14px rgba(43, 136, 255, 0.4));
+            transform: scale(1.04);
+            filter: brightness(0) invert(1) drop-shadow(0 4px 14px rgba(0, 86, 210, 0.4));
         }
 
         nav {
@@ -131,17 +131,17 @@
         .nav-btn:hover {
             background: var(--brand-blue-hover);
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(0, 56, 130, 0.5);
+            box-shadow: 0 6px 20px rgba(0, 56, 130, 0.4);
         }
 
-        /* --- HERO SEKCE --- */
+        /* --- HERO SEKCE (TMAVÝ ELEGANTNÍ ÚVOD) --- */
         .hero {
             position: relative;
-            min-height: 100vh;
+            min-height: 92vh;
             display: flex;
             align-items: center;
             padding: 0 8%;
-            background: linear-gradient(135deg, rgba(5, 8, 17, 0.95) 0%, rgba(13, 19, 34, 0.85) 100%),
+            background: linear-gradient(135deg, rgba(9, 13, 22, 0.96) 0%, rgba(15, 23, 42, 0.92) 100%),
                         url('https://images.unsplash.com/photo-1541888946425-d0fbb186a5b3?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat fixed;
             color: white;
             overflow: hidden;
@@ -151,7 +151,7 @@
             max-width: 750px;
             z-index: 2;
             animation: fadeInUp 1s ease-out;
-            padding-top: 4rem;
+            padding-top: 5rem;
         }
 
         .hero-badge {
@@ -160,7 +160,7 @@
             gap: 8px;
             background: rgba(0, 86, 210, 0.2);
             border: 1px solid rgba(0, 86, 210, 0.5);
-            color: #4da1ff;
+            color: #60a5fa;
             padding: 6px 16px;
             border-radius: 30px;
             font-size: 0.85rem;
@@ -179,9 +179,7 @@
         }
 
         .hero h1 span {
-            background: linear-gradient(135deg, #2b88ff, #0056d2);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            color: #3b82f6;
         }
 
         .hero p {
@@ -202,24 +200,24 @@
         .stat-item h3 {
             font-size: 2.2rem;
             font-weight: 800;
-            color: #2b88ff;
+            color: #3b82f6;
         }
 
         .stat-item p {
             font-size: 0.9rem;
-            color: #64748b;
+            color: #94a3b8;
             margin: 0;
         }
 
         /* --- SEKCENÍ STYLING --- */
         section {
-            padding: 7rem 8%;
+            padding: 6rem 8%;
         }
 
         .section-header {
             text-align: center;
             max-width: 650px;
-            margin: 0 auto 4rem auto;
+            margin: 0 auto 3.5rem auto;
         }
 
         .section-subtitle {
@@ -233,18 +231,15 @@
         }
 
         .section-title {
-            font-size: 2.5rem;
+            font-size: 2.4rem;
             font-weight: 800;
             color: var(--text-dark);
             letter-spacing: -0.5px;
         }
 
-        /* --- SLUŽBY (SVĚTLÉ POZADÍ S PŘECHODEM DO TMAVA) --- */
+        /* --- SLUŽBY --- */
         #sluzby {
-            /* Přechod: z tmavé nahora, přes světlou šedo-modrou, až po tmavou dole */
-            background: linear-gradient(180deg, var(--primary-black) 0%, var(--bg-light-blue) 12%, var(--bg-light-blue) 85%, var(--primary-black) 100%);
-            padding-top: 8rem;
-            padding-bottom: 10rem;
+            background-color: var(--bg-page);
         }
 
         .services-grid {
@@ -254,11 +249,11 @@
         }
 
         .service-card {
-            background: var(--card-bg);
+            background: var(--bg-card);
             padding: 2.8rem 2rem;
             border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(15, 23, 42, 0.08);
-            border: 1px solid rgba(0, 86, 210, 0.12);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            border: 1px solid var(--border-light);
             transition: var(--transition);
             position: relative;
             overflow: hidden;
@@ -271,15 +266,15 @@
             left: 0;
             width: 100%;
             height: 4px;
-            background: linear-gradient(90deg, var(--brand-blue), #2b88ff);
+            background: var(--brand-blue);
             opacity: 0;
             transition: var(--transition);
         }
 
         .service-card:hover {
             transform: translateY(-8px);
-            box-shadow: 0 25px 50px rgba(0, 86, 210, 0.18);
-            border-color: rgba(0, 86, 210, 0.3);
+            box-shadow: 0 20px 40px rgba(0, 86, 210, 0.12);
+            border-color: rgba(0, 86, 210, 0.2);
         }
 
         .service-card:hover::before {
@@ -303,11 +298,11 @@
         .service-card:hover .service-icon {
             background: var(--brand-blue);
             color: white;
-            transform: scale(1.1) rotate(5deg);
+            transform: scale(1.08) rotate(4deg);
         }
 
         .service-card h3 {
-            font-size: 1.4rem;
+            font-size: 1.35rem;
             font-weight: 700;
             margin-bottom: 1rem;
             color: var(--text-dark);
@@ -319,22 +314,19 @@
             line-height: 1.7;
         }
 
-        /* --- REFERENCE (TMAVÁ SEKCE) --- */
+        /* --- REFERENCE (SVĚTLÁ, VYSOOCE KONTRASTNÍ KARTA) --- */
         #reference {
-            background-color: var(--primary-black);
-            color: #ffffff;
-        }
-
-        #reference .section-title {
-            color: #ffffff;
+            background-color: #ffffff;
+            border-top: 1px solid var(--border-light);
+            border-bottom: 1px solid var(--border-light);
         }
 
         .case-study {
-            background: linear-gradient(145deg, #0d1322, #050811);
+            background: #ffffff;
             border-radius: 24px;
             overflow: hidden;
-            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.5);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 20px 50px rgba(15, 23, 42, 0.08);
+            border: 1px solid #e2e8f0;
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 0;
@@ -349,13 +341,13 @@
 
         .case-tag {
             display: inline-block;
-            background: rgba(0, 86, 210, 0.2);
-            color: #4da1ff;
-            padding: 4px 12px;
+            background: #e0f2fe;
+            color: var(--brand-blue);
+            padding: 6px 14px;
             border-radius: 20px;
             font-weight: 700;
             font-size: 0.8rem;
-            margin-bottom: 1rem;
+            margin-bottom: 1.2rem;
             width: fit-content;
         }
 
@@ -364,9 +356,10 @@
             position: relative;
             width: 100%;
             height: 100%;
-            min-height: 400px;
+            min-height: 420px;
             overflow: hidden;
             user-select: none;
+            background: #e2e8f0;
         }
 
         .ba-image {
@@ -384,7 +377,7 @@
             width: 50%;
             z-index: 2;
             border-right: 3px solid white;
-            box-shadow: 5px 0 15px rgba(0,0,0,0.3);
+            box-shadow: 5px 0 20px rgba(0,0,0,0.25);
         }
 
         .ba-after {
@@ -396,7 +389,7 @@
             position: absolute;
             bottom: 20px;
             padding: 6px 14px;
-            background: rgba(5, 8, 17, 0.8);
+            background: rgba(9, 13, 22, 0.85);
             color: white;
             font-size: 0.8rem;
             font-weight: 700;
@@ -412,37 +405,35 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 44px;
-            height: 44px;
+            width: 46px;
+            height: 46px;
             background: white;
             border-radius: 50%;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
             z-index: 4;
             display: flex;
             align-items: center;
             justify-content: center;
             color: var(--brand-blue);
             cursor: ew-resize;
+            font-size: 1.1rem;
         }
 
-        /* --- KONTAKT --- */
+        /* --- KONTAKT (TMAVÁ MODERNÍ KARTA) --- */
         .contact-section {
-            background: var(--primary-black);
+            background: var(--primary-dark);
             color: white;
             border-radius: 30px;
-            padding: 5rem 6%;
+            padding: 4.5rem 6%;
             margin: 5rem 8%;
-            position: relative;
-            overflow: hidden;
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
         }
 
         .contact-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 4rem;
-            position: relative;
-            z-index: 2;
+            align-items: center;
         }
 
         .contact-info-card {
@@ -455,19 +446,19 @@
         .contact-icon {
             width: 55px;
             height: 55px;
-            background: rgba(0, 86, 210, 0.15);
+            background: rgba(0, 86, 210, 0.2);
             border-radius: 14px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 1.4rem;
-            color: #2b88ff;
-            border: 1px solid rgba(0, 86, 210, 0.3);
+            color: #60a5fa;
+            border: 1px solid rgba(0, 86, 210, 0.4);
         }
 
-        /* --- FOOTER & SOCIÁLNÍ SÍTĚ --- */
+        /* --- FOOTER --- */
         footer {
-            background: #020409;
+            background: #05080f;
             color: #64748b;
             text-align: center;
             padding: 3rem 2rem 2.5rem 2rem;
@@ -482,7 +473,7 @@
             gap: 2.2rem;
             margin-bottom: 2rem;
             padding-bottom: 2rem;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
         }
 
         .social-icon {
@@ -499,7 +490,7 @@
         }
 
         .social-icon:hover {
-            color: #2b88ff;
+            color: #3b82f6;
             transform: translateY(-3px);
             opacity: 1;
         }
@@ -541,6 +532,7 @@
             .hero-stats { flex-wrap: wrap; gap: 1.5rem; }
             header { padding: 0.8rem 5%; }
             nav { display: none; }
+            .contact-section { margin: 3rem 4%; padding: 3rem 5%; }
         }
     </style>
 </head>
@@ -570,7 +562,7 @@
             
             <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
                 <a href="#kontakt" class="nav-btn" style="padding: 1rem 2.2rem; font-size: 1rem;">Chci cenovou nabídku</a>
-                <a href="#reference" style="padding: 1rem 2.2rem; font-size: 1rem; color: white; border: 1px solid rgba(255,255,255,0.2); border-radius: 50px; text-decoration: none; font-weight: 600; backdrop-filter: blur(5px);">Naše práce</a>
+                <a href="#reference" style="padding: 1rem 2.2rem; font-size: 1rem; color: white; border: 1px solid rgba(255,255,255,0.25); border-radius: 50px; text-decoration: none; font-weight: 600; backdrop-filter: blur(5px);">Naše práce</a>
             </div>
 
             <div class="hero-stats">
@@ -628,14 +620,14 @@
         <div class="case-study reveal">
             <div class="case-content">
                 <span class="case-tag">Praha 6 — Podbaba</span>
-                <h3 style="font-size: 1.8rem; margin-bottom: 1rem; color: #ffffff;">Kompletní proměna bytového jádra & interiéru</h3>
-                <p style="color: #94a3b8; margin-bottom: 1.5rem;">
+                <h3 style="font-size: 1.8rem; margin-bottom: 1rem; color: var(--text-dark);">Kompletní proměna bytového jádra & interiéru</h3>
+                <p style="color: var(--text-muted); margin-bottom: 1.5rem;">
                     Během 6 týdnů jsme provedli kompletní demolici starého umakartového jádra, nové rozvody elektřiny a vody, položili velkoformátovou dlažbu a nainstalovali designové osvětlení.
                 </p>
-                <ul style="list-style: none; margin-bottom: 2rem;">
-                    <li style="margin-bottom: 8px; color: #ffffff; font-weight: 600;"><i class="fa-solid fa-check" style="color: #2b88ff; margin-right: 10px;"></i> Vyklizení a kompletní demolice</li>
-                    <li style="margin-bottom: 8px; color: #ffffff; font-weight: 600;"><i class="fa-solid fa-check" style="color: #2b88ff; margin-right: 10px;"></i> Nové štuky a odhlučněné příčky</li>
-                    <li style="color: #ffffff; font-weight: 600;"><i class="fa-solid fa-check" style="color: #2b88ff; margin-right: 10px;"></i> Předáno přesně v dohodnutém termínu</li>
+                <ul style="list-style: none; margin-bottom: 1rem;">
+                    <li style="margin-bottom: 10px; color: var(--text-dark); font-weight: 600;"><i class="fa-solid fa-check" style="color: var(--brand-blue); margin-right: 10px;"></i> Vyklizení a kompletní demolice</li>
+                    <li style="margin-bottom: 10px; color: var(--text-dark); font-weight: 600;"><i class="fa-solid fa-check" style="color: var(--brand-blue); margin-right: 10px;"></i> Nové štuky a odhlučněné příčky</li>
+                    <li style="color: var(--text-dark); font-weight: 600;"><i class="fa-solid fa-check" style="color: var(--brand-blue); margin-right: 10px;"></i> Předáno přesně v dohodnutém termínu</li>
                 </ul>
             </div>
 
@@ -655,7 +647,7 @@
     <div id="kontakt" class="contact-section reveal">
         <div class="contact-grid">
             <div>
-                <span class="section-subtitle" style="color: #2b88ff;">Napište nám</span>
+                <span class="section-subtitle" style="color: #60a5fa;">Napište nám</span>
                 <h2 style="font-size: 2.2rem; margin-bottom: 1.5rem; color: white;">Máte projekt? Rádi vám spočítáme rozpočet</h2>
                 <p style="color: #94a3b8; margin-bottom: 2.5rem;">Kontaktujte nás pro nezávaznou konzultaci nebo obhlídku stavby zdarma.</p>
 
@@ -676,11 +668,11 @@
                 </div>
             </div>
 
-            <div style="background: rgba(255, 255, 255, 0.03); padding: 2.5rem; border-radius: 20px; border: 1px solid rgba(255,255,255,0.08); backdrop-filter: blur(10px);">
+            <div style="background: rgba(255, 255, 255, 0.04); padding: 2.5rem; border-radius: 20px; border: 1px solid rgba(255,255,255,0.08); backdrop-filter: blur(10px);">
                 <h3 style="margin-bottom: 1.5rem; color: white;">Fakturační údaje</h3>
                 <p style="margin-bottom: 1rem; color: #cbd5e1;"><strong>Stavební firma OWAX s.r.o.</strong></p>
-                <p style="margin-bottom: 0.8rem; color: #94a3b8;"><i class="fa-solid fa-location-dot" style="margin-right: 10px; color: #2b88ff;"></i> Praha & Středočeský kraj</p>
-                <p style="margin-bottom: 0.8rem; color: #94a3b8;"><i class="fa-solid fa-id-card" style="margin-right: 10px; color: #2b88ff;"></i> IČO: 12345678</p>
+                <p style="margin-bottom: 0.8rem; color: #94a3b8;"><i class="fa-solid fa-location-dot" style="margin-right: 10px; color: #60a5fa;"></i> Praha & Středočeský kraj</p>
+                <p style="margin-bottom: 0.8rem; color: #94a3b8;"><i class="fa-solid fa-id-card" style="margin-right: 10px; color: #60a5fa;"></i> IČO: 12345678</p>
             </div>
         </div>
     </div>
