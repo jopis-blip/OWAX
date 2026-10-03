@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>OWAX.cz | Stavební & Rekonstrukční práce Praha</title>
     
-    <!-- === POPIS A NÁHLEDY PRO SDÍLENÍ (OPEN GRAPH / FACEBOOK / WHATSAPP / MESSENGER) === -->
+    <!-- === POPIS A NÁHLEDY PRO SDÍLENÍ === -->
     <meta name="description" content="Špičkové stavební práce, stavby na klíč a kompletní rekonstrukce v Praze a okolí. Důraz na precizní řemeslo a dodržení termínů.">
     
     <meta property="og:type" content="website">
@@ -13,15 +13,6 @@
     <meta property="og:title" content="OWAX.cz | Stavební & Rekonstrukční práce">
     <meta property="og:description" content="Špičkové stavební práce, stavby na klíč a kompletní rekonstrukce v Praze a okolí. Důraz na precizní řemeslo a dodržení termínů.">
     <meta property="og:image" content="https://www.owax.cz/logo.png">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
-
-    <!-- === POPIS A NÁHLED PRO X (TWITTER) === -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:url" content="https://www.owax.cz/">
-    <meta name="twitter:title" content="OWAX.cz | Stavební & Rekonstrukční práce">
-    <meta name="twitter:description" content="Špičkové stavební práce, stavby na klíč a kompletní rekonstrukce v Praze a okolí. Důraz na precizní řemeslo a dodržení termínů.">
-    <meta name="twitter:image" content="https://www.owax.cz/logo.png">
 
     <!-- Google Fonts & FontAwesome -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -31,12 +22,9 @@
 
     <style>
         :root {
-            --bg-page: #edf0f5; /* Světlé čisté pozadí webu */
-            
-            /* Odstíny dlaždic shodné s dolní částí hero sekce */
+            --bg-page: #edf0f5; 
             --card-dark: #1e293b;  
             --card-inner: #283548; 
-            
             --brand-blue: #0056d2;
             --brand-blue-hover: #003882;
             --brand-blue-glow: rgba(0, 86, 210, 0.3);
@@ -44,8 +32,6 @@
             --text-muted: #cbd5e1; 
             --border-card: rgba(255, 255, 255, 0.12);
             --transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-            
-            /* Zvětšená výška hlavičky pro větší logo */
             --header-height: 95px;
         }
 
@@ -104,7 +90,6 @@
             cursor: pointer;
         }
 
-        /* Výrazně zvětšené logo pro všechna zařízení */
         .logo-img {
             height: clamp(60px, 5.5vw, 85px);
             width: auto;
@@ -169,7 +154,6 @@
             box-shadow: 0 6px 20px rgba(0, 56, 130, 0.5);
         }
 
-        /* Hamburger Tlačítko pro Mobil */
         .hamburger {
             display: none;
             background: none;
@@ -446,6 +430,48 @@
             font-size: 1.1rem;
         }
 
+        /* --- O NÁS --- */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: clamp(2rem, 4vw, 4rem);
+            align-items: center;
+        }
+
+        .about-features {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .about-feature-item {
+            background: var(--card-inner);
+            padding: 1.2rem;
+            border-radius: 16px;
+            border: 1px solid var(--border-card);
+        }
+
+        .about-feature-item i {
+            color: #60a5fa;
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .about-feature-item h4 {
+            color: white;
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 0.3rem;
+        }
+
+        .about-feature-item p {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            margin: 0;
+        }
+
         /* --- KONTAKT --- */
         .contact-grid {
             display: grid;
@@ -563,7 +589,7 @@
         }
 
         @media (max-width: 1024px) {
-            .case-study, .contact-grid {
+            .case-study, .contact-grid, .about-grid {
                 grid-template-columns: 1fr;
             }
             .dark-card-container {
@@ -581,14 +607,13 @@
             }
         }
 
-        /* ROZBALOVACÍ MENU PRO MOBILY A MENŠÍ TABLETY */
         @media (max-width: 768px) {
             :root {
                 --header-height: 80px;
             }
             
             .hamburger {
-                display: block; /* Zobrazíme 3 čárky */
+                display: block;
             }
 
             nav {
@@ -605,14 +630,12 @@
                 border-bottom: 1px solid var(--border-card);
                 box-shadow: 0 15px 30px rgba(0,0,0,0.4);
                 
-                /* Skryté stav pro animaci */
                 opacity: 0;
                 visibility: hidden;
                 transform: translateY(-10px);
                 transition: var(--transition);
             }
 
-            /* Trída pro aktivování/rozbalení menu přes JS */
             nav.active {
                 opacity: 1;
                 visibility: visible;
@@ -632,6 +655,10 @@
             .nav-btn {
                 margin-top: 0.5rem;
                 padding: 0.8rem 1.5rem;
+            }
+
+            .about-features {
+                grid-template-columns: 1fr;
             }
 
             .hero {
@@ -784,6 +811,54 @@
         </div>
     </div>
 
+    <!-- O NÁS -->
+    <div id="o-nas">
+        <div class="section-header reveal">
+            <span class="section-subtitle">Kdo jsme</span>
+            <h2 class="section-title">O společnosti OWAX</h2>
+        </div>
+
+        <div class="dark-card-container reveal">
+            <div class="about-grid">
+                <div>
+                    <h3 style="font-size: clamp(1.4rem, 2vw, 2rem); margin-bottom: 1rem; color: white;">Poctivé stavební řemeslo s moderním přístupem</h3>
+                    <p style="color: var(--text-muted); margin-bottom: 1.2rem; font-size: clamp(0.9rem, 1vw, 1.05rem); line-height: 1.7;">
+                        Jsme česká stavební společnost z Prahy zaměřená na kvalitu, detail a osobní přístup. Od našeho založení pomáháme klientům měnit jejich představy o novém domově či rekonstrukci v realitu.
+                    </p>
+                    <p style="color: var(--text-muted); font-size: clamp(0.9rem, 1vw, 1.05rem); line-height: 1.7;">
+                        Zakládáme si na transparentní komunikaci, pevně daných rozpočtech a dodržování schválených termínů. Náš tým se skládá ze zkušených řemeslníků a techniků, kteří ovládají nejmodernější stavební postupy.
+                    </p>
+                </div>
+
+                <div class="about-features">
+                    <div class="about-feature-item">
+                        <i class="fa-solid fa-award"></i>
+                        <h4>Špičková kvalita</h4>
+                        <p>Používáme pouze ověřené certifikované materiály s dlouhou životností.</p>
+                    </div>
+
+                    <div class="about-feature-item">
+                        <i class="fa-solid fa-handshake"></i>
+                        <h4>Férový přístup</h4>
+                        <p>Garance pevné ceny bez skrytých víceprací a nečekaných poplatků.</p>
+                    </div>
+
+                    <div class="about-feature-item">
+                        <i class="fa-solid fa-clock"></i>
+                        <h4>Dodržení termínů</h4>
+                        <p>Práce plánujeme efektivně, aby projekt probíhal hladce a bez zbytečných průtahů.</p>
+                    </div>
+
+                    <div class="about-feature-item">
+                        <i class="fa-solid fa-user-gear"></i>
+                        <h4>Servis na klíč</h4>
+                        <p>Zajistíme vše od návrhu a přípravy až po finální úklid a předání.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- KONTAKT -->
     <div id="kontakt" class="dark-card-container reveal">
         <div class="contact-grid">
@@ -851,7 +926,6 @@
             }
         });
 
-        // Automatické zavření menu po kliknutí na odkaz
         navLinks.forEach(link => {
             link.addEventListener('click', () => {
                 navMenu.classList.remove('active');
