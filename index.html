@@ -33,7 +33,7 @@
         :root {
             --bg-page: #edf0f5; /* Světlé čisté pozadí webu */
             
-            /* Zsvětlené odstíny dlaždic shodné s dolní částí hero sekce */
+            /* Odstíny dlaždic shodné s dolní částí hero sekce */
             --card-dark: #1e293b;  
             --card-inner: #283548; 
             
@@ -45,8 +45,8 @@
             --border-card: rgba(255, 255, 255, 0.12);
             --transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
             
-            /* Dynamická proměnná pro výšku hlavičky */
-            --header-height: 80px;
+            /* Zvětšená výška hlavičky pro větší logo */
+            --header-height: 95px;
         }
 
         * {
@@ -64,7 +64,6 @@
             line-height: 1.6;
         }
 
-        /* Udržení obsahu v rozumné šířce na extrémně velkých monitorech */
         .container {
             max-width: 1440px;
             margin: 0 auto;
@@ -105,8 +104,9 @@
             cursor: pointer;
         }
 
+        /* Výrazně zvětšené logo pro všechna zařízení */
         .logo-img {
-            height: clamp(45px, 4vw, 60px);
+            height: clamp(60px, 5.5vw, 85px);
             width: auto;
             object-fit: contain;
             filter: brightness(0) invert(1) drop-shadow(0 2px 8px rgba(255, 255, 255, 0.15));
@@ -246,7 +246,7 @@
             margin: 0;
         }
 
-        /* --- SEKČNÍ HLAVIČKY NA SVĚTLÉM POZADÍ --- */
+        /* --- SEKČNÍ HLAVIČKY --- */
         .section-header {
             text-align: center;
             max-width: 750px;
@@ -271,7 +271,7 @@
             letter-spacing: -0.5px;
         }
 
-        /* --- STYL PRO SVĚTLEJŠÍ DLAŽDICE --- */
+        /* --- DLAŽDICE --- */
         .dark-card-container {
             background: var(--card-dark);
             border-radius: clamp(18px, 2.5vw, 28px);
@@ -363,7 +363,6 @@
             width: fit-content;
         }
 
-        /* BEFORE / AFTER SLIDER */
         .before-after-container {
             position: relative;
             width: 100%;
@@ -536,9 +535,7 @@
             }
         }
 
-        /* === MEDIA QUERIES (PŘIZPŮSOBENÍ PRO ZAŘÍZENÍ) === */
-
-        /* VELKÉ MONITORY (Desktop nad 1440px) */
+        /* === MEDIA QUERIES === */
         @media (min-width: 1441px) {
             .dark-card-container, .services-grid {
                 margin-left: auto;
@@ -551,7 +548,6 @@
             }
         }
 
-        /* TABLETY A MENŠÍ DESKTOPY (do 1024px) */
         @media (max-width: 1024px) {
             .case-study, .contact-grid {
                 grid-template-columns: 1fr;
@@ -571,20 +567,18 @@
             }
         }
 
-        /* MOBILNÍ TELEFONY (do 768px) */
         @media (max-width: 768px) {
             :root {
-                --header-height: 70px;
+                --header-height: 80px;
             }
             
-            /* Zajištění dostatečného odstupu pod fixní lištou na mobilu */
             .hero {
                 padding-top: calc(var(--header-height) + 2.5rem);
                 min-height: auto;
             }
 
             nav {
-                display: none; /* Skrytí klasického menu na mobilu */
+                display: none;
             }
 
             .hero-stats {
