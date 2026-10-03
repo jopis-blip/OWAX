@@ -74,7 +74,7 @@
             z-index: 1000;
             transition: var(--transition);
             padding: 0 8%;
-            background: rgba(17, 24, 39, 0.95);
+            background: rgba(17, 24, 39, 0.98);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
             border-bottom: 1px solid var(--border-card);
@@ -176,6 +176,10 @@
             padding: 0.5rem;
             z-index: 1001;
             transition: var(--transition);
+        }
+
+        .menu-footer {
+            display: none;
         }
 
         /* --- HERO SEKCE --- */
@@ -573,7 +577,7 @@
             fill: currentColor;
         }
 
-        /* OPRAVENÉ REVEAL ANIMACE (Spouští se při každém skrolování) */
+        /* REVEAL ANIMACE */
         .reveal {
             opacity: 0;
             transform: translateY(30px) scale(0.98);
@@ -638,60 +642,96 @@
                 display: block;
             }
 
-            /* NOVOST: Animace plynulého rozbalení mobilního menu */
+            /* CELEOBRAZOVKOVÉ ROZBALOVACÍ MENU */
             nav {
-                position: absolute;
+                position: fixed;
                 top: var(--header-height);
                 left: 0;
                 width: 100%;
-                background: rgba(17, 24, 39, 0.98);
+                height: calc(100vh - var(--header-height));
+                background: #0f172a; /* 100% neprůhledná barva - neprosvítá nic */
+                display: flex;
                 flex-direction: column;
-                align-items: stretch;
-                padding: 1.5rem 2rem 2rem 2rem;
-                gap: 1.2rem;
-                border-bottom: 1px solid var(--border-card);
-                box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+                justify-content: space-between;
+                padding: 2rem 2rem 3rem 2rem;
+                gap: 1rem;
+                box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8);
+                overflow-y: auto;
                 
                 opacity: 0;
                 visibility: hidden;
-                transform: translateY(-20px) scale(0.97);
-                transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease, visibility 0.4s;
-                transform-origin: top center;
+                transform: translateY(-10px);
+                transition: all 0.3s ease-in-out;
             }
 
             nav.active {
                 opacity: 1;
                 visibility: visible;
-                transform: translateY(0) scale(1);
-            }
-
-            /* Postupné vynoření jednotlivých odkazů v menu */
-            nav a {
-                font-size: 1.1rem;
-                padding: 0.6rem 0;
-                border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-                opacity: 0;
-                transform: translateY(-10px);
-                transition: transform 0.3s ease, opacity 0.3s ease;
-            }
-
-            nav.active a {
-                opacity: 1;
                 transform: translateY(0);
             }
 
-            nav.active a:nth-child(1) { transition-delay: 0.1s; }
-            nav.active a:nth-child(2) { transition-delay: 0.15s; }
-            nav.active a:nth-child(3) { transition-delay: 0.2s; }
-            nav.active a:nth-child(4) { transition-delay: 0.25s; }
+            .menu-links {
+                display: flex;
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            nav a {
+                font-size: 1.2rem;
+                padding: 1rem 0;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            }
 
             nav a::after {
                 display: none;
             }
 
+            /* Tlačítko poptávky uvnitř rozbaleného menu */
             .nav-btn {
-                margin-top: 0.5rem;
-                padding: 0.8rem 1.5rem;
+                background: var(--brand-blue) !important;
+                border: none !important;
+                color: #ffffff !important;
+                margin-top: 1rem;
+                padding: 1rem 1.5rem;
+                font-weight: 700;
+                border-radius: 50px;
+                text-align: center;
+                box-shadow: 0 4px 15px var(--brand-blue-glow) !important;
+            }
+
+            /* DOLNÍ SEKCEMENU SE SOCIÁLNÍMI SÍTĚMI A KONTAKTY */
+            .menu-footer {
+                display: block;
+                margin-top: auto;
+                padding-top: 1.5rem;
+                border-top: 1px solid rgba(255, 255, 255, 0.1);
+                text-align: center;
+            }
+
+            .menu-footer p {
+                color: #94a3b8;
+                font-size: 0.85rem;
+                margin-bottom: 1rem;
+            }
+
+            .menu-socials {
+                display: flex;
+                justify-content: center;
+                gap: 1.8rem;
+            }
+
+            .menu-socials a {
+                color: #ffffff;
+                font-size: 1.5rem;
+                border: none !important;
+                padding: 0 !important;
+                opacity: 0.85;
+                transition: var(--transition);
+            }
+
+            .menu-socials a:hover {
+                color: #3b82f6;
+                opacity: 1;
             }
 
             .about-features {
@@ -744,10 +784,22 @@
             </button>
 
             <nav id="nav-menu">
-                <a href="#sluzby" class="nav-link">Služby</a>
-                <a href="#reference" class="nav-link">Reference</a>
-                <a href="#o-nas" class="nav-link">O nás</a>
-                <a href="#kontakt" class="nav-btn nav-link">Nezávazná poptávka</a>
+                <div class="menu-links">
+                    <a href="#sluzby" class="nav-link">Služby</a>
+                    <a href="#reference" class="nav-link">Reference</a>
+                    <a href="#o-nas" class="nav-link">O nás</a>
+                    <a href="#kontakt" class="nav-btn nav-link">Nezávazná poptávka</a>
+                </div>
+
+                <div class="menu-footer">
+                    <p>Rychlý kontakt & sociální sítě</p>
+                    <div class="menu-socials">
+                        <a href="tel:+420123456789" title="Zavolat"><i class="fa-solid fa-phone"></i></a>
+                        <a href="mailto:info@owax.cz" title="E-mail"><i class="fa-solid fa-envelope"></i></a>
+                        <a href="https://www.instagram.com/owaxproducts?stkn=czc5c2Y4d3oxOHNx" target="_blank" rel="noopener noreferrer" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#" title="Facebook"><i class="fa-brands fa-facebook"></i></a>
+                    </div>
+                </div>
             </nav>
         </div>
     </header>
@@ -762,8 +814,8 @@
             <p>Špičkové stavební práce, stavby na klíč a kompletní rekonstrukce v Praze a okolí. Důraz na precizní řemeslo a termíny.</p>
             
             <div class="hero-btns" style="display: flex; gap: 1rem; flex-wrap: wrap;">
-                <a href="#kontakt" class="nav-btn" style="padding: 1rem 2.2rem; font-size: 1rem;">Chci cenovou nabídku</a>
-                <a href="#reference" style="padding: 1rem 2.2rem; font-size: 1rem; color: white; border: 1px solid rgba(255,255,255,0.25); border-radius: 50px; text-decoration: none; font-weight: 600;">Naše práce</a>
+                <a href="#kontakt" class="nav-btn-hero" style="padding: 1rem 2.2rem; font-size: 1rem; background: var(--brand-blue); color: white; border-radius: 50px; text-decoration: none; font-weight: 700; text-align: center; box-shadow: 0 4px 15px var(--brand-blue-glow);">Chci cenovou nabídku</a>
+                <a href="#reference" style="padding: 1rem 2.2rem; font-size: 1rem; color: white; border: 1px solid rgba(255,255,255,0.25); border-radius: 50px; text-decoration: none; font-weight: 600; text-align: center;">Naše práce</a>
             </div>
 
             <div class="hero-stats">
@@ -970,9 +1022,11 @@
             if (navMenu.classList.contains('active')) {
                 icon.classList.remove('fa-bars');
                 icon.classList.add('fa-xmark');
+                document.body.style.overflow = 'hidden'; // Zamezí skrolování pozadí při otevřeném menu
             } else {
                 icon.classList.remove('fa-xmark');
                 icon.classList.add('fa-bars');
+                document.body.style.overflow = '';
             }
         });
 
@@ -982,10 +1036,11 @@
                 const icon = hamburgerBtn.querySelector('i');
                 icon.classList.remove('fa-xmark');
                 icon.classList.add('fa-bars');
+                document.body.style.overflow = '';
             });
         });
 
-        /* === OPRAVENÉ REVEAL ANIMACE (Opakují se při každém skrolování) === */
+        /* === REVEAL ANIMACE PRO OPAKOVANÉ DYNAMICKÉ ZOBRAZOVÁNÍ === */
         const observerOptions = {
             root: null,
             threshold: 0.15,
@@ -997,7 +1052,7 @@
                 if (entry.isIntersecting) {
                     entry.target.classList.add('active');
                 } else {
-                    entry.target.classList.remove('active'); // Při odskrolování zruší třídu pro nový náběh
+                    entry.target.classList.remove('active');
                 }
             });
         }, observerOptions);
