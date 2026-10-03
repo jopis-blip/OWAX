@@ -719,7 +719,6 @@
     <!-- NAVIGACE -->
     <header>
         <div class="header-content">
-            <!-- UPRAVENÝ ODKAZ LOGA: Obnoví stránku a vrátí na úplný vršek -->
             <a href="/" onclick="window.location.href='/'; return false;" class="logo-container" title="OWAX - Hlavní strana">
                 <img src="logo.png" alt="OWAX Logo" class="logo-img">
             </a>
@@ -931,6 +930,19 @@
     </footer>
 
     <script>
+        /* === VYNUCENÍ NAČTENÍ ÚPLNĚ NAHOŘE PO REFRESHI === */
+        if ('scrollRestoration' in history) {
+            history.scrollRestoration = 'manual';
+        }
+
+        window.addEventListener('beforeunload', () => {
+            window.scrollTo(0, 0);
+        });
+
+        window.addEventListener('load', () => {
+            window.scrollTo(0, 0);
+        });
+
         /* === HAMBURGER MENU === */
         const hamburgerBtn = document.getElementById('hamburger-btn');
         const navMenu = document.getElementById('nav-menu');
