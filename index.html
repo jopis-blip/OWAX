@@ -31,7 +31,7 @@
             --text-main: #ffffff;
             --text-muted: #cbd5e1; 
             --border-card: rgba(255, 255, 255, 0.12);
-            --transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+            --transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
             --header-height: 95px;
         }
 
@@ -46,7 +46,6 @@
             scroll-behavior: smooth;
         }
 
-        /* Odsazení pro kotvy, aby se nadpisy nechytaly pod fixní hlavičku */
         section[id], div[id] {
             scroll-margin-top: calc(var(--header-height) + 1.5rem);
         }
@@ -56,6 +55,7 @@
             color: #0f172a;
             overflow-x: hidden;
             line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
         }
 
         .container {
@@ -75,11 +75,14 @@
             transition: var(--transition);
             padding: 0 8%;
             background: rgba(17, 24, 39, 0.95);
-            backdrop-filter: blur(12px);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             border-bottom: 1px solid var(--border-card);
             display: flex;
             justify-content: space-between;
             align-items: center;
+            transform: translateZ(0);
+            will-change: transform;
         }
 
         .header-content {
@@ -104,6 +107,7 @@
             object-fit: contain;
             filter: brightness(0) invert(1) drop-shadow(0 2px 8px rgba(255, 255, 255, 0.15));
             transition: var(--transition);
+            transform: translateZ(0);
         }
 
         .logo-container:hover .logo-img {
@@ -182,7 +186,7 @@
             align-items: center;
             padding: calc(var(--header-height) + 2rem) 8% 4rem 8%;
             background: linear-gradient(135deg, rgba(17, 24, 39, 0.95) 0%, rgba(30, 41, 59, 0.92) 100%),
-                        url('https://images.unsplash.com/photo-1541888946425-d0fbb186a5b3?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat fixed;
+                        url('https://images.unsplash.com/photo-1541888946425-d0fbb186a5b3?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
             color: white;
             overflow: hidden;
             margin-bottom: 2rem;
@@ -192,9 +196,10 @@
         .hero-content {
             max-width: 900px;
             z-index: 2;
-            animation: fadeInUp 1s ease-out;
+            animation: fadeInUp 0.8s ease-out;
             width: 100%;
             margin: 0 auto;
+            transform: translateZ(0);
         }
 
         .hero-badge {
@@ -287,6 +292,7 @@
             box-shadow: 0 20px 40px rgba(17, 24, 39, 0.08);
             border: 1px solid var(--border-card);
             margin: 0 8% clamp(2.5rem, 4vw, 4.5rem) 8%;
+            transform: translateZ(0);
         }
 
         /* --- SLUŽBY --- */
@@ -307,10 +313,12 @@
             color: white;
             display: flex;
             flex-direction: column;
+            transform: translateZ(0);
+            will-change: transform;
         }
 
         .service-card:hover {
-            transform: translateY(-8px);
+            transform: translateY(-6px);
             box-shadow: 0 20px 40px rgba(0, 86, 210, 0.25);
             border-color: rgba(0, 86, 210, 0.5);
         }
@@ -333,7 +341,7 @@
         .service-card:hover .service-icon {
             background: var(--brand-blue);
             color: white;
-            transform: scale(1.08);
+            transform: scale(1.05);
         }
 
         .service-card h3 {
@@ -377,8 +385,10 @@
             border-radius: 20px;
             overflow: hidden;
             user-select: none;
+            touch-action: pan-y;
             background: #283548;
             border: 1px solid var(--border-card);
+            transform: translateZ(0);
         }
 
         .ba-image {
@@ -397,6 +407,7 @@
             z-index: 2;
             border-right: 3px solid white;
             box-shadow: 5px 0 20px rgba(0,0,0,0.3);
+            will-change: width;
         }
 
         .ba-after {
@@ -413,7 +424,6 @@
             font-size: 0.8rem;
             font-weight: 700;
             border-radius: 8px;
-            backdrop-filter: blur(6px);
             border: 1px solid rgba(255,255,255,0.1);
         }
 
@@ -437,6 +447,7 @@
             color: var(--brand-blue);
             cursor: ew-resize;
             font-size: 1.1rem;
+            will-change: left;
         }
 
         /* --- O NÁS --- */
@@ -562,25 +573,27 @@
             fill: currentColor;
         }
 
+        /* OPTIMALIZOVANÉ ANIMACE PRO HW ACCELERACI */
         .reveal {
             opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s ease-out;
+            transform: translateY(20px) translateZ(0);
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.6s ease-out;
+            will-change: transform, opacity;
         }
 
         .reveal.active {
             opacity: 1;
-            transform: translateY(0);
+            transform: translateY(0) translateZ(0);
         }
 
         @keyframes fadeInUp {
             from {
                 opacity: 0;
-                transform: translateY(30px);
+                transform: translateY(20px) translateZ(0);
             }
             to {
                 opacity: 1;
-                transform: translateY(0);
+                transform: translateY(0) translateZ(0);
             }
         }
 
@@ -631,7 +644,6 @@
                 left: 0;
                 width: 100%;
                 background: rgba(17, 24, 39, 0.98);
-                backdrop-filter: blur(16px);
                 flex-direction: column;
                 align-items: stretch;
                 padding: 1.5rem 2rem 2rem 2rem;
@@ -702,22 +714,20 @@
         }
     </style>
 </head>
-<body id="top">
+<body>
 
     <!-- NAVIGACE -->
     <header>
         <div class="header-content">
-            <!-- Odkaz směřuje na hlavní doménu na vrchol úvodní stránky -->
-            <a href="/#top" class="logo-container" title="OWAX - Hlavní strana">
+            <!-- UPRAVENÝ ODKAZ LOGA: Obnoví stránku a vrátí na úplný vršek -->
+            <a href="/" onclick="window.location.href='/'; return false;" class="logo-container" title="OWAX - Hlavní strana">
                 <img src="logo.png" alt="OWAX Logo" class="logo-img">
             </a>
 
-            <!-- Hamburger ikona -->
             <button class="hamburger" id="hamburger-btn" aria-label="Otevřít menu">
                 <i class="fa-solid fa-bars"></i>
             </button>
 
-            <!-- Navigace -->
             <nav id="nav-menu">
                 <a href="#sluzby" class="nav-link">Služby</a>
                 <a href="#reference" class="nav-link">Reference</a>
@@ -738,7 +748,7 @@
             
             <div class="hero-btns" style="display: flex; gap: 1rem; flex-wrap: wrap;">
                 <a href="#kontakt" class="nav-btn" style="padding: 1rem 2.2rem; font-size: 1rem;">Chci cenovou nabídku</a>
-                <a href="#reference" style="padding: 1rem 2.2rem; font-size: 1rem; color: white; border: 1px solid rgba(255,255,255,0.25); border-radius: 50px; text-decoration: none; font-weight: 600; backdrop-filter: blur(5px);">Naše práce</a>
+                <a href="#reference" style="padding: 1rem 2.2rem; font-size: 1rem; color: white; border: 1px solid rgba(255,255,255,0.25); border-radius: 50px; text-decoration: none; font-weight: 600;">Naše práce</a>
             </div>
 
             <div class="hero-stats">
@@ -921,7 +931,7 @@
     </footer>
 
     <script>
-        /* === OVLÁDÁNÍ MOBILNÍHO HAMBURGER MENU === */
+        /* === HAMBURGER MENU === */
         const hamburgerBtn = document.getElementById('hamburger-btn');
         const navMenu = document.getElementById('nav-menu');
         const navLinks = document.querySelectorAll('.nav-link');
@@ -947,32 +957,33 @@
             });
         });
 
-        /* === ANIMACE PŘI SKROLOVÁNÍ === */
-        function reveal() {
-            var reveals = document.querySelectorAll(".reveal");
-            for (var i = 0; i < reveals.length; i++) {
-                var windowHeight = window.innerHeight;
-                var elementTop = reveals[i].getBoundingClientRect().top;
-                var elementVisible = 80;
-                if (elementTop < windowHeight - elementVisible) {
-                    reveals[i].classList.add("active");
-                }
-            }
-        }
-        window.addEventListener("scroll", reveal);
-        reveal();
+        /* === OPTIMALIZOVANÉ ANIMACE SKROLOVÁNÍ (IntersectionObserver) === */
+        const observerOptions = {
+            root: null,
+            threshold: 0.1,
+            rootMargin: "0px 0px -50px 0px"
+        };
 
-        /* === BEFORE / AFTER SLIDER === */
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        /* === BEFORE / AFTER SLIDER S PASIVNÍMI EVENTS === */
         const slider = document.getElementById('ba-slider');
         const beforeImg = document.getElementById('ba-before');
         const handle = document.getElementById('ba-handle');
         let isDown = false;
+        let ticking = false;
 
-        function moveSlider(e) {
-            if (!isDown) return;
+        function updateSlider(pageX) {
             let rect = slider.getBoundingClientRect();
-            let pageX = e.pageX || (e.touches && e.touches[0].pageX);
-            if (!pageX) return;
             let x = pageX - rect.left - window.scrollX;
             if (x < 0) x = 0;
             if (x > rect.width) x = rect.width;
@@ -981,12 +992,26 @@
             handle.style.left = percent + "%";
         }
 
+        function onMove(e) {
+            if (!isDown) return;
+            let pageX = e.pageX || (e.touches && e.touches[0].pageX);
+            if (!pageX) return;
+
+            if (!ticking) {
+                window.requestAnimationFrame(() => {
+                    updateSlider(pageX);
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        }
+
         slider.addEventListener('mousedown', () => isDown = true);
-        slider.addEventListener('touchstart', () => isDown = true);
+        slider.addEventListener('touchstart', () => isDown = true, { passive: true });
         window.addEventListener('mouseup', () => isDown = false);
         window.addEventListener('touchend', () => isDown = false);
-        slider.addEventListener('mousemove', moveSlider);
-        slider.addEventListener('touchmove', moveSlider);
+        slider.addEventListener('mousemove', onMove);
+        slider.addEventListener('touchmove', onMove, { passive: true });
     </script>
 </body>
 </html>
