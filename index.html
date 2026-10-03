@@ -505,7 +505,7 @@
             margin: 0;
         }
 
-        /* --- ČISTÉ A PROZDUŠNĚNÉ ROZVRŽENÍ KONTAKTŮ A FORMULÁŘE --- */
+        /* --- KONTAKTY A FORMULÁŘ (TMAVÁ DLAŽDICE, SVĚTLÁ TEXTOVÁ POLE) --- */
         .contact-container {
             margin: 0 8% clamp(2.5rem, 4vw, 4.5rem) 8%;
             display: grid;
@@ -514,7 +514,8 @@
             align-items: stretch;
         }
 
-        .contact-info-box {
+        .contact-info-box,
+        .contact-form-box {
             background: var(--card-dark);
             border-radius: clamp(18px, 2.5vw, 28px);
             padding: clamp(2rem, 3.5vw, 3.5rem);
@@ -523,14 +524,14 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 20px 40px rgba(17, 24, 39, 0.08);
         }
 
         .contact-info-card {
             display: flex;
             align-items: center;
             gap: 1.2rem;
-            margin-top: 1.5rem;
+            margin-top: 1.2rem;
         }
 
         .contact-icon {
@@ -547,26 +548,15 @@
             flex-shrink: 0;
         }
 
-        .contact-form-box {
-            background: #ffffff;
-            border-radius: clamp(18px, 2.5vw, 28px);
-            padding: clamp(2rem, 3.5vw, 3.5rem);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.05);
-            border: 1px solid #e2e8f0;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-
         .contact-form-box h3 {
-            font-size: clamp(1.3rem, 1.8vw, 1.8rem);
-            color: #0f172a;
+            font-size: clamp(1.4rem, 2vw, 2rem);
+            color: #ffffff;
             font-weight: 800;
             margin-bottom: 0.4rem;
         }
 
         .contact-form-box p {
-            color: #64748b;
+            color: var(--text-muted);
             font-size: 0.95rem;
             margin-bottom: 1.8rem;
         }
@@ -584,17 +574,18 @@
         }
 
         .form-group label {
-            color: #334155;
+            color: #ffffff;
             font-size: 0.88rem;
             font-weight: 700;
             letter-spacing: 0.2px;
         }
 
+        /* SVĚTLÁ TEXTOVÁ POLE */
         .form-group input,
         .form-group textarea {
             width: 100%;
-            background: #f8fafc;
-            border: 1px solid #e2e8f0;
+            background: #ffffff;
+            border: 1px solid #cbd5e1;
             border-radius: 12px;
             padding: 0.95rem 1.1rem;
             color: #0f172a;
@@ -605,14 +596,14 @@
 
         .form-group input::placeholder,
         .form-group textarea::placeholder {
-            color: #94a3b8;
+            color: #64748b;
         }
 
         .form-group input:focus,
         .form-group textarea:focus {
-            border-color: var(--brand-blue);
+            border-color: #0056d2;
             background: #ffffff;
-            box-shadow: 0 0 0 4px rgba(0, 86, 210, 0.1);
+            box-shadow: 0 0 0 4px rgba(0, 86, 210, 0.2);
         }
 
         .form-group textarea {
@@ -662,16 +653,16 @@
 
         .form-status.success {
             display: block;
-            background: #f0fdf4;
-            color: #166534;
-            border: 1px solid #bbf7d0;
+            background: rgba(34, 197, 94, 0.15);
+            color: #4ade80;
+            border: 1px solid rgba(34, 197, 94, 0.3);
         }
 
         .form-status.error {
             display: block;
-            background: #fef2f2;
-            color: #991b1b;
-            border: 1px solid #fecaca;
+            background: rgba(239, 68, 68, 0.15);
+            color: #f87171;
+            border: 1px solid rgba(239, 68, 68, 0.3);
         }
 
         /* --- FOOTER --- */
@@ -978,6 +969,10 @@
                 <a href="#kontakt" class="nav-btn">Nezávazná poptávka</a>
 
                 <div class="menu-contacts">
+                    <a href="tel:+420777123456" class="menu-contact-item">
+                        <div class="contact-icon"><i class="fa-solid fa-phone"></i></div>
+                        +420 777 123 456
+                    </a>
                     <a href="mailto:info@owax.cz" class="menu-contact-item">
                         <div class="contact-icon"><i class="fa-solid fa-envelope"></i></div>
                         info@owax.cz
@@ -1147,12 +1142,20 @@
             <!-- LEVÁ STRANA: KONTAKTNÍ ÚDAJE -->
             <div class="contact-info-box">
                 <h3 style="font-size: clamp(1.4rem, 2vw, 2rem); margin-bottom: 0.8rem; color: white;">Rádi připravíme nabídku</h3>
-                <p style="color: var(--text-muted); margin-bottom: 1.2rem; font-size: clamp(0.9rem, 1vw, 1.05rem);">Prostřednictvím formuláře nám pošlete e-mail. Ozveme se vám s podrobnostmi co nejdříve.</p>
+                <p style="color: var(--text-muted); margin-bottom: 1.2rem; font-size: clamp(0.9rem, 1vw, 1.05rem);">Zavolejte nám nebo využijte kontaktní formulář. Vše s vámi rádi probereme.</p>
+
+                <div class="contact-info-card">
+                    <div class="contact-icon"><i class="fa-solid fa-phone"></i></div>
+                    <div>
+                        <p style="color: var(--text-muted); font-size: 0.85rem;">Telefonní kontakt</p>
+                        <a href="tel:+420777123456" style="color: white; font-weight: 700; text-decoration: none; font-size: clamp(1.05rem, 1.2vw, 1.25rem);">+420 777 123 456</a>
+                    </div>
+                </div>
 
                 <div class="contact-info-card">
                     <div class="contact-icon"><i class="fa-solid fa-envelope"></i></div>
                     <div>
-                        <p style="color: var(--text-muted); font-size: 0.85rem;">Přímý kontakt</p>
+                        <p style="color: var(--text-muted); font-size: 0.85rem;">E-mailová adresa</p>
                         <a href="mailto:info@owax.cz" style="color: white; font-weight: 700; text-decoration: none; font-size: clamp(1.05rem, 1.2vw, 1.25rem);">info@owax.cz</a>
                     </div>
                 </div>
@@ -1165,10 +1168,10 @@
                 </div>
             </div>
 
-            <!-- PRAVÁ STRANA: FORMULÁŘ (E-MAIL + POPIS POŽADAVKU, BEZ HVĚZDIČEK) -->
+            <!-- PRAVÁ STRANA: FORMULÁŘ (TMAVÁ DLAŽDICE + SVĚTLÁ INPUT POLE) -->
             <div class="contact-form-box">
                 <h3>Napište nám</h3>
-                <p>Zanechte nám e-mail a stručný popis. Vše s vámi rádi probereme.</p>
+                <p>Zanechte nám e-mail a popis požadavku. Ozveme se vám co nejdříve.</p>
 
                 <form id="contact-form" action="https://formsubmit.co/ajax/jopis@jopis.cz" method="POST" class="contact-form">
                     <input type="hidden" name="_subject" value="Nová poptávka z webu OWAX.cz">
