@@ -549,13 +549,13 @@
             flex-shrink: 0;
         }
 
-        /* ČISTÁ SVĚTLÁ KARTA PRO FORMULÁŘ */
+        /* ČISTÁ SVĚTLÁ KARTA PRO FORMULÁŘ (ZMĚNA 1: POZADÍ NENÍ BÍLÉ) */
         .contact-form-box {
-            background: #ffffff;
+            background: #f4f6f8;
             border-radius: clamp(18px, 2.5vw, 28px);
             padding: clamp(2rem, 3.5vw, 3.5rem);
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.06);
-            border: 1px solid #e2e8f0;
+            border: 1px solid #cbd5e1;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -595,7 +595,7 @@
         .form-group input,
         .form-group textarea {
             width: 100%;
-            background: #f8fafc;
+            background: #ffffff;
             border: 1px solid #cbd5e1;
             border-radius: 12px;
             padding: 0.9rem 1.1rem;
@@ -817,6 +817,7 @@
                 transform: translateY(0) scale(1);
             }
 
+            /* ZMĚNA 3: Zarovnání textu doleva a zobrazení na celou šířku */
             nav a.nav-link {
                 font-size: 1rem;
                 font-weight: 600;
@@ -826,14 +827,17 @@
                 opacity: 0;
                 transform: translateX(-15px);
                 transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease;
+                display: block;
+                box-sizing: border-box;
             }
 
             nav a.nav-link::after {
                 display: none;
             }
 
-            /* PODBARVENÉ TLAČÍTKO V MOBILNÍM MENU (ZAROVNANÉ VLEVO) */
+            /* ZMĚNA 2 & 3: PODBARVENÉ TLAČÍTKO V MOBILNÍM MENU NA CELOU ŠÍŘKU ŘÁDKU A ZAROVNANÉ VLEVO DOLEVA POD OSTATNÍ */
             nav a.nav-btn {
+                display: block;
                 width: 100%;
                 text-align: left;
                 padding: 0.8rem 1.2rem;
@@ -842,6 +846,7 @@
                 opacity: 0;
                 transform: translateX(-15px);
                 transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease;
+                box-sizing: border-box;
             }
 
             .menu-contacts {
@@ -1177,7 +1182,7 @@
                 </div>
             </div>
 
-            <!-- PRAVÁ STRANA: SVĚTLÝ ČISTÝ FORMULÁŘ -->
+            <!-- PRAVÁ STRANA: ČISTÝ FORMULÁŘ (UPRAVENÉ POZADÍ) -->
             <div class="contact-form-box">
                 <h3>Napište nám</h3>
                 <p>Zanechte nám kontakt, ozveme se vám zpět.</p>
