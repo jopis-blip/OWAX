@@ -534,7 +534,7 @@
             border: 1px solid var(--border-card);
         }
 
-        /* NOVOST: STYLING FORMULÁŘE */
+        /* STYLING FORMULÁŘE & STAVOVÉ HLÁŠKY */
         .contact-form {
             display: flex;
             flex-direction: column;
@@ -606,6 +606,36 @@
             background: var(--brand-blue-hover);
             transform: translateY(-2px);
             box-shadow: 0 6px 20px rgba(0, 56, 130, 0.5);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Notifikace o stavu odeslání */
+        .form-status {
+            margin-top: 1rem;
+            padding: 0.8rem 1rem;
+            border-radius: 10px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            display: none;
+        }
+
+        .form-status.success {
+            display: block;
+            background: rgba(34, 197, 94, 0.15);
+            color: #4ade80;
+            border: 1px solid rgba(34, 197, 94, 0.3);
+        }
+
+        .form-status.error {
+            display: block;
+            background: rgba(239, 68, 68, 0.15);
+            color: #f87171;
+            border: 1px solid rgba(239, 68, 68, 0.3);
         }
 
         /* --- FOOTER --- */
@@ -1102,17 +1132,17 @@
                     </div>
                 </div>
 
-                <!-- PRAVÁ STRANA: FUNKČNÍ KONTAKTNÍ FORMULÁŘ -->
+                <!-- PRAVÁ STRANA: FUNKČNÍ KONTAKTNÍ FORMULÁŘ (AJAX) -->
                 <div class="inner-dark-card">
                     <h3 style="margin-bottom: 0.5rem; color: white; font-size: clamp(1.2rem, 1.4vw, 1.5rem);">Napište nám</h3>
                     <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem;">Vyplňte váš kontakt a popis požadavku, ozveme se vám co nejdříve.</p>
 
-                    <form action="https://formsubmit.co/jopis@jopis.cz" method="POST" class="contact-form">
+                    <form id="contact-form" action="https://formsubmit.co/ajax/jopis@jopis.cz" method="POST" class="contact-form">
                         <!-- Nastavení předmětu e-mailu -->
                         <input type="hidden" name="_subject" value="Nová poptávka z webu OWAX.cz">
                         <!-- Ochrana proti spamu (Honeypot) -->
                         <input type="text" name="_honey" style="display:none">
-                        <!-- Vypnutí captchy pro plynulý zážitek (lze zapnout vymazáním řádku) -->
+                        <!-- Vypnutí captchy -->
                         <input type="hidden" name="_captcha" value="false">
 
                         <div class="form-group">
@@ -1125,9 +1155,11 @@
                             <textarea id="message" name="Zpráva" placeholder="Popište stručně váš záměr (např. kompletní rekonstrukce bytu 2+kk v Praze, termín realizace...)" required></textarea>
                         </div>
 
-                        <button type="submit" class="submit-btn">
+                        <button type="submit" id="submit-btn" class="submit-btn">
                             <i class="fa-solid fa-paper-plane"></i> Odeslat poptávku
                         </button>
+
+                        <div id="form-status" class="form-status"></div>
                     </form>
                 </div>
             </div>
@@ -1244,6 +1276,47 @@
         window.addEventListener('touchend', () => isDown = false);
         slider.addEventListener('mousemove', onMove);
         slider.addEventListener('touchmove', onMove, { passive: true });
+
+        /* === AJAX ODESÍLÁNÍ FORMULÁŘE (BEZ PŘESMĚROVÁNÍ) === */
+        const contactForm = document.getElementById('contact-form');
+        const submitBtn = document.getElementById('submit-btn');
+        const formStatus = document.getElementById('form-status');
+
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Odesílám...';
+            formStatus.className = 'form-status';
+            formStatus.style.display = 'none';
+
+            const formData = new FormData(contactForm);
+
+            fetch(contactForm.action, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            })
+            .then(response => {
+                if (response.ok) {
+                    formStatus.textContent = '✓ Požadavek byl úspěšně odeslán! Brzy se vám ozveme.';
+                    formStatus.className = 'form-status success';
+                    contactForm.reset();
+                } else {
+                    throw new Error('Chyba odeslání');
+                }
+            })
+            .catch(error => {
+                formStatus.textContent = '✕ Při odesílání došlo k chybě. Zkuste to prosím znovu nebo využijte přímý e-mail.';
+                formStatus.className = 'form-status error';
+            })
+            .finally(() => {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Odeslat poptávku';
+            });
+        });
     </script>
 </body>
 </html>
