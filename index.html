@@ -5,14 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OWAX.cz | Stavební & Rekonstrukční práce Praha</title>
     
-    <!-- Open Graph metatagy pro sociální sítě a chatovací aplikace -->
+    <!-- Open Graph metatagy -->
     <meta property="og:type" content="website">
     <meta property="og:title" content="OWAX.cz | Stavební & Rekonstrukční práce">
     <meta property="og:description" content="Špičkové stavební práce, stavby na klíč a kompletní rekonstrukce v Praze a okolí. Důraz na precizní řemeslo a dodržení termínů.">
     <meta property="og:image" content="logo.png">
     <meta property="og:url" content="https://owax.cz">
 
-    <!-- Google Fonts & FontAwesome ikony -->
+    <!-- Google Fonts & FontAwesome -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
@@ -54,8 +54,8 @@
             width: 100%;
             z-index: 1000;
             transition: var(--transition);
-            padding: 1rem 8%;
-            background: rgba(5, 8, 17, 0.9);
+            padding: 0.8rem 8%;
+            background: rgba(5, 8, 17, 0.92);
             backdrop-filter: blur(12px);
             border-bottom: 1px solid rgba(255, 255, 255, 0.08);
             display: flex;
@@ -70,17 +70,18 @@
             cursor: pointer;
         }
 
-        /* Odstranění bílého pozadí z loga a přizpůsobení */
+        /* Zvětšené logo s převodem na bílou pro tmavé pozadí */
         .logo-img {
-            height: 50px;
+            height: 68px;
             width: auto;
-            filter: brightness(0) invert(1); /* Převede černé prvky loga na bílé pro tmavou lištu */
-            mix-blend-mode: screen; /* Efektivně odstraní tmavé/bílé pozadí podle filtru */
+            object-fit: contain;
+            filter: brightness(0) invert(1) drop-shadow(0 2px 8px rgba(255, 255, 255, 0.15));
             transition: var(--transition);
         }
 
         .logo-container:hover .logo-img {
-            transform: scale(1.03);
+            transform: scale(1.05);
+            filter: brightness(0) invert(1) drop-shadow(0 4px 14px rgba(43, 136, 255, 0.4));
         }
 
         nav {
@@ -492,7 +493,6 @@
             fill: currentColor;
         }
 
-        /* ANIMACE ROZSVIČOVÁNÍ (SCROLL) */
         .reveal {
             opacity: 0;
             transform: translateY(30px);
@@ -515,7 +515,6 @@
             }
         }
 
-        /* MOBILNÍ RESPONSIVITA */
         @media (max-width: 992px) {
             .case-study, .contact-grid {
                 grid-template-columns: 1fr;
@@ -523,7 +522,7 @@
             .case-content { padding: 2.5rem; }
             .hero h1 { font-size: 2.8rem; }
             .hero-stats { flex-wrap: wrap; gap: 1.5rem; }
-            header { padding: 1rem 5%; }
+            header { padding: 0.8rem 5%; }
             nav { display: none; }
         }
     </style>
@@ -532,8 +531,7 @@
 
     <!-- NAVIGACE -->
     <header>
-        <!-- Kliknutí na logo Obnoví stránku a přesune na začátek -->
-        <a href="#top" class="logo-container" onclick="location.reload(); location.href='#top';" title="OWAX - Hlavní strana">
+        <a href="#top" class="logo-container" onclick="location.reload(); location.href='#top';" title="OWAX - Obnovit stránku">
             <img src="logo.png" alt="OWAX Logo" class="logo-img">
         </a>
         <nav>
@@ -624,7 +622,6 @@
                 </ul>
             </div>
 
-            <!-- POROVNÁNÍ PŘED / PO -->
             <div class="before-after-container" id="ba-slider">
                 <div class="ba-image ba-after"></div>
                 <div class="ba-image ba-before" id="ba-before"></div>
@@ -674,25 +671,15 @@
     <!-- FOOTER -->
     <footer>
         <div class="social-links">
-            <a href="#" class="social-icon" title="Facebook">
-                <i class="fa-brands fa-square-facebook"></i>
-            </a>
-            <a href="#" class="social-icon" title="X (Twitter)">
-                <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-            </a>
-            <a href="#" class="social-icon" title="YouTube">
-                <i class="fa-brands fa-youtube"></i>
-            </a>
-            <a href="https://www.instagram.com/owaxproducts?stkn=czc5c2Y4d3oxOHNx" target="_blank" rel="noopener noreferrer" class="social-icon" title="Instagram">
-                <i class="fa-brands fa-instagram"></i>
-            </a>
+            <a href="#" class="social-icon" title="Facebook"><i class="fa-brands fa-square-facebook"></i></a>
+            <a href="#" class="social-icon" title="X (Twitter)"><svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+            <a href="#" class="social-icon" title="YouTube"><i class="fa-brands fa-youtube"></i></a>
+            <a href="https://www.instagram.com/owaxproducts?stkn=czc5c2Y4d3oxOHNx" target="_blank" rel="noopener noreferrer" class="social-icon" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
         </div>
         <p>&copy; 2026 OWAX. Všechna práva vyhrazena.</p>
     </footer>
 
-    <!-- INTERAKTIVNÍ SKRIPTY PRO ANIMACE A SLIDER -->
     <script>
-        // ANIMACE PŘI SKROLOVÁNÍ (REVEAL EFEKT)
         function reveal() {
             var reveals = document.querySelectorAll(".reveal");
             for (var i = 0; i < reveals.length; i++) {
@@ -705,9 +692,8 @@
             }
         }
         window.addEventListener("scroll", reveal);
-        reveal(); // Spustit při načtení
+        reveal();
 
-        // SLIDER PŘED / PO
         const slider = document.getElementById('ba-slider');
         const beforeImg = document.getElementById('ba-before');
         const handle = document.getElementById('ba-handle');
