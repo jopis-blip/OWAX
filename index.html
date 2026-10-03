@@ -74,7 +74,7 @@
             z-index: 1000;
             transition: var(--transition);
             padding: 0 8%;
-            background: #111827; /* 100% Neprůhledné pozadí */
+            background: #111827; 
             border-bottom: 1px solid var(--border-card);
             display: flex;
             justify-content: space-between;
@@ -169,11 +169,15 @@
             background: none;
             border: none;
             color: white;
-            font-size: 1.8rem;
+            font-size: 2rem;
             cursor: pointer;
             padding: 0.5rem;
             z-index: 1001;
-            transition: var(--transition);
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .hamburger.active {
+            transform: rotate(90deg);
         }
 
         .menu-contacts, .menu-socials {
@@ -494,19 +498,19 @@
             margin: 0;
         }
 
-        /* --- KONTAKT --- */
+        /* --- KONTAKT A FORMULÁŘ --- */
         .contact-grid {
             display: grid;
-            grid-template-columns: 1.1fr 0.9fr;
+            grid-template-columns: 1fr 1fr;
             gap: clamp(2rem, 4vw, 4rem);
-            align-items: center;
+            align-items: flex-start;
         }
 
         .contact-info-card {
             display: flex;
             align-items: center;
             gap: 1.2rem;
-            margin-bottom: 1.8rem;
+            margin-bottom: 1.5rem;
         }
 
         .contact-icon {
@@ -525,9 +529,83 @@
 
         .inner-dark-card {
             background: var(--card-inner);
-            padding: clamp(1.8rem, 3vw, 2.8rem);
+            padding: clamp(1.8rem, 3vw, 2.5rem);
             border-radius: 22px;
             border: 1px solid var(--border-card);
+        }
+
+        /* NOVOST: STYLING FORMULÁŘE */
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .form-group label {
+            color: #e2e8f0;
+            font-size: 0.95rem;
+            font-weight: 600;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            background: #1e293b;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 12px;
+            padding: 0.9rem 1.1rem;
+            color: #ffffff;
+            font-size: 1rem;
+            transition: var(--transition);
+            outline: none;
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: #94a3b8;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: #60a5fa;
+            box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.25);
+            background: #1a2332;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .submit-btn {
+            background: var(--brand-blue);
+            color: #ffffff;
+            border: none;
+            padding: 1rem 1.8rem;
+            border-radius: 12px;
+            font-size: 1.05rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: 0 4px 15px var(--brand-blue-glow);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 0.5rem;
+            width: 100%;
+        }
+
+        .submit-btn:hover {
+            background: var(--brand-blue-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 56, 130, 0.5);
         }
 
         /* --- FOOTER --- */
@@ -640,39 +718,44 @@
                 display: block;
             }
 
-            /* UPRAVENÉ NEPPRŮHLEDNÉ A KOMPAKTNÍ MENU */
+            /* NAVIGACE / MENU */
             nav {
                 position: fixed;
                 top: var(--header-height);
                 left: 0;
                 width: 100%;
-                background: #111827 !important; /* Fully Opaque - NENÍ PRŮHLEDNÉ */
+                background: #111827 !important;
                 backdrop-filter: none !important;
                 -webkit-backdrop-filter: none !important;
                 flex-direction: column;
-                padding: 1.2rem 1.8rem 1.5rem 1.8rem;
-                gap: 0.9rem;
-                box-shadow: 0 15px 25px rgba(0, 0, 0, 0.6);
+                padding: 1.8rem 2rem 2.2rem 2rem;
+                gap: 1.2rem;
+                box-shadow: 0 20px 35px rgba(0, 0, 0, 0.7);
                 border-bottom: 1px solid var(--border-card);
-                align-items: flex-start; /* Zarovnání obsahu doleva/do bloku místo na střed */
+                align-items: flex-start;
                 
                 opacity: 0;
                 visibility: hidden;
-                transform: translateY(-10px);
-                transition: all 0.3s ease-in-out;
+                transform: translateY(-20px) scale(0.97);
+                transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.35s ease, visibility 0.35s;
+                will-change: transform, opacity;
             }
 
             nav.active {
                 opacity: 1;
                 visibility: visible;
-                transform: translateY(0);
+                transform: translateY(0) scale(1);
             }
 
             nav a {
-                font-size: 1rem;
+                font-size: 1.25rem;
+                font-weight: 700;
                 width: 100%;
-                text-align: left; /* Zarovnání odkazu do leva */
-                padding: 4px 0;
+                text-align: left;
+                padding: 8px 0;
+                opacity: 0;
+                transform: translateX(-15px);
+                transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease;
             }
 
             nav a::after {
@@ -683,66 +766,77 @@
                 background: var(--brand-blue) !important;
                 border: none !important;
                 color: #ffffff !important;
-                margin-top: 0.2rem;
-                padding: 0.7rem 1.2rem;
+                margin-top: 0.5rem;
+                padding: 0.95rem 1.6rem !important;
+                font-size: 1.15rem !important;
                 font-weight: 700;
                 box-shadow: 0 4px 15px var(--brand-blue-glow) !important;
                 text-align: center;
+                border-radius: 12px !important;
             }
 
-            /* TELEFON A EMAIL UVNITŘ MENU */
             .menu-contacts {
                 display: flex;
                 flex-direction: column;
-                gap: 0.5rem;
+                gap: 0.9rem;
                 width: 100%;
-                padding-top: 0.8rem;
-                margin-top: 0.5rem;
-                border-top: 1px solid rgba(255, 255, 255, 0.1);
+                padding-top: 1.2rem;
+                margin-top: 0.6rem;
+                border-top: 1px solid rgba(255, 255, 255, 0.12);
+                opacity: 0;
+                transform: translateX(-15px);
+                transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease;
             }
 
             .menu-contact-item {
                 display: flex;
                 align-items: center;
-                gap: 10px;
-                color: #cbd5e1;
+                gap: 12px;
+                color: #e2e8f0;
                 text-decoration: none;
-                font-size: 0.95rem;
-                font-weight: 600;
+                font-size: 1.15rem;
+                font-weight: 700;
                 transition: var(--transition);
             }
 
             .menu-contact-item i {
                 color: #60a5fa;
-                font-size: 1rem;
-                width: 18px;
+                font-size: 1.3rem;
+                width: 24px;
             }
 
             .menu-contact-item:hover {
                 color: #ffffff;
             }
 
-            /* SOCIÁLNÍ SÍTĚ UVNITŘ MENU */
             .menu-socials {
                 display: flex;
                 justify-content: flex-start;
                 align-items: center;
-                gap: 1.5rem;
-                margin-top: 0.4rem;
+                gap: 1.8rem;
+                margin-top: 0.6rem;
                 width: 100%;
+                opacity: 0;
+                transform: translateX(-15px);
+                transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease;
             }
 
             .menu-socials .social-icon {
                 color: #ffffff;
-                font-size: 1.4rem;
-                opacity: 0.85;
+                font-size: 1.7rem;
+                opacity: 0.9;
                 transition: var(--transition);
                 display: flex;
                 align-items: center;
                 justify-content: center;
                 text-decoration: none;
-                width: 24px;
-                height: 24px;
+                width: 32px;
+                height: 32px;
+            }
+
+            .menu-socials .social-icon svg {
+                width: 26px;
+                height: 26px;
             }
 
             .menu-socials .social-icon:hover {
@@ -750,6 +844,13 @@
                 transform: translateY(-2px);
                 opacity: 1;
             }
+
+            nav.active a:nth-child(1) { opacity: 1; transform: translateX(0); transition-delay: 0.08s; }
+            nav.active a:nth-child(2) { opacity: 1; transform: translateX(0); transition-delay: 0.13s; }
+            nav.active a:nth-child(3) { opacity: 1; transform: translateX(0); transition-delay: 0.18s; }
+            nav.active a:nth-child(4) { opacity: 1; transform: translateX(0); transition-delay: 0.23s; }
+            nav.active .menu-contacts  { opacity: 1; transform: translateX(0); transition-delay: 0.28s; }
+            nav.active .menu-socials   { opacity: 1; transform: translateX(0); transition-delay: 0.33s; }
 
             .about-features {
                 grid-template-columns: 1fr;
@@ -806,7 +907,6 @@
                 <a href="#o-nas" class="nav-link">O nás</a>
                 <a href="#kontakt" class="nav-btn nav-link">Nezávazná poptávka</a>
 
-                <!-- TELEFON & E-MAIL STEJNÉ JAKO NA HLAVNÍ STRÁNCE -->
                 <div class="menu-contacts">
                     <a href="tel:+420123456789" class="menu-contact-item">
                         <i class="fa-solid fa-phone"></i> +420 123 456 789
@@ -816,7 +916,6 @@
                     </a>
                 </div>
 
-                <!-- 4 IDENTICKÉ SOCIÁLNÍ SÍTĚ -->
                 <div class="menu-socials">
                     <a href="#" class="social-icon" title="Facebook"><i class="fa-brands fa-square-facebook"></i></a>
                     <a href="#" class="social-icon" title="X (Twitter)"><svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
@@ -969,14 +1068,15 @@
         </div>
     </section>
 
-    <!-- KONTAKT -->
+    <!-- KONTAKT A FORMULÁŘ -->
     <section id="kontakt">
         <div class="dark-card-container reveal">
             <div class="contact-grid">
+                <!-- LEVÁ STRANA: KONTAKTNÍ ÚDAJE -->
                 <div>
-                    <span class="section-subtitle" style="color: #60a5fa;">Napište nám</span>
+                    <span class="section-subtitle" style="color: #60a5fa;">Kontaktujte nás</span>
                     <h2 style="font-size: clamp(1.8rem, 2.5vw, 2.5rem); margin-bottom: 1.2rem; color: white;">Máte projekt? Rádi vám spočítáme rozpočet</h2>
-                    <p style="color: var(--text-muted); margin-bottom: 2.5rem; font-size: clamp(0.9rem, 1vw, 1.05rem);">Kontaktujte nás pro nezávaznou konzultaci nebo obhlídku stavby zdarma.</p>
+                    <p style="color: var(--text-muted); margin-bottom: 2rem; font-size: clamp(0.9rem, 1vw, 1.05rem);">Kontaktujte nás telefonicky, e-mailem nebo zanechte zprávu ve formuláři. Ozveme se vám zpět.</p>
 
                     <div class="contact-info-card">
                         <div class="contact-icon"><i class="fa-solid fa-phone"></i></div>
@@ -993,17 +1093,42 @@
                             <a href="mailto:info@owax.cz" style="color: white; font-weight: 700; text-decoration: none; font-size: clamp(1rem, 1.2vw, 1.25rem);">info@owax.cz</a>
                         </div>
                     </div>
+
+                    <div style="margin-top: 1.8rem; padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,0.1);">
+                        <p style="margin-bottom: 0.4rem; color: #f1f5f9; font-weight: 600;">Stavební firma OWAX s.r.o.</p>
+                        <p style="color: var(--text-muted); font-size: 0.9rem; display: flex; align-items: center; gap: 8px;">
+                            <i class="fa-solid fa-location-dot" style="color: #60a5fa;"></i> Praha & Středočeský kraj | IČO: 12345678
+                        </p>
+                    </div>
                 </div>
 
+                <!-- PRAVÁ STRANA: FUNKČNÍ KONTAKTNÍ FORMULÁŘ -->
                 <div class="inner-dark-card">
-                    <h3 style="margin-bottom: 1.5rem; color: white; font-size: clamp(1.1rem, 1.3vw, 1.35rem);">Fakturační údaje</h3>
-                    <p style="margin-bottom: 1rem; color: #f1f5f9; font-weight: 600;">Stavební firma OWAX s.r.o.</p>
-                    <p style="margin-bottom: 0.8rem; color: var(--text-muted); display: flex; align-items: center; gap: 10px;">
-                        <i class="fa-solid fa-location-dot" style="color: #60a5fa;"></i> Praha & Středočeský kraj
-                    </p>
-                    <p style="color: var(--text-muted); display: flex; align-items: center; gap: 10px;">
-                        <i class="fa-solid fa-id-card" style="color: #60a5fa;"></i> IČO: 12345678
-                    </p>
+                    <h3 style="margin-bottom: 0.5rem; color: white; font-size: clamp(1.2rem, 1.4vw, 1.5rem);">Napište nám</h3>
+                    <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem;">Vyplňte váš kontakt a popis požadavku, ozveme se vám co nejdříve.</p>
+
+                    <form action="https://formsubmit.co/jopis@jopis.cz" method="POST" class="contact-form">
+                        <!-- Nastavení předmětu e-mailu -->
+                        <input type="hidden" name="_subject" value="Nová poptávka z webu OWAX.cz">
+                        <!-- Ochrana proti spamu (Honeypot) -->
+                        <input type="text" name="_honey" style="display:none">
+                        <!-- Vypnutí captchy pro plynulý zážitek (lze zapnout vymazáním řádku) -->
+                        <input type="hidden" name="_captcha" value="false">
+
+                        <div class="form-group">
+                            <label for="contact_info">Váš e-mail nebo telefon *</label>
+                            <input type="text" id="contact_info" name="Kontakt" placeholder="např. jan.novak@email.cz nebo 777 123 456" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="message">Popis požadavku / Zpráva *</label>
+                            <textarea id="message" name="Zpráva" placeholder="Popište stručně váš záměr (např. kompletní rekonstrukce bytu 2+kk v Praze, termín realizace...)" required></textarea>
+                        </div>
+
+                        <button type="submit" class="submit-btn">
+                            <i class="fa-solid fa-paper-plane"></i> Odeslat poptávku
+                        </button>
+                    </form>
                 </div>
             </div>
         </div>
@@ -1034,13 +1159,15 @@
             window.scrollTo(0, 0);
         });
 
-        /* === HAMBURGER MENU === */
+        /* === HAMBURGER MENU A DYNAMICKÁ ANIMACE === */
         const hamburgerBtn = document.getElementById('hamburger-btn');
         const navMenu = document.getElementById('nav-menu');
         const navLinks = document.querySelectorAll('.nav-link');
 
         hamburgerBtn.addEventListener('click', () => {
             navMenu.classList.toggle('active');
+            hamburgerBtn.classList.toggle('active');
+            
             const icon = hamburgerBtn.querySelector('i');
             if (navMenu.classList.contains('active')) {
                 icon.classList.remove('fa-bars');
@@ -1054,6 +1181,7 @@
         navLinks.forEach(link => {
             link.addEventListener('click', () => {
                 navMenu.classList.remove('active');
+                hamburgerBtn.classList.remove('active');
                 const icon = hamburgerBtn.querySelector('i');
                 icon.classList.remove('fa-xmark');
                 icon.classList.add('fa-bars');
