@@ -573,17 +573,17 @@
             fill: currentColor;
         }
 
-        /* OPTIMALIZOVANÉ ANIMACE PRO HW ACCELERACI */
+        /* OPRAVENÉ REVEAL ANIMACE (Spouští se při každém skrolování) */
         .reveal {
             opacity: 0;
-            transform: translateY(20px) translateZ(0);
+            transform: translateY(30px) scale(0.98);
             transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.6s ease-out;
             will-change: transform, opacity;
         }
 
         .reveal.active {
             opacity: 1;
-            transform: translateY(0) translateZ(0);
+            transform: translateY(0) scale(1);
         }
 
         @keyframes fadeInUp {
@@ -638,6 +638,7 @@
                 display: block;
             }
 
+            /* NOVOST: Animace plynulého rozbalení mobilního menu */
             nav {
                 position: absolute;
                 top: var(--header-height);
@@ -649,25 +650,40 @@
                 padding: 1.5rem 2rem 2rem 2rem;
                 gap: 1.2rem;
                 border-bottom: 1px solid var(--border-card);
-                box-shadow: 0 15px 30px rgba(0,0,0,0.4);
+                box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
                 
                 opacity: 0;
                 visibility: hidden;
-                transform: translateY(-10px);
-                transition: var(--transition);
+                transform: translateY(-20px) scale(0.97);
+                transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease, visibility 0.4s;
+                transform-origin: top center;
             }
 
             nav.active {
                 opacity: 1;
                 visibility: visible;
+                transform: translateY(0) scale(1);
+            }
+
+            /* Postupné vynoření jednotlivých odkazů v menu */
+            nav a {
+                font-size: 1.1rem;
+                padding: 0.6rem 0;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+                opacity: 0;
+                transform: translateY(-10px);
+                transition: transform 0.3s ease, opacity 0.3s ease;
+            }
+
+            nav.active a {
+                opacity: 1;
                 transform: translateY(0);
             }
 
-            nav a {
-                font-size: 1.1rem;
-                padding: 0.5rem 0;
-                border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            }
+            nav.active a:nth-child(1) { transition-delay: 0.1s; }
+            nav.active a:nth-child(2) { transition-delay: 0.15s; }
+            nav.active a:nth-child(3) { transition-delay: 0.2s; }
+            nav.active a:nth-child(4) { transition-delay: 0.25s; }
 
             nav a::after {
                 display: none;
@@ -969,18 +985,19 @@
             });
         });
 
-        /* === OPTIMALIZOVANÉ ANIMACE SKROLOVÁNÍ (IntersectionObserver) === */
+        /* === OPRAVENÉ REVEAL ANIMACE (Opakují se při každém skrolování) === */
         const observerOptions = {
             root: null,
-            threshold: 0.1,
+            threshold: 0.15,
             rootMargin: "0px 0px -50px 0px"
         };
 
-        const observer = new IntersectionObserver((entries, observer) => {
+        const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('active');
-                    observer.unobserve(entry.target);
+                } else {
+                    entry.target.classList.remove('active'); // Při odskrolování zruší třídu pro nový náběh
                 }
             });
         }, observerOptions);
