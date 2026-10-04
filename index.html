@@ -141,11 +141,14 @@
             transition: var(--transition);
         }
 
-        nav a.nav-link:hover::after {
+        /* Aktivní stav při hoveru i při scrollování */
+        nav a.nav-link:hover::after,
+        nav a.nav-link.active::after {
             width: 100%;
         }
 
-        nav a.nav-link:hover {
+        nav a.nav-link:hover,
+        nav a.nav-link.active {
             color: #ffffff;
         }
 
@@ -429,6 +432,7 @@
             z-index: 1;
         }
 
+        /* DYNAMICKÉ POPISKY - POSOUVAJÍ SE A JSOU UPROSTŘED SWÉ ČÁSTI */
         .ba-label {
             position: absolute;
             bottom: 15px;
@@ -439,10 +443,15 @@
             font-weight: 700;
             border-radius: 8px;
             border: 1px solid rgba(255,255,255,0.1);
+            z-index: 3;
+            transform: translateX(-50%);
+            white-space: nowrap;
+            pointer-events: none;
+            will-change: left;
         }
 
-        .ba-label-before { left: 15px; z-index: 3; }
-        .ba-label-after { right: 15px; z-index: 3; }
+        .ba-label-before { left: 25%; }
+        .ba-label-after { left: 75%; }
 
         .ba-slider-handle {
             position: absolute;
@@ -464,7 +473,6 @@
             will-change: left;
         }
 
-        /* UPRAVENÉ TLAČÍTKO DETAIL PROJEKTU */
         .btn-project-detail {
             display: inline-flex;
             align-items: center;
@@ -493,7 +501,6 @@
             margin: 0 8% clamp(2.5rem, 4vw, 4.5rem) 8%;
         }
 
-        /* UPRAVENÉ TLAČÍTKO VŠECHNY PROJEKTY - VYROVNANÉ OHRANIČENÍ A IKONA GALERIE */
         .btn-main-portfolio {
             display: inline-flex;
             align-items: center;
@@ -655,7 +662,6 @@
             letter-spacing: 0.2px;
         }
 
-        /* SVĚTLÁ TEXTOVÁ POLE */
         .form-group input,
         .form-group textarea {
             width: 100%;
@@ -1166,7 +1172,7 @@
             </div>
         </div>
 
-        <!-- TLAČÍTKO VŠECHNY PROJEKTY S PŮVODNÍ GALERIJNÍ IKONOU V NOVÉM KONTEJNERU A VYROVNANÝM OHRANIČENÍM -->
+        <!-- TLAČÍTKO VŠECHNY PROJEKTY -->
         <div class="main-cta-container reveal">
             <a href="projekty.html" class="btn-main-portfolio">
                 <div class="btn-icon-box">
@@ -1347,6 +1353,34 @@
             });
         });
 
+        /* === SCROLLSPY (PODTRŽENÍ POLOŽEK V HLAVIČCE PODLE SCROLLOVÁNÍ) === */
+        const sections = document.querySelectorAll('section[id]');
+        const mainNavLinks = document.querySelectorAll('nav a.nav-link');
+
+        const scrollSpyOptions = {
+            root: null,
+            // Sleduje střed obrazovky s posunem kvůli fixní hlavičce
+            rootMargin: '-20% 0px -55% 0px',
+            threshold: 0
+        };
+
+        const scrollSpyObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const currentId = entry.target.getAttribute('id');
+                    
+                    mainNavLinks.forEach(link => {
+                        link.classList.remove('active');
+                        if (link.getAttribute('href') === `#${currentId}`) {
+                            link.classList.add('active');
+                        }
+                    });
+                }
+            });
+        }, scrollSpyOptions);
+
+        sections.forEach(section => scrollSpyObserver.observe(section));
+
         /* === REVEAL ANIMACE === */
         const observerOptions = {
             root: null,
@@ -1366,21 +1400,35 @@
 
         document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-        /* === BEFORE / AFTER SLIDER S PASIVNÍMI EVENTS === */
+        /* === BEFORE / AFTER SLIDER S DYNAMICKÝMI POPISKY UPROSTŘED === */
         const slider = document.getElementById('ba-slider');
         const beforeImg = document.getElementById('ba-before');
         const handle = document.getElementById('ba-handle');
+        const labelBefore = slider.querySelector('.ba-label-before');
+        const labelAfter = slider.querySelector('.ba-label-after');
+
         let isDown = false;
         let ticking = false;
 
         function updateSlider(pageX) {
             let rect = slider.getBoundingClientRect();
             let x = pageX - rect.left - window.scrollX;
+            
             if (x < 0) x = 0;
             if (x > rect.width) x = rect.width;
+            
             let percent = (x / rect.width) * 100;
+
+            // Posun ohraničení obrázku a jezdce
             beforeImg.style.width = percent + "%";
             handle.style.left = percent + "%";
+
+            // Výpočet středu pro levou (PŘED) a pravou (PO) část
+            let centerBefore = percent / 2;
+            let centerAfter = percent + ((100 - percent) / 2);
+
+            labelBefore.style.left = centerBefore + "%";
+            labelAfter.style.left = centerAfter + "%";
         }
 
         function onMove(e) {
