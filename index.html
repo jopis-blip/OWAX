@@ -141,7 +141,6 @@
             transition: var(--transition);
         }
 
-        /* Aktivní stav při hoveru i při scrollování */
         nav a.nav-link:hover::after,
         nav a.nav-link.active::after {
             width: 100%;
@@ -400,7 +399,7 @@
             width: 100%;
             height: clamp(280px, 30vw, 420px);
             border-radius: 20px;
-            overflow: hidden;
+            overflow: hidden; /* Skryje popisek když vyjede ven */
             user-select: none;
             touch-action: pan-y;
             background: #283548;
@@ -432,7 +431,7 @@
             z-index: 1;
         }
 
-        /* DYNAMICKÉ POPISKY - POSOUVAJÍ SE A JSOU UPROSTŘED SWÉ ČÁSTI */
+        /* POPISKY S PLYNULÝM MIZENÍM (OPACITY TRANSITION) */
         .ba-label {
             position: absolute;
             bottom: 15px;
@@ -447,7 +446,9 @@
             transform: translateX(-50%);
             white-space: nowrap;
             pointer-events: none;
-            will-change: left;
+            will-change: left, opacity;
+            transition: opacity 0.2s ease-out;
+            opacity: 1;
         }
 
         .ba-label-before { left: 25%; }
@@ -1239,7 +1240,6 @@
         </div>
 
         <div class="contact-container reveal">
-            <!-- LEVÁ STRANA: KONTAKTNÍ ÚDAJE -->
             <div class="contact-info-box">
                 <h3 style="font-size: clamp(1.4rem, 2vw, 2rem); margin-bottom: 0.8rem; color: white;">Rádi připravíme nabídku</h3>
                 <p style="color: var(--text-muted); margin-bottom: 1.2rem; font-size: clamp(0.9rem, 1vw, 1.05rem);">Zavolejte nám nebo využijte kontaktní formulář. Vše s vámi rádi probereme.</p>
@@ -1268,7 +1268,6 @@
                 </div>
             </div>
 
-            <!-- PRAVÁ STRANA: FORMULÁŘ -->
             <div class="contact-form-box">
                 <h3>Napište nám</h3>
                 <p>Zanechte nám e-mail a popis požadavku. Ozveme se vám co nejdříve.</p>
@@ -1322,9 +1321,10 @@
 
         window.addEventListener('load', () => {
             window.scrollTo(0, 0);
+            updateSlider(slider.getBoundingClientRect().width / 2); // inicializace slideru
         });
 
-        /* === HAMBURGER MENU A DYNAMICKÁ ANIMACE === */
+        /* === HAMBURGER MENU === */
         const hamburgerBtn = document.getElementById('hamburger-btn');
         const navMenu = document.getElementById('nav-menu');
         const navLinks = document.querySelectorAll('.nav-link, .nav-btn');
@@ -1353,33 +1353,36 @@
             });
         });
 
-        /* === SCROLLSPY (PODTRŽENÍ POLOŽEK V HLAVIČCE PODLE SCROLLOVÁNÍ) === */
+        /* === SCROLLSPY === */
         const sections = document.querySelectorAll('section[id]');
         const mainNavLinks = document.querySelectorAll('nav a.nav-link');
 
-        const scrollSpyOptions = {
-            root: null,
-            // Sleduje střed obrazovky s posunem kvůli fixní hlavičce
-            rootMargin: '-20% 0px -55% 0px',
-            threshold: 0
-        };
+        function updateActiveNav() {
+            const scrollPos = window.scrollY || document.documentElement.scrollTop;
+            const headerHeight = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--header-height')) || 95;
+            
+            let currentSectionId = "";
 
-        const scrollSpyObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const currentId = entry.target.getAttribute('id');
-                    
-                    mainNavLinks.forEach(link => {
-                        link.classList.remove('active');
-                        if (link.getAttribute('href') === `#${currentId}`) {
-                            link.classList.add('active');
-                        }
-                    });
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - headerHeight - 120;
+                const sectionHeight = section.offsetHeight;
+
+                if (scrollPos >= sectionTop && scrollPos < sectionTop + sectionHeight) {
+                    currentSectionId = section.getAttribute('id');
                 }
             });
-        }, scrollSpyOptions);
 
-        sections.forEach(section => scrollSpyObserver.observe(section));
+            mainNavLinks.forEach(link => {
+                link.classList.remove('active');
+                if (currentSectionId && link.getAttribute('href') === `#${currentSectionId}`) {
+                    link.classList.add('active');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', updateActiveNav, { passive: true });
+        window.addEventListener('resize', updateActiveNav, { passive: true });
+        document.addEventListener('DOMContentLoaded', updateActiveNav);
 
         /* === REVEAL ANIMACE === */
         const observerOptions = {
@@ -1400,7 +1403,7 @@
 
         document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-        /* === BEFORE / AFTER SLIDER S DYNAMICKÝMI POPISKY UPROSTŘED === */
+        /* === BEFORE / AFTER SLIDER S DYNAMICKÝM SKRÝVÁNÍM POPISKŮ PŘI KRAJÍCH === */
         const slider = document.getElementById('ba-slider');
         const beforeImg = document.getElementById('ba-before');
         const handle = document.getElementById('ba-handle');
@@ -1412,7 +1415,7 @@
 
         function updateSlider(pageX) {
             let rect = slider.getBoundingClientRect();
-            let x = pageX - rect.left - window.scrollX;
+            let x = pageX - rect.left;
             
             if (x < 0) x = 0;
             if (x > rect.width) x = rect.width;
@@ -1429,6 +1432,21 @@
 
             labelBefore.style.left = centerBefore + "%";
             labelAfter.style.left = centerAfter + "%";
+
+            // LOGIKA PRO ZMIZENÍ POPISKU PŘI KRAJI
+            // Pokud je sekce "PŘED" užší než cca 12% šířky, skryjeme popisek PŘED
+            if (percent < 12) {
+                labelBefore.style.opacity = "0";
+            } else {
+                labelBefore.style.opacity = "1";
+            }
+
+            // Pokud je sekce "PO" užší než cca 12% šířky, skryjeme popisek PO
+            if (percent > 88) {
+                labelAfter.style.opacity = "0";
+            } else {
+                labelAfter.style.opacity = "1";
+            }
         }
 
         function onMove(e) {
