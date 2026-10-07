@@ -3,14 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>OWAX | Rekonstrukce, projekce a stavební poradenství Praha</title>
-    <meta name="description" content="Tým stavebních inženýrů z ČVUT. Rekonstrukce bytů a domů, novostavby, projekční činnost, rozpočty a koordinace stavby v Praze a Středočeském kraji – od přípravy po realizaci.">
-
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://www.owax.cz/">
-    <meta property="og:title" content="OWAX | Rekonstrukce, projekce a stavební poradenství">
-    <meta property="og:description" content="Tým stavebních inženýrů z ČVUT. Rekonstrukce bytů a domů, novostavby, projekční činnost, rozpočty a koordinace stavby v Praze a Středočeském kraji.">
-    <meta property="og:image" content="https://www.owax.cz/logo.png">
+    <title>Reference | OWAX</title>
+    <meta name="description" content="Vybrané realizace a projekty OWAX – kompletní rekonstrukce bytu v Praze 6, projekční práce, zaměření staveb a další.">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1226,7 +1220,7 @@ footer {
 </head>
 <body>
 
-    <!-- HLAVIČKA (stejná na všech stránkách, liší se jen třída "active" v menu) -->
+    <!-- HLAVIČKA -->
     <header>
         <div class="header-content">
             <a href="index.html" class="logo-container" title="OWAX – Úvod">
@@ -1241,9 +1235,9 @@ footer {
             </div>
 
             <nav id="nav-menu">
-                <a href="index.html" class="nav-link active">Úvod</a>
+                <a href="index.html" class="nav-link">Úvod</a>
                 <a href="sluzby.html" class="nav-link">Služby</a>
-                <a href="reference.html" class="nav-link">Reference</a>
+                <a href="reference.html" class="nav-link active">Reference</a>
                 <a href="o-nas.html" class="nav-link">O nás</a>
                 <a href="kontakt.html" class="nav-link">Kontakt</a>
 
@@ -1265,76 +1259,104 @@ footer {
         </div>
     </header>
 
-    <!-- ÚVOD -->
-    <section class="hero">
-        <div class="hero-content">
-            <div class="hero-badge">
-                <i class="fa-solid fa-graduation-cap"></i> Inženýrský přístup ke stavbě
-            </div>
-            <h1>Vaše stavba v rukou <span>stavebních inženýrů</span></h1>
-            <p>Zajišťujeme kompletní přípravu i realizaci rekonstrukcí a novostaveb v Praze a Středočeském kraji. Projekční činnost, rozpočty, koordinace profesí i samotné provedení prací – vše s odbornou přesností a osobním přístupem.</p>
+    <!-- ZÁHLAVÍ STRÁNKY -->
+    <section class="page-hero">
+        <div class="page-hero-inner">
+            <div class="hero-badge"><i class="fa-solid fa-images"></i> Reference</div>
+            <h1>Vybrané realizace <span>a projekty</span></h1>
+            <p>Ukázky naší práce – od kompletních rekonstrukcí po projekční práce a zaměření staveb.</p>
+        </div>
+    </section>
 
-            <div class="hero-btns">
-                <a href="kontakt.html" class="hero-btn hero-btn-primary">Chci nezávaznou konzultaci</a>
-                <a href="reference.html" class="hero-btn hero-btn-secondary">Naše projekty</a>
-            </div>
+    <!-- HLAVNÍ REALIZACE: PODBABA -->
+    <section>
+        <div class="section-header reveal">
+            <span class="section-subtitle">Realizace</span>
+            <h2 class="section-title">Rekonstrukce bytu — Podbaba, Praha 6</h2>
+        </div>
 
-            <div class="hero-stats">
-                <div class="stat-item">
-                    <h3>5+</h3>
-                    <p>Let praxe ve velkých stavebních firmách</p>
+        <div class="dark-card-container reveal">
+            <div class="case-study">
+                <div>
+                    <span class="case-tag">Realizace · Praha 6 — Podbaba</span>
+                    <h3 class="card-title">Kompletní rekonstrukce bytu na klíč</h3>
+                    <p class="card-text">
+                        Komplexní proměna bytu od demontáže původních konstrukcí až po montáž nové kuchyňské linky. Vedle vlastních stavebních prací jsme zajistili koordinaci elektrikářů a truhlářů tak, aby jednotlivé profese plynule navazovaly a byt byl předán v požadované kvalitě.
+                    </p>
+                    <ul class="check-list">
+                        <li><i class="fa-solid fa-check"></i> Bourací práce, demontáž nábytku a SDK konstrukcí</li>
+                        <li><i class="fa-solid fa-check"></i> Nové podlahy a elektroinstalace</li>
+                        <li><i class="fa-solid fa-check"></i> Osazení dveří, malby a montáž kuchyňské linky</li>
+                        <li><i class="fa-solid fa-check"></i> Koordinace subdodavatelů – elektro a truhlářské práce</li>
+                    </ul>
                 </div>
-                <div class="stat-item">
-                    <h3>ČVUT</h3>
-                    <p>Vysokoškolské stavební vzdělání</p>
-                </div>
-                <div class="stat-item">
-                    <h3>1 partner</h3>
-                    <p>Pro přípravu i realizaci</p>
+
+                <div class="before-after-container" id="ba-slider">
+                    <div class="ba-image ba-after"></div>
+                    <div class="ba-image ba-before" id="ba-before"></div>
+                    <span class="ba-label ba-label-before">PŘED</span>
+                    <span class="ba-label ba-label-after">PO</span>
+                    <div class="ba-slider-handle" id="ba-handle">
+                        <i class="fa-solid fa-arrows-left-right"></i>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ROZCESTNÍK -->
+    <!-- DALŠÍ PROJEKTY – fotky nahrajte do složky "foto" pod uvedeným názvem -->
     <section>
         <div class="section-header reveal">
-            <span class="section-subtitle">Vítejte v OWAX</span>
-            <h2 class="section-title">Jak vám můžeme pomoci</h2>
+            <span class="section-subtitle">Projekční činnost</span>
+            <h2 class="section-title">Další projekty</h2>
         </div>
 
-        <div class="services-grid">
-            <a href="sluzby.html" class="service-card reveal">
-                <div class="service-icon"><i class="fa-solid fa-screwdriver-wrench"></i></div>
-                <h3>Naše služby</h3>
-                <p>Rekonstrukce, novostavby, projekční činnost, rozpočty, koordinace i stavební poradenství – vše od jednoho partnera.</p>
-                <span class="card-more">Zobrazit služby <i class="fa-solid fa-arrow-right"></i></span>
-            </a>
+        <div class="projects-grid">
+            <div class="project-card reveal">
+                <div class="project-img">
+                    <i class="fa-solid fa-compass-drafting"></i>
+                    <img src="foto/sklep.jpg" alt="Přestavba sklepních prostor na byt" onerror="this.remove()">
+                </div>
+                <div class="project-body">
+                    <span class="case-tag">Projekce</span>
+                    <h3>Přestavba sklepních prostor na bytovou jednotku</h3>
+                    <p>Návrh přeměny nevyužívaných suterénních prostor na plnohodnotné bydlení. Zpracovali jsme výkresovou dokumentaci, navrhli kuchyň a vyřešili technické zařízení budovy (TZB).</p>
+                </div>
+            </div>
 
-            <a href="reference.html" class="service-card reveal">
-                <div class="service-icon"><i class="fa-solid fa-images"></i></div>
-                <h3>Reference</h3>
-                <p>Prohlédněte si ukázky naší práce – od kompletní rekonstrukce bytu po projekční práce a zaměření staveb.</p>
-                <span class="card-more">Zobrazit projekty <i class="fa-solid fa-arrow-right"></i></span>
-            </a>
+            <div class="project-card reveal">
+                <div class="project-img">
+                    <i class="fa-solid fa-ruler-combined"></i>
+                    <img src="foto/ricany.jpg" alt="Zaměření rodinného domu v Říčanech" onerror="this.remove()">
+                </div>
+                <div class="project-body">
+                    <span class="case-tag">Zaměření · Říčany</span>
+                    <h3>Zaměření skutečného stavu rodinného domu</h3>
+                    <p>Přesné zaměření rodinného domu a zpracování podkladů pro kolaudační řízení, aby mohl být objekt bez komplikací uveden do užívání.</p>
+                </div>
+            </div>
 
-            <a href="o-nas.html" class="service-card reveal">
-                <div class="service-icon"><i class="fa-solid fa-users"></i></div>
-                <h3>O nás</h3>
-                <p>Seznamte se s naším týmem a zjistěte, proč s námi bude vaše stavba v dobrých rukou.</p>
-                <span class="card-more">Poznejte nás <i class="fa-solid fa-arrow-right"></i></span>
-            </a>
+            <div class="project-card reveal">
+                <div class="project-img">
+                    <i class="fa-solid fa-tree"></i>
+                    <img src="foto/skolka.jpg" alt="Návrh zahrady firemní mateřské školy" onerror="this.remove()">
+                </div>
+                <div class="project-body">
+                    <span class="case-tag">Návrh</span>
+                    <h3>Návrh zahrady firemní mateřské školy</h3>
+                    <p>Koncepční návrh venkovního prostoru firemní školky s důrazem na bezpečnost, funkčnost a podnětné prostředí pro hru a pohyb dětí.</p>
+                </div>
+            </div>
         </div>
     </section>
 
     <!-- VÝZVA -->
     <section>
         <div class="dark-card-container cta-band reveal">
-            <h2>Plánujete rekonstrukci nebo stavbu?</h2>
-            <p>Ozvěte se nám. Probereme vaše představy a navrhneme nejvhodnější postup. Úvodní konzultace je nezávazná.</p>
+            <h2>Chcete podobný výsledek?</h2>
+            <p>Rádi se podíváme i na váš projekt. Ozvěte se nám a domluvíme nezávaznou konzultaci.</p>
             <div class="hero-btns">
                 <a href="kontakt.html" class="hero-btn hero-btn-primary">Kontaktujte nás</a>
-                <a href="tel:+420723557807" class="hero-btn hero-btn-secondary"><i class="fa-solid fa-phone"></i>&nbsp; +420 723 557 807</a>
             </div>
         </div>
     </section>
