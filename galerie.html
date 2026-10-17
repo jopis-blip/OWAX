@@ -1570,7 +1570,8 @@ footer {
     100% { scale: 1; }
 }
 
-/* Rozsvícený krok: když čára dojde k číslu, rozsvítí se i fotka a text
+/* Poslední krok (.final) svítí zeleně.
+   Rozsvícený krok: když čára dojde k číslu, rozsvítí se i fotka a text
    a spojnice od čísla k nim – je hned vidět, co ke kterému číslu patří */
 .timeline-card::before {
     content: '';
@@ -1606,12 +1607,13 @@ footer {
     color: #93c5fd;
 }
 
-.timeline-step.no-photo.reached .timeline-body {
+.timeline-step.final.reached .timeline-card .gallery-item,
+.timeline-step.final.reached .timeline-body {
     border-color: rgba(34, 197, 94, 0.9);
     box-shadow: 0 0 0 1px rgba(34, 197, 94, 0.5), 0 0 22px rgba(34, 197, 94, 0.35), 0 12px 30px rgba(0, 0, 0, 0.08);
 }
 
-.timeline-step.no-photo.reached .timeline-card::before {
+.timeline-step.final.reached .timeline-card::before {
     background: var(--brand-green);
     box-shadow: 0 0 8px rgba(34, 197, 94, 0.6);
 }
@@ -1989,6 +1991,7 @@ footer {
                     <button class="gallery-item"><img src="foto/podbaba-prubeh-6.jpg" alt="Rekonstrukce bytu, Praha 6 – Podbaba: Vyštukované a vymalované stěny s připravenými vývody pro kuchyň" loading="lazy" onerror="this.parentElement.remove()"><span class="gallery-caption">7. Hotové stěny a vývody pro kuchyň</span></button>
                     <button class="gallery-item"><img src="foto/podbaba-prubeh-7.jpg" alt="Rekonstrukce bytu, Praha 6 – Podbaba: Obývací část bytu po vymalování" loading="lazy" onerror="this.parentElement.remove()"><span class="gallery-caption">8. Obývací část po malování</span></button>
                     <button class="gallery-item"><img src="foto/podbaba-prubeh-8.jpg" alt="Rekonstrukce bytu, Praha 6 – Podbaba: Pohled od vstupu – prostor připravený pro montáž kuchyňské linky" loading="lazy" onerror="this.parentElement.remove()"><span class="gallery-caption">9. Připraveno pro montáž kuchyně</span></button>
+                    <button class="gallery-item"><img src="foto/podbaba-kuchyne.jpg" alt="Rekonstrukce bytu, Praha 6 – Podbaba: Montáž nové kuchyňské linky" loading="lazy" onerror="this.parentElement.remove()"><span class="gallery-caption">10. Montáž kuchyňské linky</span></button>
                     <button class="gallery-item"><img src="Po.JPEG" alt="Rekonstrukce bytu, Praha 6 – Podbaba (po)" loading="lazy" onerror="this.parentElement.remove()"><span class="gallery-caption">Po – montáž kuchyně</span></button>
             </div>
         </div>
