@@ -1307,6 +1307,51 @@ footer {
 .lightbox-next { right: 1.5rem; top: 50%; transform: translateY(-50%); }
 
 /* ================================================
+   REFERENCE – ROZDĚLENÍ NA REALIZACE A PROJEKCE
+   ================================================ */
+.category-nav {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    margin-top: 2rem;
+}
+
+.category-nav a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.7rem 1.4rem;
+    border-radius: 50px;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    color: white;
+    font-weight: 700;
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+.category-nav a:hover {
+    border-color: rgba(255, 255, 255, 0.6);
+    transform: translateY(-2px);
+}
+
+.category-count {
+    background: var(--brand-blue);
+    border-radius: 20px;
+    padding: 1px 9px;
+    font-size: 0.8rem;
+}
+
+/* Kotvy sekcí nesmí zajet pod pevnou hlavičku */
+.category-section {
+    scroll-margin-top: var(--header-height);
+}
+
+.category-section + .category-section {
+    border-top: 1px solid rgba(15, 23, 42, 0.08);
+}
+
+/* ================================================
    DETAIL ZAKÁZKY
    ================================================ */
 /* Celá karta v Referencích je proklik na detail */
