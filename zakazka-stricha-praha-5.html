@@ -1497,6 +1497,104 @@ footer {
     text-decoration: none;
 }
 
+/* --- Oživení časové osy ---
+   Křivka: tečkovaná „cesta“ + modrá čára, která se při posouvání stránky
+   prodlužuje. Číslo kroku se rozsvítí, když k němu čára dojde.
+   Fotka a text najíždějí z boků (jen když běží skript – třída .anim). */
+.timeline-curve .curve-track {
+    stroke: rgba(0, 86, 210, 0.22);
+    stroke-width: 3;
+    stroke-dasharray: 2 9;
+    stroke-linecap: round;
+    fill: none;
+}
+
+.timeline-curve .curve-progress {
+    stroke-width: 4;
+    stroke-linecap: round;
+    fill: none;
+    filter: drop-shadow(0 0 6px rgba(0, 86, 210, 0.45));
+}
+
+.timeline-num {
+    background: white;
+    color: var(--brand-blue);
+    border: 3px solid var(--brand-blue);
+    box-shadow: 0 0 0 5px var(--bg-page);
+    transition: background 0.4s, color 0.4s, box-shadow 0.4s, scale 0.4s;
+}
+
+.timeline-num.reached {
+    background: var(--brand-blue);
+    color: white;
+    box-shadow: 0 0 0 5px var(--bg-page), 0 0 0 10px rgba(0, 86, 210, 0.18), 0 6px 18px var(--brand-blue-glow);
+    animation: num-pop 0.5s ease-out;
+}
+
+.timeline-num.done {
+    background: white;
+    color: var(--brand-green);
+    border-color: var(--brand-green);
+    box-shadow: 0 0 0 5px var(--bg-page);
+}
+
+.timeline-num.done.reached {
+    background: var(--brand-green);
+    color: white;
+    box-shadow: 0 0 0 5px var(--bg-page), 0 0 0 10px rgba(34, 197, 94, 0.2), 0 6px 18px rgba(34, 197, 94, 0.4);
+}
+
+@keyframes num-pop {
+    0% { scale: 1; }
+    45% { scale: 1.25; }
+    100% { scale: 1; }
+}
+
+/* Fotka se při najetí myší lehce přiblíží */
+.timeline-card .gallery-item img {
+    transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.timeline-card .gallery-item:hover img {
+    transform: scale(1.06);
+}
+
+/* Najíždění z boků */
+.timeline.anim .timeline-card .gallery-item,
+.timeline.anim .timeline-body {
+    transition: opacity 0.8s ease-out, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.timeline.anim .timeline-body {
+    transition-delay: 0.15s;
+}
+
+.timeline.anim .timeline-step:not(.in) .gallery-item {
+    opacity: 0;
+    transform: translateX(-70px) rotate(-2deg);
+}
+
+.timeline.anim .timeline-step:not(.in) .timeline-body {
+    opacity: 0;
+    transform: translateX(70px);
+}
+
+.timeline.anim .timeline-step:nth-of-type(even):not(.in) .gallery-item {
+    transform: translateX(70px) rotate(2deg);
+}
+
+.timeline.anim .timeline-step:nth-of-type(even):not(.in) .timeline-body {
+    transform: translateX(-70px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .timeline.anim .timeline-step:not(.in) .gallery-item,
+    .timeline.anim .timeline-step:not(.in) .timeline-body {
+        opacity: 1;
+        transform: none;
+    }
+}
+
 /* Zakázka bez fotek: sekce s fotkami se nezobrazí */
 .detail-photos:not(:has(.gallery-item, .before-after-container)) .section-header {
     display: none;
@@ -1640,15 +1738,33 @@ footer {
     }
 
     /* Časová osa na telefonu: místo křivky rovná čára vlevo, fotka nad textem */
-    .timeline::before {
+    .timeline::before,
+    .timeline::after {
         content: '';
         position: absolute;
         top: 0;
-        bottom: 0;
         left: calc(var(--side) + 20px);
         width: 3px;
-        background: linear-gradient(var(--brand-blue), #60a5fa);
         border-radius: 3px;
+    }
+
+    /* Tečkovaná cesta a modrá čára, která se při posouvání prodlužuje */
+    .timeline::before {
+        bottom: 0;
+        background: repeating-linear-gradient(rgba(0, 86, 210, 0.25) 0 3px, transparent 3px 11px);
+    }
+
+    .timeline::after {
+        height: var(--fill, 0px);
+        background: linear-gradient(var(--brand-blue), #60a5fa);
+        box-shadow: 0 0 6px rgba(0, 86, 210, 0.45);
+    }
+
+    .timeline.anim .timeline-step:not(.in) .gallery-item,
+    .timeline.anim .timeline-step:nth-of-type(even):not(.in) .gallery-item,
+    .timeline.anim .timeline-step:not(.in) .timeline-body,
+    .timeline.anim .timeline-step:nth-of-type(even):not(.in) .timeline-body {
+        transform: translateY(30px);
     }
 
     .timeline-curve {
@@ -2006,7 +2122,7 @@ if (contactForm) {
     });
 }
 
-/* === ČASOVÁ OSA – nepravidelná křivka mezi čísly kroků (jen na stránce zakázky) === */
+/* === ČASOVÁ OSA – hladká nepravidelná křivka, která se kreslí při posouvání (jen na stránce zakázky) === */
 const timeline = document.querySelector('.timeline');
 
 if (timeline) {
@@ -2014,39 +2130,102 @@ if (timeline) {
     const svg = document.createElementNS(svgNS, 'svg');
     svg.setAttribute('class', 'timeline-curve');
     svg.setAttribute('aria-hidden', 'true');
-    svg.innerHTML = '<defs><linearGradient id="curve-grad" x1="0" y1="0" x2="0" y2="1">' +
-        '<stop offset="0" stop-color="#0056d2"/><stop offset="1" stop-color="#60a5fa"/></linearGradient></defs>';
-    const path = document.createElementNS(svgNS, 'path');
-    path.setAttribute('fill', 'none');
-    path.setAttribute('stroke', 'url(#curve-grad)');
-    path.setAttribute('stroke-width', '3');
-    path.setAttribute('stroke-linecap', 'round');
-    svg.appendChild(path);
+    svg.innerHTML = '<defs><linearGradient id="curve-grad" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="0" y2="1000">' +
+        '<stop offset="0" stop-color="#0056d2"/><stop offset="1" stop-color="#60a5fa"/></linearGradient></defs>' +
+        '<path class="curve-track"/><path class="curve-progress" stroke="url(#curve-grad)"/>';
     timeline.prepend(svg);
+    const track = svg.querySelector('.curve-track');
+    const progress = svg.querySelector('.curve-progress');
+    const grad = svg.querySelector('#curve-grad');
+    const nums = [...timeline.querySelectorAll('.timeline-num')];
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     // Různě velké výchylky, aby křivka nebyla pravidelná
-    const bends = [70, 40, 85, 55, 30, 75, 50, 65, 45];
+    const bends = [75, 45, 90, 55, 35, 80, 50, 70, 40];
+    let samples = [];   // [délka po křivce, y] pro dohledání, kam až čáru vykreslit
+    let total = 0;
 
-    function drawCurve() {
-        const box = timeline.getBoundingClientRect();
-        svg.setAttribute('viewBox', `0 0 ${box.width} ${box.height}`);
-        const pts = [...timeline.querySelectorAll('.timeline-num')].map(n => {
-            const r = n.getBoundingClientRect();
-            return { x: r.left + r.width / 2 - box.left, y: r.top + r.height / 2 - box.top };
-        });
-        if (pts.length < 2) return;
-
-        let d = `M ${pts[0].x} ${pts[0].y}`;
-        for (let i = 1; i < pts.length; i++) {
-            const a = pts[i - 1], b = pts[i];
-            const dy = b.y - a.y;
-            const side = i % 2 ? 1 : -1;
-            const bend = bends[(i - 1) % bends.length] * side;
-            d += ` C ${a.x + bend} ${a.y + dy * 0.4}, ${b.x + bend * 0.6} ${b.y - dy * 0.4}, ${b.x} ${b.y}`;
-        }
-        path.setAttribute('d', d);
+    // Střed čísla v souřadnicích osy (bez vlivu animací)
+    function center(n) {
+        const li = n.closest('.timeline-step');
+        const shifted = getComputedStyle(n).transform !== 'none';
+        return {
+            x: li.offsetLeft + n.offsetLeft + (shifted ? 0 : n.offsetWidth / 2),
+            y: li.offsetTop + n.offsetTop + (shifted ? 0 : n.offsetHeight / 2)
+        };
     }
 
+    // Hladká křivka (Catmull-Rom) přes čísla kroků a vychýlené mezibody
+    function smoothPath(p) {
+        let d = `M ${p[0].x} ${p[0].y}`;
+        for (let i = 0; i < p.length - 1; i++) {
+            const p0 = p[i - 1] || p[i], p1 = p[i], p2 = p[i + 1], p3 = p[i + 2] || p2;
+            d += ` C ${p1.x + (p2.x - p0.x) / 6} ${p1.y + (p2.y - p0.y) / 6},` +
+                 ` ${p2.x - (p3.x - p1.x) / 6} ${p2.y - (p3.y - p1.y) / 6}, ${p2.x} ${p2.y}`;
+        }
+        return d;
+    }
+
+    function drawCurve() {
+        const w = timeline.offsetWidth, h = timeline.offsetHeight;
+        svg.setAttribute('viewBox', `0 0 ${w} ${h}`);
+        grad.setAttribute('y2', h);
+        const pts = nums.map(center);
+        if (pts.length < 2) return;
+
+        const all = [pts[0]];
+        for (let i = 1; i < pts.length; i++) {
+            const a = pts[i - 1], b = pts[i];
+            const side = i % 2 ? 1 : -1;
+            all.push({ x: (a.x + b.x) / 2 + bends[(i - 1) % bends.length] * side, y: (a.y + b.y) / 2 });
+            all.push(b);
+        }
+        const d = smoothPath(all);
+        track.setAttribute('d', d);
+        progress.setAttribute('d', d);
+
+        total = progress.getTotalLength();
+        progress.style.strokeDasharray = total;
+        samples = [];
+        for (let i = 0; i <= 200; i++) {
+            const len = total * i / 200;
+            samples.push([len, progress.getPointAtLength(len).y]);
+        }
+        update();
+    }
+
+    // Vykreslí čáru až k výšce 60 % okna a rozsvítí čísla, ke kterým došla
+    function update() {
+        const top = timeline.getBoundingClientRect().top;
+        const target = window.innerHeight * 0.6 - top;   // y v souřadnicích osy
+        const full = reduceMotion ? Infinity : target;
+
+        let len = 0;
+        for (const [l, y] of samples) { if (y <= full) len = l; else break; }
+        progress.style.strokeDashoffset = total - len;
+        timeline.style.setProperty('--fill', Math.max(0, Math.min(timeline.offsetHeight, full)) + 'px');
+
+        nums.forEach(n => n.classList.toggle('reached', center(n).y <= full));
+    }
+
+    // Fotka a text najedou z boků, když se krok objeví na obrazovce
+    timeline.classList.add('anim');
+    const stepObserver = new IntersectionObserver(entries => {
+        entries.forEach(e => {
+            if (e.isIntersecting) {
+                e.target.classList.add('in');
+                stepObserver.unobserve(e.target);
+            }
+        });
+    }, { threshold: 0.2 });
+    timeline.querySelectorAll('.timeline-step').forEach(s => stepObserver.observe(s));
+
+    let ticking = false;
+    window.addEventListener('scroll', () => {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(() => { update(); ticking = false; });
+    }, { passive: true });
     new ResizeObserver(drawCurve).observe(timeline);
     window.addEventListener('load', drawCurve);
     drawCurve();
