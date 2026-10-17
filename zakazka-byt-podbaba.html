@@ -1381,6 +1381,11 @@ footer {
     margin: 0 auto clamp(2rem, 3vw, 3rem);
     padding: 0 var(--side);
     list-style: none;
+    /* Dva sloupce; každý krok zabírá 2 řádky mřížky a další krok začíná
+       o řádek níž – karta vpravo tak začíná v půlce karty vlevo a nezůstává
+       vedle nich prázdné místo. Číslo řádku nese proměnná --row. */
+    display: grid;
+    grid-template-columns: 1fr 1fr;
 }
 
 /* Svislá spojovací čára */
@@ -1398,13 +1403,14 @@ footer {
 
 .timeline-step {
     position: relative;
-    width: 50%;
-    padding: 0 clamp(2rem, 3.5vw, 3.5rem) clamp(1.8rem, 3vw, 2.8rem) 0;
+    grid-column: 1;
+    grid-row: var(--row) / span 2;
+    padding: 0 clamp(2rem, 3.5vw, 3.5rem) clamp(1rem, 1.6vw, 1.5rem) 0;
 }
 
 .timeline-step:nth-child(even) {
-    margin-left: 50%;
-    padding: 0 0 clamp(1.8rem, 3vw, 2.8rem) clamp(2rem, 3.5vw, 3.5rem);
+    grid-column: 2;
+    padding: 0 0 clamp(1rem, 1.6vw, 1.5rem) clamp(2rem, 3.5vw, 3.5rem);
 }
 
 /* Číslo kroku na čáře */
@@ -1635,10 +1641,14 @@ footer {
         left: calc(var(--side) + 20px);
     }
 
+    .timeline {
+        grid-template-columns: 1fr;
+    }
+
     .timeline-step,
     .timeline-step:nth-child(even) {
-        width: 100%;
-        margin-left: 0;
+        grid-column: 1;
+        grid-row: auto;
         padding: 0 0 1.6rem 56px;
     }
 
@@ -1769,7 +1779,7 @@ footer {
         </div>
 
         <ol class="timeline">
-            <li class="timeline-step reveal">
+            <li class="timeline-step reveal" style="--row: 1">
                 <span class="timeline-num">1</span>
                 <div class="timeline-card">
                     <button class="gallery-item"><img src="foto/podbaba-prubeh-1.jpg" alt="Rekonstrukce bytu, Praha 6 – Podbaba: Původní stav po demontáži kuchyňské linky a obkladu" loading="lazy" onerror="this.parentElement.remove()"></button>
@@ -1780,7 +1790,7 @@ footer {
                     </div>
                 </div>
             </li>
-            <li class="timeline-step reveal">
+            <li class="timeline-step reveal" style="--row: 2">
                 <span class="timeline-num">2</span>
                 <div class="timeline-card">
                     <button class="gallery-item"><img src="foto/podbaba-prubeh-2.jpg" alt="Rekonstrukce bytu, Praha 6 – Podbaba: Zakrytí podlah a příprava prostoru před bouracími pracemi" loading="lazy" onerror="this.parentElement.remove()"></button>
@@ -1791,7 +1801,7 @@ footer {
                     </div>
                 </div>
             </li>
-            <li class="timeline-step reveal">
+            <li class="timeline-step reveal" style="--row: 3">
                 <span class="timeline-num">3</span>
                 <div class="timeline-card">
                     <button class="gallery-item"><img src="foto/podbaba-prubeh-3.jpg" alt="Rekonstrukce bytu, Praha 6 – Podbaba: Nové rozvody elektroinstalace a vývody pro kuchyňskou linku" loading="lazy" onerror="this.parentElement.remove()"></button>
@@ -1802,7 +1812,7 @@ footer {
                     </div>
                 </div>
             </li>
-            <li class="timeline-step reveal">
+            <li class="timeline-step reveal" style="--row: 4">
                 <span class="timeline-num">4</span>
                 <div class="timeline-card">
                     <button class="gallery-item"><img src="foto/podbaba-prubeh-4.jpg" alt="Rekonstrukce bytu, Praha 6 – Podbaba: Pokládka velkoformátové dlažby s nivelačním systémem" loading="lazy" onerror="this.parentElement.remove()"></button>
@@ -1813,7 +1823,7 @@ footer {
                     </div>
                 </div>
             </li>
-            <li class="timeline-step reveal">
+            <li class="timeline-step reveal" style="--row: 5">
                 <span class="timeline-num">5</span>
                 <div class="timeline-card">
                     <button class="gallery-item"><img src="foto/podbaba-prubeh-5.jpg" alt="Rekonstrukce bytu, Praha 6 – Podbaba: Nová velkoformátová dlažba v kuchyňském koutě navazující na parkety" loading="lazy" onerror="this.parentElement.remove()"></button>
@@ -1824,7 +1834,7 @@ footer {
                     </div>
                 </div>
             </li>
-            <li class="timeline-step reveal">
+            <li class="timeline-step reveal" style="--row: 6">
                 <span class="timeline-num">6</span>
                 <div class="timeline-card">
                     <button class="gallery-item"><img src="foto/podbaba-prubeh-6.jpg" alt="Rekonstrukce bytu, Praha 6 – Podbaba: Vyštukované a vymalované stěny s připravenými vývody pro kuchyň" loading="lazy" onerror="this.parentElement.remove()"></button>
@@ -1835,7 +1845,7 @@ footer {
                     </div>
                 </div>
             </li>
-            <li class="timeline-step reveal">
+            <li class="timeline-step reveal" style="--row: 7">
                 <span class="timeline-num">7</span>
                 <div class="timeline-card">
                     <button class="gallery-item"><img src="foto/podbaba-prubeh-7.jpg" alt="Rekonstrukce bytu, Praha 6 – Podbaba: Obývací část bytu po vymalování" loading="lazy" onerror="this.parentElement.remove()"></button>
@@ -1846,7 +1856,7 @@ footer {
                     </div>
                 </div>
             </li>
-            <li class="timeline-step reveal">
+            <li class="timeline-step reveal" style="--row: 8">
                 <span class="timeline-num">8</span>
                 <div class="timeline-card">
                     <button class="gallery-item"><img src="foto/podbaba-prubeh-8.jpg" alt="Rekonstrukce bytu, Praha 6 – Podbaba: Pohled od vstupu – prostor připravený pro montáž kuchyňské linky" loading="lazy" onerror="this.parentElement.remove()"></button>
@@ -1857,7 +1867,7 @@ footer {
                     </div>
                 </div>
             </li>
-            <li class="timeline-step reveal">
+            <li class="timeline-step reveal" style="--row: 9">
                 <span class="timeline-num done"><i class="fa-solid fa-check"></i></span>
                 <div class="timeline-card">
                     <div class="timeline-body">

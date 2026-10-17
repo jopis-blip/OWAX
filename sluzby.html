@@ -1381,6 +1381,11 @@ footer {
     margin: 0 auto clamp(2rem, 3vw, 3rem);
     padding: 0 var(--side);
     list-style: none;
+    /* Dva sloupce; každý krok zabírá 2 řádky mřížky a další krok začíná
+       o řádek níž – karta vpravo tak začíná v půlce karty vlevo a nezůstává
+       vedle nich prázdné místo. Číslo řádku nese proměnná --row. */
+    display: grid;
+    grid-template-columns: 1fr 1fr;
 }
 
 /* Svislá spojovací čára */
@@ -1398,13 +1403,14 @@ footer {
 
 .timeline-step {
     position: relative;
-    width: 50%;
-    padding: 0 clamp(2rem, 3.5vw, 3.5rem) clamp(1.8rem, 3vw, 2.8rem) 0;
+    grid-column: 1;
+    grid-row: var(--row) / span 2;
+    padding: 0 clamp(2rem, 3.5vw, 3.5rem) clamp(1rem, 1.6vw, 1.5rem) 0;
 }
 
 .timeline-step:nth-child(even) {
-    margin-left: 50%;
-    padding: 0 0 clamp(1.8rem, 3vw, 2.8rem) clamp(2rem, 3.5vw, 3.5rem);
+    grid-column: 2;
+    padding: 0 0 clamp(1rem, 1.6vw, 1.5rem) clamp(2rem, 3.5vw, 3.5rem);
 }
 
 /* Číslo kroku na čáře */
@@ -1635,10 +1641,14 @@ footer {
         left: calc(var(--side) + 20px);
     }
 
+    .timeline {
+        grid-template-columns: 1fr;
+    }
+
     .timeline-step,
     .timeline-step:nth-child(even) {
-        width: 100%;
-        margin-left: 0;
+        grid-column: 1;
+        grid-row: auto;
         padding: 0 0 1.6rem 56px;
     }
 
