@@ -1301,6 +1301,92 @@ footer {
 .lightbox-next { right: 1.5rem; top: 50%; transform: translateY(-50%); }
 
 /* ================================================
+   DETAIL ZAKÁZKY
+   ================================================ */
+/* Celá karta v Referencích je proklik na detail */
+.project-card {
+    position: relative;
+}
+
+.project-link {
+    margin-top: auto;
+    padding-top: 1.1rem;
+    color: #60a5fa;
+    font-weight: 700;
+    font-size: 0.9rem;
+    text-decoration: none;
+}
+
+.project-link::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+}
+
+.project-card:hover .project-link {
+    color: white;
+}
+
+.back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #60a5fa;
+    font-weight: 600;
+    text-decoration: none;
+    margin-top: 1.5rem;
+}
+
+.back-link:hover {
+    color: white;
+}
+
+.detail-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: clamp(2rem, 4vw, 4rem);
+    align-items: start;
+}
+
+.detail-grid h3 {
+    color: white;
+    font-size: 1.1rem;
+    margin: 1.6rem 0 0.9rem;
+}
+
+.facts-list {
+    background: var(--card-inner);
+    border: 1px solid var(--border-card);
+    border-radius: 18px;
+    padding: clamp(1.2rem, 2vw, 1.8rem);
+}
+
+.facts-list h3 {
+    margin-top: 0;
+}
+
+.facts-list dl {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 0.75rem 1.2rem;
+}
+
+.facts-list dt {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+.facts-list dd {
+    color: white;
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+.detail-ba {
+    margin-bottom: clamp(1rem, 1.6vw, 1.6rem);
+}
+
+/* ================================================
    RESPONZIVITA
    ================================================ */
 @media (min-width: 1441px) {
@@ -1315,7 +1401,7 @@ footer {
     :root {
         --side: 5%;
     }
-    .case-study, .about-grid, .contact-container {
+    .case-study, .about-grid, .contact-container, .detail-grid {
         grid-template-columns: 1fr;
     }
     .steps-grid {
@@ -1463,6 +1549,9 @@ footer {
                         <li><i class="fa-solid fa-check"></i> Osazení dveří, malby a montáž kuchyňské linky</li>
                         <li><i class="fa-solid fa-check"></i> Koordinace subdodavatelů – elektro a truhlářské práce</li>
                     </ul>
+                    <div class="hero-btns" style="margin-top: 1.6rem;">
+                        <a href="zakazka-byt-podbaba.html" class="hero-btn hero-btn-secondary">Detail zakázky a fotky</a>
+                    </div>
                 </div>
 
                 <div class="before-after-container" id="ba-slider">
@@ -1495,6 +1584,7 @@ footer {
                     <span class="case-tag">Realizace · Praha 5</span>
                     <h3>Vchodová stříška s ocelovou konstrukcí</h3>
                     <p>Dodávka a montáž stříšky nad vstup do domu o rozměrech cca 180 × 70 cm. Nosnou ocelovou konstrukci v antracitové barvě jsme ukotvili do fasády přes kotevní konzoly, zastřešili ji čirým komůrkovým polykarbonátem a doplnili odvodňovacím žlabem, který svádí vodu mimo vstup.</p>
+                    <a href="zakazka-stricha-praha-5.html" class="project-link">Detail zakázky <i class="fa-solid fa-arrow-right"></i></a>
                 </div>
             </div>
 
