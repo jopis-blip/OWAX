@@ -1153,11 +1153,62 @@ footer {
 /* ================================================
    GALERIE
    ================================================ */
+/* Jedno album = jedna zakázka */
+.gallery-album {
+    background: var(--card-dark);
+    border: 1px solid var(--border-card);
+    border-radius: clamp(18px, 2vw, 24px);
+    padding: clamp(1.4rem, 2.4vw, 2.4rem);
+    margin: 0 var(--side) clamp(1.5rem, 2.5vw, 2.5rem);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.05);
+}
+
+/* Album bez jediné fotky se nezobrazí */
+.gallery-album:not(:has(.gallery-item)) {
+    display: none;
+}
+
+.gallery-album-header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.4rem 1.5rem;
+    margin-bottom: clamp(1rem, 1.6vw, 1.6rem);
+}
+
+.gallery-album-header .case-tag {
+    margin-bottom: 0.6rem;
+}
+
+.gallery-album-header h3 {
+    color: white;
+    font-size: clamp(1.15rem, 1.5vw, 1.45rem);
+    font-weight: 700;
+}
+
+.gallery-album-header p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    margin-top: 0.3rem;
+}
+
+.gallery-album-link {
+    color: #60a5fa;
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.gallery-album-link:hover {
+    color: white;
+}
+
 .gallery-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(clamp(240px, 22vw, 340px), 1fr));
-    gap: clamp(1rem, 1.6vw, 1.6rem);
-    margin: 0 var(--side) clamp(2.5rem, 4vw, 4.5rem);
+    grid-template-columns: repeat(auto-fill, minmax(clamp(220px, 20vw, 300px), 1fr));
+    gap: clamp(0.8rem, 1.2vw, 1.2rem);
 }
 
 .gallery-item {
@@ -1326,6 +1377,15 @@ footer {
     .team-card {
         padding: 1.3rem;
     }
+
+    .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .gallery-caption {
+        font-size: 0.75rem;
+        padding: 1.2rem 0.6rem 0.5rem;
+    }
 }
 
     </style>
@@ -1378,22 +1438,82 @@ footer {
         <div class="page-hero-inner">
             <div class="hero-badge"><i class="fa-solid fa-camera"></i> Galerie</div>
             <h1>Fotky z naší <span>práce</span></h1>
-            <p>Prohlédněte si fotografie z našich realizací a projektů. Kliknutím fotku zvětšíte.</p>
+            <p>Fotografie z našich realizací a projektů, rozdělené podle zakázek. Kliknutím fotku zvětšíte.</p>
         </div>
     </section>
 
-    <!-- FOTKY – novou fotku přidáte zkopírováním jednoho řádku <button> a změnou src a alt.
-         Fotka, která ve složce chybí, se na stránce nezobrazí. -->
+    <!-- FOTKY – každá zakázka má vlastní album (blok <div class="gallery-album">).
+         Novou fotku přidáte zkopírováním jednoho řádku <button> a změnou src, alt a popisku.
+         Novou zakázku přidáte zkopírováním celého alba. Fotky, které ve složce chybí, se nezobrazí,
+         a album bez fotek se skryje. -->
     <section>
-        <div class="gallery-grid reveal">
-            <button class="gallery-item"><img src="foto/stricha-1.jpg" alt="Vchodová stříška, Praha 5 – celkový pohled" loading="lazy" onerror="this.parentElement.remove()"><span class="gallery-caption">Vchodová stříška – Praha 5</span></button>
-            <button class="gallery-item"><img src="foto/stricha-2.jpg" alt="Vchodová stříška, Praha 5 – kotvení konzoly do fasády" loading="lazy" onerror="this.parentElement.remove()"><span class="gallery-caption">Stříška – kotvení konzoly</span></button>
-            <button class="gallery-item"><img src="foto/stricha-3.jpg" alt="Vchodová stříška, Praha 5 – detail napojení na fasádu" loading="lazy" onerror="this.parentElement.remove()"><span class="gallery-caption">Stříška – detail napojení</span></button>
-            <button class="gallery-item"><img src="Pred.JPG" alt="Rekonstrukce bytu, Praha 6 – Podbaba (před)" loading="lazy" onerror="this.parentElement.remove()"><span class="gallery-caption">Podbaba – před</span></button>
-            <button class="gallery-item"><img src="Po.JPEG" alt="Rekonstrukce bytu, Praha 6 – Podbaba (po)" loading="lazy" onerror="this.parentElement.remove()"><span class="gallery-caption">Podbaba – po</span></button>
-            <button class="gallery-item"><img src="foto/sklep.jpg" alt="Přestavba sklepních prostor na bytovou jednotku" loading="lazy" onerror="this.parentElement.remove()"><span class="gallery-caption">Přestavba sklepa na byt</span></button>
-            <button class="gallery-item"><img src="foto/ricany.jpg" alt="Zaměření rodinného domu v Říčanech" loading="lazy" onerror="this.parentElement.remove()"><span class="gallery-caption">Zaměření domu – Říčany</span></button>
-            <button class="gallery-item"><img src="foto/skolka.jpg" alt="Návrh zahrady firemní mateřské školy" loading="lazy" onerror="this.parentElement.remove()"><span class="gallery-caption">Zahrada mateřské školy</span></button>
+        <div class="gallery-album reveal">
+            <div class="gallery-album-header">
+                <div>
+                    <span class="case-tag">Realizace · Praha 5</span>
+                    <h3>Vchodová stříška s ocelovou konstrukcí</h3>
+                    <p>Ocelová konstrukce kotvená do fasády, polykarbonátová krytina a odvodňovací žlab.</p>
+                </div>
+                <a href="reference.html" class="gallery-album-link">Více o zakázce <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+            <div class="gallery-grid">
+                    <button class="gallery-item"><img src="foto/stricha-1.jpg" alt="Vchodová stříška, Praha 5 – celkový pohled" loading="lazy" onerror="this.parentElement.remove()"><span class="gallery-caption">Celkový pohled</span></button>
+                    <button class="gallery-item"><img src="foto/stricha-2.jpg" alt="Vchodová stříška, Praha 5 – kotvení konzoly do fasády" loading="lazy" onerror="this.parentElement.remove()"><span class="gallery-caption">Kotvení konzoly</span></button>
+                    <button class="gallery-item"><img src="foto/stricha-3.jpg" alt="Vchodová stříška, Praha 5 – detail napojení na fasádu" loading="lazy" onerror="this.parentElement.remove()"><span class="gallery-caption">Detail napojení</span></button>
+            </div>
+        </div>
+        <div class="gallery-album reveal">
+            <div class="gallery-album-header">
+                <div>
+                    <span class="case-tag">Realizace · Praha 6 — Podbaba</span>
+                    <h3>Kompletní rekonstrukce bytu na klíč</h3>
+                    <p>Bourací práce, nové podlahy a elektroinstalace, malby a montáž kuchyňské linky.</p>
+                </div>
+                <a href="reference.html" class="gallery-album-link">Více o zakázce <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+            <div class="gallery-grid">
+                    <button class="gallery-item"><img src="Pred.JPG" alt="Rekonstrukce bytu, Praha 6 – Podbaba (před)" loading="lazy" onerror="this.parentElement.remove()"><span class="gallery-caption">Před</span></button>
+                    <button class="gallery-item"><img src="Po.JPEG" alt="Rekonstrukce bytu, Praha 6 – Podbaba (po)" loading="lazy" onerror="this.parentElement.remove()"><span class="gallery-caption">Po</span></button>
+            </div>
+        </div>
+        <div class="gallery-album reveal">
+            <div class="gallery-album-header">
+                <div>
+                    <span class="case-tag">Projekce</span>
+                    <h3>Přestavba sklepních prostor na bytovou jednotku</h3>
+                    <p>Výkresová dokumentace, návrh kuchyně a řešení TZB.</p>
+                </div>
+                <a href="reference.html" class="gallery-album-link">Více o zakázce <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+            <div class="gallery-grid">
+                    <button class="gallery-item"><img src="foto/sklep.jpg" alt="Přestavba sklepních prostor na bytovou jednotku" loading="lazy" onerror="this.parentElement.remove()"><span class="gallery-caption">Přestavba sklepa</span></button>
+            </div>
+        </div>
+        <div class="gallery-album reveal">
+            <div class="gallery-album-header">
+                <div>
+                    <span class="case-tag">Zaměření · Říčany</span>
+                    <h3>Zaměření skutečného stavu rodinného domu</h3>
+                    <p>Zaměření a podklady pro kolaudační řízení.</p>
+                </div>
+                <a href="reference.html" class="gallery-album-link">Více o zakázce <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+            <div class="gallery-grid">
+                    <button class="gallery-item"><img src="foto/ricany.jpg" alt="Zaměření rodinného domu v Říčanech" loading="lazy" onerror="this.parentElement.remove()"><span class="gallery-caption">Zaměření domu</span></button>
+            </div>
+        </div>
+        <div class="gallery-album reveal">
+            <div class="gallery-album-header">
+                <div>
+                    <span class="case-tag">Návrh</span>
+                    <h3>Návrh zahrady firemní mateřské školy</h3>
+                    <p>Koncepční návrh venkovního prostoru školky.</p>
+                </div>
+                <a href="reference.html" class="gallery-album-link">Více o zakázce <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+            <div class="gallery-grid">
+                    <button class="gallery-item"><img src="foto/skolka.jpg" alt="Návrh zahrady firemní mateřské školy" loading="lazy" onerror="this.parentElement.remove()"><span class="gallery-caption">Zahrada školky</span></button>
+            </div>
         </div>
     </section>
 
@@ -1601,8 +1721,10 @@ if (lightbox) {
     const lightboxCaption = document.getElementById('lightbox-caption');
     let current = 0;
 
-    // Bere jen fotky, které se opravdu načetly (chybějící se samy odstraní)
-    const items = () => [...document.querySelectorAll('.gallery-item')];
+    let album = null;
+
+    // Listuje se jen fotkami otevřeného alba (chybějící fotky se samy odstraní)
+    const items = () => album ? [...album.querySelectorAll('.gallery-item')] : [];
 
     function showPhoto(index) {
         const list = items();
@@ -1619,9 +1741,10 @@ if (lightbox) {
         document.body.style.overflow = '';
     }
 
-    document.querySelector('.gallery-grid').addEventListener('click', (e) => {
+    document.addEventListener('click', (e) => {
         const item = e.target.closest('.gallery-item');
         if (!item) return;
+        album = item.closest('.gallery-album');
         showPhoto(items().indexOf(item));
         lightbox.classList.add('active');
         document.body.style.overflow = 'hidden';
