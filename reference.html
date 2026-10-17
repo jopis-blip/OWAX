@@ -1301,6 +1301,51 @@ footer {
 .lightbox-next { right: 1.5rem; top: 50%; transform: translateY(-50%); }
 
 /* ================================================
+   REFERENCE – ROZDĚLENÍ NA REALIZACE A PROJEKCE
+   ================================================ */
+.category-nav {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    margin-top: 2rem;
+}
+
+.category-nav a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.7rem 1.4rem;
+    border-radius: 50px;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    color: white;
+    font-weight: 700;
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+.category-nav a:hover {
+    border-color: rgba(255, 255, 255, 0.6);
+    transform: translateY(-2px);
+}
+
+.category-count {
+    background: var(--brand-blue);
+    border-radius: 20px;
+    padding: 1px 9px;
+    font-size: 0.8rem;
+}
+
+/* Kotvy sekcí nesmí zajet pod pevnou hlavičku */
+.category-section {
+    scroll-margin-top: var(--header-height);
+}
+
+.category-section + .category-section {
+    border-top: 1px solid rgba(15, 23, 42, 0.08);
+}
+
+/* ================================================
    DETAIL ZAKÁZKY
    ================================================ */
 /* Celá karta v Referencích je proklik na detail */
@@ -1520,57 +1565,36 @@ footer {
         <div class="page-hero-inner">
             <div class="hero-badge"><i class="fa-solid fa-images"></i> Reference</div>
             <h1>Vybrané realizace <span>a projekty</span></h1>
-            <p>Ukázky naší práce – od kompletních rekonstrukcí po projekční práce a zaměření staveb.</p>
-        </div>
-    </section>
-
-    <!-- HLAVNÍ REALIZACE: PODBABA -->
-    <section>
-        <div class="section-header reveal">
-            <span class="section-subtitle">Realizace</span>
-            <h2 class="section-title">Rekonstrukce bytu — Podbaba, Praha 6</h2>
-        </div>
-
-        <div class="dark-card-container reveal">
-            <div class="case-study">
-                <div>
-                    <span class="case-tag">Realizace · Praha 6 — Podbaba</span>
-                    <h3 class="card-title">Kompletní rekonstrukce bytu na klíč</h3>
-                    <p class="card-text">
-                        Komplexní proměna bytu od demontáže původních konstrukcí až po montáž nové kuchyňské linky. Vedle vlastních stavebních prací jsme zajistili koordinaci elektrikářů a truhlářů tak, aby jednotlivé profese plynule navazovaly a byt byl předán v požadované kvalitě.
-                    </p>
-                    <ul class="check-list">
-                        <li><i class="fa-solid fa-check"></i> Bourací práce, demontáž nábytku a SDK konstrukcí</li>
-                        <li><i class="fa-solid fa-check"></i> Nové podlahy a elektroinstalace</li>
-                        <li><i class="fa-solid fa-check"></i> Osazení dveří, malby a montáž kuchyňské linky</li>
-                        <li><i class="fa-solid fa-check"></i> Koordinace subdodavatelů – elektro a truhlářské práce</li>
-                    </ul>
-                    <div class="hero-btns" style="margin-top: 1.6rem;">
-                        <a href="zakazka-byt-podbaba.html" class="hero-btn hero-btn-secondary">Detail zakázky a fotky</a>
-                    </div>
-                </div>
-
-                <div class="before-after-container" id="ba-slider">
-                    <div class="ba-image ba-after"></div>
-                    <div class="ba-image ba-before" id="ba-before"></div>
-                    <span class="ba-label ba-label-before">PŘED</span>
-                    <span class="ba-label ba-label-after">PO</span>
-                    <div class="ba-slider-handle" id="ba-handle">
-                        <i class="fa-solid fa-arrows-left-right"></i>
-                    </div>
-                </div>
+            <p>Ukázky naší práce rozdělené podle typu – stavební realizace a projekční činnost.</p>
+            <div class="category-nav">
+                <a href="#realizace"><i class="fa-solid fa-helmet-safety"></i> Realizace <span class="category-count">2</span></a>
+                <a href="#projekce"><i class="fa-solid fa-compass-drafting"></i> Projekce <span class="category-count">3</span></a>
             </div>
         </div>
     </section>
 
-    <!-- DALŠÍ PROJEKTY – fotky nahrajte do složky "foto" pod uvedeným názvem -->
-    <section>
+    <!-- REALIZACE – novou zakázku přidáte zkopírováním jednoho bloku <div class="project-card"> (a upravte počet v záhlaví) -->
+    <section id="realizace" class="category-section">
         <div class="section-header reveal">
-            <span class="section-subtitle">Projekční činnost</span>
-            <h2 class="section-title">Další projekty</h2>
+            <span class="section-subtitle">Realizace</span>
+            <h2 class="section-title">Dokončené stavby a montáže</h2>
+            <p class="section-lead">Zakázky, které jsme sami postavili nebo namontovali – od rekonstrukcí po zámečnické práce.</p>
         </div>
 
         <div class="projects-grid">
+            <div class="project-card reveal">
+                <div class="project-img">
+                    <i class="fa-solid fa-house"></i>
+                    <img src="Po.JPEG" alt="Rekonstrukce bytu, Praha 6 – Podbaba" onerror="this.remove()">
+                </div>
+                <div class="project-body">
+                    <span class="case-tag">Realizace · Praha 6 — Podbaba</span>
+                    <h3>Kompletní rekonstrukce bytu na klíč</h3>
+                    <p>Proměna bytu od demontáže původních konstrukcí až po montáž nové kuchyňské linky – bourací práce, nové podlahy a elektroinstalace, malby a koordinace elektrikářů a truhlářů.</p>
+                    <a href="zakazka-byt-podbaba.html" class="project-link">Detail zakázky <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+            </div>
+
             <div class="project-card reveal">
                 <div class="project-img">
                     <i class="fa-solid fa-house"></i>
@@ -1583,14 +1607,25 @@ footer {
                     <a href="zakazka-stricha-praha-5.html" class="project-link">Detail zakázky <i class="fa-solid fa-arrow-right"></i></a>
                 </div>
             </div>
+        </div>
+    </section>
 
+    <!-- PROJEKCE – fotky nahrajte do složky "foto" pod uvedeným názvem -->
+    <section id="projekce" class="category-section">
+        <div class="section-header reveal">
+            <span class="section-subtitle">Projekce</span>
+            <h2 class="section-title">Projekty, návrhy a zaměření</h2>
+            <p class="section-lead">Projektová dokumentace, zaměření staveb a koncepční návrhy.</p>
+        </div>
+
+        <div class="projects-grid">
             <div class="project-card reveal">
                 <div class="project-img">
                     <i class="fa-solid fa-compass-drafting"></i>
                     <img src="foto/sklep.jpg" alt="Přestavba sklepních prostor na byt" onerror="this.remove()">
                 </div>
                 <div class="project-body">
-                    <span class="case-tag">Projekce</span>
+                    <span class="case-tag">Projekce · Dokumentace</span>
                     <h3>Přestavba sklepních prostor na bytovou jednotku</h3>
                     <p>Návrh přeměny nevyužívaných suterénních prostor na plnohodnotné bydlení. Zpracovali jsme výkresovou dokumentaci, navrhli kuchyň a vyřešili technické zařízení budovy (TZB).</p>
                 </div>
@@ -1602,7 +1637,7 @@ footer {
                     <img src="foto/ricany.jpg" alt="Zaměření rodinného domu v Říčanech" onerror="this.remove()">
                 </div>
                 <div class="project-body">
-                    <span class="case-tag">Zaměření · Říčany</span>
+                    <span class="case-tag">Projekce · Zaměření · Říčany</span>
                     <h3>Zaměření skutečného stavu rodinného domu</h3>
                     <p>Přesné zaměření rodinného domu a zpracování podkladů pro kolaudační řízení, aby mohl být objekt bez komplikací uveden do užívání.</p>
                 </div>
@@ -1614,7 +1649,7 @@ footer {
                     <img src="foto/skolka.jpg" alt="Návrh zahrady firemní mateřské školy" onerror="this.remove()">
                 </div>
                 <div class="project-body">
-                    <span class="case-tag">Návrh</span>
+                    <span class="case-tag">Projekce · Návrh</span>
                     <h3>Návrh zahrady firemní mateřské školy</h3>
                     <p>Koncepční návrh venkovního prostoru firemní školky s důrazem na bezpečnost, funkčnost a podnětné prostředí pro hru a pohyb dětí.</p>
                 </div>
