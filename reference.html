@@ -1373,51 +1373,85 @@ footer {
 }
 
 /* ================================================
-   ČASOVÁ OSA PRŮBĚHU ZAKÁZKY
+   ČASOVÁ OSA PRŮBĚHU ZAKÁZKY – nepravidelná křivka
+   Každý krok = fotka na jedné straně, text na druhé (strany se střídají).
+   Kroky spojuje vlnitá křivka (SVG), kterou kreslí skript podle
+   polohy čísel kroků. Posun čísla od středu určuje --dx.
    ================================================ */
 .timeline {
     position: relative;
-    max-width: 1100px;
+    max-width: 1180px;
     margin: 0 auto clamp(2rem, 3vw, 3rem);
     padding: 0 var(--side);
     list-style: none;
-    /* Dva sloupce; každý krok zabírá 2 řádky mřížky a další krok začíná
-       o řádek níž – karta vpravo tak začíná v půlce karty vlevo a nezůstává
-       vedle nich prázdné místo. Číslo řádku nese proměnná --row. */
-    display: grid;
-    grid-template-columns: 1fr 1fr;
 }
 
-/* Svislá spojovací čára */
-.timeline::before {
-    content: '';
+.timeline-curve {
     position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 50%;
-    width: 3px;
-    transform: translateX(-50%);
-    background: linear-gradient(var(--brand-blue), #60a5fa);
-    border-radius: 3px;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: visible;
+    z-index: 0;
 }
 
 .timeline-step {
     position: relative;
+    margin-bottom: clamp(0.8rem, 1.4vw, 1.3rem);
+}
+
+.timeline-card {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: 1fr clamp(90px, 11vw, 150px) 1fr;
+    align-items: center;
+}
+
+.timeline-card .gallery-item {
     grid-column: 1;
-    grid-row: var(--row) / span 2;
-    padding: 0 clamp(2rem, 3.5vw, 3.5rem) clamp(1rem, 1.6vw, 1.5rem) 0;
+    grid-row: 1;
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    border-radius: 16px;
 }
 
-.timeline-step:nth-child(even) {
-    grid-column: 2;
-    padding: 0 0 clamp(1rem, 1.6vw, 1.5rem) clamp(2rem, 3.5vw, 3.5rem);
+.timeline-body {
+    grid-column: 3;
+    grid-row: 1;
+    background: var(--card-dark);
+    border: 1px solid var(--border-card);
+    border-radius: 16px;
+    padding: clamp(1rem, 1.6vw, 1.5rem);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.06);
 }
 
-/* Číslo kroku na čáře */
+/* Sudé kroky: fotka vpravo, text vlevo */
+.timeline-step:nth-of-type(even) .gallery-item {
+    grid-column: 3;
+}
+
+.timeline-step:nth-of-type(even) .timeline-body {
+    grid-column: 1;
+}
+
+/* Krok bez fotky (výsledek) – text na straně fotky ze vzoru */
+.timeline-step.no-photo .timeline-body {
+    grid-column: 1;
+}
+
+.timeline-step.no-photo:nth-of-type(even) .timeline-body {
+    grid-column: 3;
+}
+
+/* Číslo kroku na křivce */
 .timeline-num {
     position: absolute;
-    top: 1.2rem;
-    right: -22px;
+    top: 50%;
+    left: calc(50% + var(--dx, 0px));
+    transform: translate(-50%, -50%);
     width: 44px;
     height: 44px;
     border-radius: 50%;
@@ -1429,43 +1463,12 @@ footer {
     justify-content: center;
     border: 4px solid var(--bg-page);
     box-shadow: 0 4px 12px var(--brand-blue-glow);
-    z-index: 1;
-}
-
-.timeline-step:nth-child(even) .timeline-num {
-    right: auto;
-    left: -22px;
+    z-index: 2;
 }
 
 .timeline-num.done {
     background: var(--brand-green);
     box-shadow: 0 4px 12px rgba(34, 197, 94, 0.35);
-}
-
-.timeline-card {
-    background: var(--card-dark);
-    border: 1px solid var(--border-card);
-    border-radius: clamp(16px, 1.8vw, 22px);
-    overflow: hidden;
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.06);
-}
-
-.timeline-card .gallery-item {
-    display: block;
-    width: 100%;
-    aspect-ratio: 16 / 10;
-    border: none;
-    border-radius: 0;
-    box-shadow: none;
-}
-
-.timeline-card .gallery-item:hover {
-    transform: none;
-    opacity: 0.92;
-}
-
-.timeline-body {
-    padding: clamp(1.1rem, 1.8vw, 1.6rem);
 }
 
 .timeline-phase {
@@ -1636,27 +1639,56 @@ footer {
         grid-template-columns: repeat(2, 1fr);
     }
 
-    /* Časová osa na telefonu: čára vlevo, kroky pod sebou */
+    /* Časová osa na telefonu: místo křivky rovná čára vlevo, fotka nad textem */
     .timeline::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        bottom: 0;
         left: calc(var(--side) + 20px);
+        width: 3px;
+        background: linear-gradient(var(--brand-blue), #60a5fa);
+        border-radius: 3px;
     }
 
-    .timeline {
+    .timeline-curve {
+        display: none;
+    }
+
+    .timeline-step {
+        padding-left: 56px;
+        margin-bottom: 1.6rem;
+    }
+
+    .timeline-card {
         grid-template-columns: 1fr;
     }
 
-    .timeline-step,
-    .timeline-step:nth-child(even) {
+    .timeline-card .gallery-item,
+    .timeline-step:nth-of-type(even) .gallery-item {
         grid-column: 1;
-        grid-row: auto;
-        padding: 0 0 1.6rem 56px;
+        grid-row: 1;
+        border-radius: 16px 16px 0 0;
     }
 
-    .timeline-num,
-    .timeline-step:nth-child(even) .timeline-num {
-        left: -2px;
-        right: auto;
+    .timeline-body,
+    .timeline-step:nth-of-type(even) .timeline-body,
+    .timeline-step.no-photo .timeline-body,
+    .timeline-step.no-photo:nth-of-type(even) .timeline-body {
+        grid-column: 1;
+        grid-row: 2;
+        border-radius: 0 0 16px 16px;
+    }
+
+    .timeline-step.no-photo .timeline-body {
+        grid-row: 1;
+        border-radius: 16px;
+    }
+
+    .timeline-num {
         top: 0.8rem;
+        left: -2px;
+        transform: none;
     }
 
     .gallery-caption {
@@ -1995,6 +2027,52 @@ if (contactForm) {
             formStatus.className = 'form-status error';
         });
     });
+}
+
+/* === ČASOVÁ OSA – nepravidelná křivka mezi čísly kroků (jen na stránce zakázky) === */
+const timeline = document.querySelector('.timeline');
+
+if (timeline) {
+    const svgNS = 'http://www.w3.org/2000/svg';
+    const svg = document.createElementNS(svgNS, 'svg');
+    svg.setAttribute('class', 'timeline-curve');
+    svg.setAttribute('aria-hidden', 'true');
+    svg.innerHTML = '<defs><linearGradient id="curve-grad" x1="0" y1="0" x2="0" y2="1">' +
+        '<stop offset="0" stop-color="#0056d2"/><stop offset="1" stop-color="#60a5fa"/></linearGradient></defs>';
+    const path = document.createElementNS(svgNS, 'path');
+    path.setAttribute('fill', 'none');
+    path.setAttribute('stroke', 'url(#curve-grad)');
+    path.setAttribute('stroke-width', '3');
+    path.setAttribute('stroke-linecap', 'round');
+    svg.appendChild(path);
+    timeline.prepend(svg);
+
+    // Různě velké výchylky, aby křivka nebyla pravidelná
+    const bends = [70, 40, 85, 55, 30, 75, 50, 65, 45];
+
+    function drawCurve() {
+        const box = timeline.getBoundingClientRect();
+        svg.setAttribute('viewBox', `0 0 ${box.width} ${box.height}`);
+        const pts = [...timeline.querySelectorAll('.timeline-num')].map(n => {
+            const r = n.getBoundingClientRect();
+            return { x: r.left + r.width / 2 - box.left, y: r.top + r.height / 2 - box.top };
+        });
+        if (pts.length < 2) return;
+
+        let d = `M ${pts[0].x} ${pts[0].y}`;
+        for (let i = 1; i < pts.length; i++) {
+            const a = pts[i - 1], b = pts[i];
+            const dy = b.y - a.y;
+            const side = i % 2 ? 1 : -1;
+            const bend = bends[(i - 1) % bends.length] * side;
+            d += ` C ${a.x + bend} ${a.y + dy * 0.4}, ${b.x + bend * 0.6} ${b.y - dy * 0.4}, ${b.x} ${b.y}`;
+        }
+        path.setAttribute('d', d);
+    }
+
+    new ResizeObserver(drawCurve).observe(timeline);
+    window.addEventListener('load', drawCurve);
+    drawCurve();
 }
 
 /* === GALERIE – zvětšení fotky (jen na stránce Galerie) === */
