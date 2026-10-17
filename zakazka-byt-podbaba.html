@@ -1779,12 +1779,6 @@ footer {
 /* ================================================
    ÚVOD – fotka na pozadí
    ================================================ */
-.hero.has-photo {
-    background:
-        linear-gradient(90deg, rgba(17, 24, 39, 0.96) 0%, rgba(17, 24, 39, 0.88) 45%, rgba(17, 24, 39, 0.55) 100%),
-        url('foto/podbaba-kuchyne.jpg') center / cover no-repeat;
-}
-
 /* ================================================
    ÚVOD – ukázky práce
    ================================================ */
@@ -1908,6 +1902,259 @@ footer {
    ================================================ */
 .call-fab {
     display: none;
+}
+
+/* ================================================
+   ANIMACE A ŽIVOST WEBU
+   Vše se vypne, pokud má návštěvník v systému omezené animace.
+   ================================================ */
+
+/* Ukazatel, kolik stránky už návštěvník projel */
+.scroll-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 3px;
+    width: 100%;
+    transform-origin: left;
+    transform: scaleX(var(--p, 0));
+    background: linear-gradient(90deg, var(--brand-blue), #60a5fa);
+    box-shadow: 0 0 8px rgba(96, 165, 250, 0.6);
+    z-index: 1001;
+    pointer-events: none;
+}
+
+/* Lišta po posunutí stránky zprůhlední a rozostří pozadí */
+header {
+    transition: background 0.4s, box-shadow 0.4s, backdrop-filter 0.4s;
+}
+
+header.scrolled {
+    background: rgba(17, 24, 39, 0.82);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+}
+
+.logo-img {
+    transition: var(--transition), height 0.4s;
+}
+
+header.scrolled .logo-img {
+    height: clamp(58px, 5.5vw, 74px);
+}
+
+/* Úvod: fotka se pomalu přibližuje (vrstvy: fotka → tmavý přechod → text) */
+.hero.has-photo {
+    background: #111827;
+    isolation: isolate;
+}
+
+.hero.has-photo::before,
+.hero.has-photo::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+}
+
+.hero.has-photo::before {
+    background: url('foto/podbaba-kuchyne.jpg') center / cover no-repeat;
+    z-index: -2;
+    animation: hero-zoom 24s ease-in-out infinite alternate;
+}
+
+.hero.has-photo::after {
+    background:
+        radial-gradient(circle at 80% 30%, rgba(0, 86, 210, 0.25), transparent 55%),
+        linear-gradient(90deg, rgba(17, 24, 39, 0.96) 0%, rgba(17, 24, 39, 0.88) 45%, rgba(17, 24, 39, 0.55) 100%);
+    z-index: -1;
+}
+
+@keyframes hero-zoom {
+    from { transform: scale(1); }
+    to { transform: scale(1.12) translateX(-2%); }
+}
+
+/* Úvod: prvky najíždějí postupně */
+.hero-content {
+    animation: none;
+}
+
+.hero-content > * {
+    animation: fadeInUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.hero-content > *:nth-child(2) { animation-delay: 0.12s; }
+.hero-content > *:nth-child(3) { animation-delay: 0.24s; }
+.hero-content > *:nth-child(4) { animation-delay: 0.36s; }
+.hero-content > *:nth-child(5) { animation-delay: 0.48s; }
+
+/* Modrá část nadpisu se jemně přelévá */
+.hero h1 span,
+.page-hero h1 span {
+    background: linear-gradient(90deg, #3b82f6, #60a5fa, #93c5fd, #3b82f6);
+    background-size: 250% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: text-flow 8s linear infinite;
+}
+
+@keyframes text-flow {
+    to { background-position: 250% 0; }
+}
+
+/* Záhlaví podstránek – pomalu se pohybující světlo v pozadí */
+.page-hero {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+}
+
+.page-hero::after {
+    content: '';
+    position: absolute;
+    width: 60vw;
+    height: 60vw;
+    top: -30vw;
+    right: -15vw;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(0, 86, 210, 0.22), transparent 65%);
+    z-index: -1;
+    pointer-events: none;
+    animation: glow-drift 14s ease-in-out infinite alternate;
+}
+
+@keyframes glow-drift {
+    to { transform: translate(-12vw, 10vw); }
+}
+
+/* Nadpisy sekcí: pod nadpisem se při objevení vykreslí modrá linka */
+.section-header .section-title::after {
+    content: '';
+    display: block;
+    width: 56px;
+    height: 4px;
+    margin: 0.9rem auto 0;
+    border-radius: 4px;
+    background: linear-gradient(90deg, var(--brand-blue), #60a5fa);
+    transform: scaleX(0);
+    transition: transform 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.2s;
+}
+
+.section-header.reveal.active .section-title::after {
+    transform: scaleX(1);
+}
+
+/* Hlavní tlačítka: při najetí přes ně přejede odlesk */
+.hero-btn-primary,
+.nav-btn:not(.nav-btn-outline),
+.submit-btn {
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-btn-primary::after,
+.nav-btn:not(.nav-btn-outline)::after,
+.submit-btn::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -75%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(110deg, transparent, rgba(255, 255, 255, 0.35), transparent);
+    transform: skewX(-20deg);
+    transition: left 0.7s ease;
+    pointer-events: none;
+}
+
+.hero-btn-primary:hover::after,
+.nav-btn:not(.nav-btn-outline):hover::after,
+.submit-btn:hover::after {
+    left: 130%;
+}
+
+/* Karty služeb a kroků: ikona ožije při najetí */
+.service-icon,
+.step-num {
+    transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.3s, color 0.3s, box-shadow 0.3s;
+}
+
+.service-card:hover .service-icon {
+    transform: rotate(-8deg) scale(1.12);
+    background: var(--brand-blue);
+    color: white;
+    box-shadow: 0 8px 20px var(--brand-blue-glow);
+}
+
+.step:hover .step-num {
+    transform: scale(1.15);
+    box-shadow: 0 0 0 6px rgba(0, 86, 210, 0.25);
+}
+
+/* Karty zakázek: fotka se při najetí lehce přiblíží */
+.project-img {
+    overflow: hidden;
+}
+
+.project-img img {
+    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.project-card:hover .project-img img {
+    transform: scale(1.07);
+}
+
+/* Postup práce: kroky propojuje čára, která se vykreslí při objevení */
+.steps-grid {
+    position: relative;
+}
+
+.steps-grid::before {
+    content: '';
+    position: absolute;
+    top: 23px;
+    left: 23px;
+    /* končí u čísla posledního kroku (šířka jednoho sloupce mínus půlka čísla) */
+    right: calc((100% - 3 * clamp(1.2rem, 2vw, 2rem)) / 4 - 23px);
+    height: 2px;
+    background: linear-gradient(90deg, var(--brand-blue), #60a5fa);
+    transform-origin: left;
+    transform: scaleX(0);
+    transition: transform 1.4s cubic-bezier(0.16, 1, 0.3, 1) 0.3s;
+    opacity: 0.6;
+}
+
+.reveal.active .steps-grid::before {
+    transform: scaleX(1);
+}
+
+.step {
+    position: relative;
+}
+
+.step-num {
+    position: relative;
+    z-index: 1;
+    box-shadow: 0 0 0 6px var(--card-dark);
+}
+
+@media (max-width: 1024px) {
+    .steps-grid::before {
+        display: none;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
 }
 
 /* ================================================
@@ -2450,6 +2697,46 @@ if (galleryFilter) {
         if (e.target.tagName === 'IMG') setTimeout(updateEmpty, 0);
     }, true);
 }
+
+/* === ŽIVOST: lišta při posunu, ukazatel projetí stránky, postupné objevování karet, počítadla === */
+const pageHeader = document.querySelector('header');
+const progressBar = document.createElement('div');
+progressBar.className = 'scroll-progress';
+progressBar.setAttribute('aria-hidden', 'true');
+document.body.appendChild(progressBar);
+
+let scrollTicking = false;
+function onPageScroll() {
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    progressBar.style.setProperty('--p', max > 0 ? Math.min(1, window.scrollY / max) : 0);
+    pageHeader.classList.toggle('scrolled', window.scrollY > 30);
+    scrollTicking = false;
+}
+window.addEventListener('scroll', () => {
+    if (!scrollTicking) { scrollTicking = true; requestAnimationFrame(onPageScroll); }
+}, { passive: true });
+onPageScroll();
+
+// Karty vedle sebe se objevují postupně jedna po druhé
+document.querySelectorAll('.services-grid, .projects-grid, .steps-grid, .gallery-grid').forEach(grid => {
+    [...grid.children].forEach((child, i) => {
+        if (child.classList.contains('reveal')) child.style.transitionDelay = (i % 6) * 0.09 + 's';
+    });
+});
+
+// Čísla v úvodu se při načtení „napočítají“ (např. 0 → 5+)
+document.querySelectorAll('.stat-item h3').forEach(el => {
+    const m = el.textContent.trim().match(/^(\d+)(.*)$/);
+    if (!m || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const target = +m[1], suffix = m[2];
+    const start = performance.now() + 500, dur = 1200;
+    el.textContent = '0' + suffix;
+    (function tick(now) {
+        const t = Math.min(1, Math.max(0, (now - start) / dur));
+        el.textContent = Math.round(target * (1 - Math.pow(1 - t, 3))) + suffix;
+        if (t < 1) requestAnimationFrame(tick);
+    })(performance.now());
+});
 
 /* === REVEAL ANIMACE === */
 const observer = new IntersectionObserver((entries) => {
