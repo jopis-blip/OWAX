@@ -1372,6 +1372,122 @@ footer {
     color: white;
 }
 
+/* ================================================
+   ČASOVÁ OSA PRŮBĚHU ZAKÁZKY
+   ================================================ */
+.timeline {
+    position: relative;
+    max-width: 1100px;
+    margin: 0 auto clamp(2rem, 3vw, 3rem);
+    padding: 0 var(--side);
+    list-style: none;
+}
+
+/* Svislá spojovací čára */
+.timeline::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    width: 3px;
+    transform: translateX(-50%);
+    background: linear-gradient(var(--brand-blue), #60a5fa);
+    border-radius: 3px;
+}
+
+.timeline-step {
+    position: relative;
+    width: 50%;
+    padding: 0 clamp(2rem, 3.5vw, 3.5rem) clamp(1.8rem, 3vw, 2.8rem) 0;
+}
+
+.timeline-step:nth-child(even) {
+    margin-left: 50%;
+    padding: 0 0 clamp(1.8rem, 3vw, 2.8rem) clamp(2rem, 3.5vw, 3.5rem);
+}
+
+/* Číslo kroku na čáře */
+.timeline-num {
+    position: absolute;
+    top: 1.2rem;
+    right: -22px;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: var(--brand-blue);
+    color: white;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 4px solid var(--bg-page);
+    box-shadow: 0 4px 12px var(--brand-blue-glow);
+    z-index: 1;
+}
+
+.timeline-step:nth-child(even) .timeline-num {
+    right: auto;
+    left: -22px;
+}
+
+.timeline-num.done {
+    background: var(--brand-green);
+    box-shadow: 0 4px 12px rgba(34, 197, 94, 0.35);
+}
+
+.timeline-card {
+    background: var(--card-dark);
+    border: 1px solid var(--border-card);
+    border-radius: clamp(16px, 1.8vw, 22px);
+    overflow: hidden;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.06);
+}
+
+.timeline-card .gallery-item {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+}
+
+.timeline-card .gallery-item:hover {
+    transform: none;
+    opacity: 0.92;
+}
+
+.timeline-body {
+    padding: clamp(1.1rem, 1.8vw, 1.6rem);
+}
+
+.timeline-phase {
+    color: #60a5fa;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+}
+
+.timeline-body h3 {
+    color: white;
+    font-size: clamp(1.05rem, 1.3vw, 1.25rem);
+    margin: 0.35rem 0 0.5rem;
+}
+
+.timeline-body p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    line-height: 1.65;
+}
+
+.timeline-body a {
+    color: #60a5fa;
+    font-weight: 600;
+    text-decoration: none;
+}
+
 /* Zakázka bez fotek: sekce s fotkami se nezobrazí */
 .detail-photos:not(:has(.gallery-item, .before-after-container)) .section-header {
     display: none;
@@ -1514,6 +1630,25 @@ footer {
         grid-template-columns: repeat(2, 1fr);
     }
 
+    /* Časová osa na telefonu: čára vlevo, kroky pod sebou */
+    .timeline::before {
+        left: calc(var(--side) + 20px);
+    }
+
+    .timeline-step,
+    .timeline-step:nth-child(even) {
+        width: 100%;
+        margin-left: 0;
+        padding: 0 0 1.6rem 56px;
+    }
+
+    .timeline-num,
+    .timeline-step:nth-child(even) .timeline-num {
+        left: -2px;
+        right: auto;
+        top: 0.8rem;
+    }
+
     .gallery-caption {
         font-size: 0.75rem;
         padding: 1.2rem 0.6rem 0.5rem;
@@ -1626,25 +1761,113 @@ footer {
             </div>
         </div>
 
-        <!-- PRŮBĚH REALIZACE – fotky seřazené podle času -->
+        <!-- PRŮBĚH REALIZACE – časová osa: každý krok = <li class="timeline-step"> s fotkou a popisem -->
         <div class="section-header reveal">
             <span class="section-subtitle">Krok za krokem</span>
             <h2 class="section-title">Průběh realizace</h2>
-            <p class="section-lead">Jak se byt proměňoval od demontáže staré kuchyně až po hotové stěny a novou dlažbu.</p>
+            <p class="section-lead">Jak šly práce po sobě – od demontáže staré kuchyně až po předání bytu. Kliknutím na fotku ji zvětšíte.</p>
         </div>
 
-        <div class="gallery-album reveal">
-            <div class="gallery-grid">
-                    <button class="gallery-item"><img src="foto/podbaba-prubeh-1.jpg" alt="Rekonstrukce bytu, Praha 6 – Podbaba: Původní stav po demontáži kuchyňské linky a obkladu" loading="lazy" onerror="this.parentElement.remove()"><span class="gallery-caption">1. Výchozí stav – demontovaná kuchyně</span></button>
-                    <button class="gallery-item"><img src="foto/podbaba-prubeh-2.jpg" alt="Rekonstrukce bytu, Praha 6 – Podbaba: Zakrytí podlah a příprava prostoru před bouracími pracemi" loading="lazy" onerror="this.parentElement.remove()"><span class="gallery-caption">2. Příprava – zakrytí podlah</span></button>
-                    <button class="gallery-item"><img src="foto/podbaba-prubeh-3.jpg" alt="Rekonstrukce bytu, Praha 6 – Podbaba: Nové rozvody elektroinstalace a vývody pro kuchyňskou linku" loading="lazy" onerror="this.parentElement.remove()"><span class="gallery-caption">3. Nové rozvody elektroinstalace</span></button>
-                    <button class="gallery-item"><img src="foto/podbaba-prubeh-4.jpg" alt="Rekonstrukce bytu, Praha 6 – Podbaba: Pokládka velkoformátové dlažby s nivelačním systémem" loading="lazy" onerror="this.parentElement.remove()"><span class="gallery-caption">4. Pokládka velkoformátové dlažby</span></button>
-                    <button class="gallery-item"><img src="foto/podbaba-prubeh-5.jpg" alt="Rekonstrukce bytu, Praha 6 – Podbaba: Nová velkoformátová dlažba v kuchyňském koutě navazující na parkety" loading="lazy" onerror="this.parentElement.remove()"><span class="gallery-caption">5. Nová dlažba v kuchyňském koutě</span></button>
-                    <button class="gallery-item"><img src="foto/podbaba-prubeh-6.jpg" alt="Rekonstrukce bytu, Praha 6 – Podbaba: Vyštukované a vymalované stěny s připravenými vývody pro kuchyň" loading="lazy" onerror="this.parentElement.remove()"><span class="gallery-caption">6. Hotové stěny a vývody pro kuchyň</span></button>
-                    <button class="gallery-item"><img src="foto/podbaba-prubeh-7.jpg" alt="Rekonstrukce bytu, Praha 6 – Podbaba: Obývací část bytu po vymalování" loading="lazy" onerror="this.parentElement.remove()"><span class="gallery-caption">7. Obývací část po malování</span></button>
-                    <button class="gallery-item"><img src="foto/podbaba-prubeh-8.jpg" alt="Rekonstrukce bytu, Praha 6 – Podbaba: Pohled od vstupu – prostor připravený pro montáž kuchyňské linky" loading="lazy" onerror="this.parentElement.remove()"><span class="gallery-caption">8. Připraveno pro montáž kuchyně</span></button>
-            </div>
-        </div>
+        <ol class="timeline">
+            <li class="timeline-step reveal">
+                <span class="timeline-num">1</span>
+                <div class="timeline-card">
+                    <button class="gallery-item"><img src="foto/podbaba-prubeh-1.jpg" alt="Rekonstrukce bytu, Praha 6 – Podbaba: Původní stav po demontáži kuchyňské linky a obkladu" loading="lazy" onerror="this.parentElement.remove()"></button>
+                    <div class="timeline-body">
+                        <span class="timeline-phase">Krok 1 · Výchozí stav</span>
+                        <h3>Demontáž staré kuchyně</h3>
+                        <p>Původní kuchyňská linka je pryč a odhalila staré obklady, dožilé rozvody a vývody. Prostor jsme zdokumentovali a s klientem odsouhlasili postup prací.</p>
+                    </div>
+                </div>
+            </li>
+            <li class="timeline-step reveal">
+                <span class="timeline-num">2</span>
+                <div class="timeline-card">
+                    <button class="gallery-item"><img src="foto/podbaba-prubeh-2.jpg" alt="Rekonstrukce bytu, Praha 6 – Podbaba: Zakrytí podlah a příprava prostoru před bouracími pracemi" loading="lazy" onerror="this.parentElement.remove()"></button>
+                    <div class="timeline-body">
+                        <span class="timeline-phase">Krok 2 · Přípravné práce</span>
+                        <h3>Ochrana podlah a bourání</h3>
+                        <p>Parkety v obytné části jsme zakryli ochrannou lepenkou a páskou, aby je bourání nepoškodilo. Potom jsme otloukli zbytky obkladů a odstranili starou dlažbu v kuchyňském koutě.</p>
+                    </div>
+                </div>
+            </li>
+            <li class="timeline-step reveal">
+                <span class="timeline-num">3</span>
+                <div class="timeline-card">
+                    <button class="gallery-item"><img src="foto/podbaba-prubeh-3.jpg" alt="Rekonstrukce bytu, Praha 6 – Podbaba: Nové rozvody elektroinstalace a vývody pro kuchyňskou linku" loading="lazy" onerror="this.parentElement.remove()"></button>
+                    <div class="timeline-body">
+                        <span class="timeline-phase">Krok 3 · Hrubé práce</span>
+                        <h3>Nové rozvody elektroinstalace</h3>
+                        <p>Do stěn jsme vysekali drážky a natáhli nové rozvody pro zásuvky, spotřebiče a osvětlení. Rozmístění vývodů odpovídá přesně návrhu nové kuchyňské linky.</p>
+                    </div>
+                </div>
+            </li>
+            <li class="timeline-step reveal">
+                <span class="timeline-num">4</span>
+                <div class="timeline-card">
+                    <button class="gallery-item"><img src="foto/podbaba-prubeh-4.jpg" alt="Rekonstrukce bytu, Praha 6 – Podbaba: Pokládka velkoformátové dlažby s nivelačním systémem" loading="lazy" onerror="this.parentElement.remove()"></button>
+                    <div class="timeline-body">
+                        <span class="timeline-phase">Krok 4 · Podlahy</span>
+                        <h3>Pokládka velkoformátové dlažby</h3>
+                        <p>Velkoformátovou dlažbu jsme kladli s nivelačním systémem (modré klínky), díky kterému jsou desky v dokonalé rovině a hrany na sebe přesně navazují.</p>
+                    </div>
+                </div>
+            </li>
+            <li class="timeline-step reveal">
+                <span class="timeline-num">5</span>
+                <div class="timeline-card">
+                    <button class="gallery-item"><img src="foto/podbaba-prubeh-5.jpg" alt="Rekonstrukce bytu, Praha 6 – Podbaba: Nová velkoformátová dlažba v kuchyňském koutě navazující na parkety" loading="lazy" onerror="this.parentElement.remove()"></button>
+                    <div class="timeline-body">
+                        <span class="timeline-phase">Krok 5 · Podlahy</span>
+                        <h3>Hotová dlažba v kuchyňském koutě</h3>
+                        <p>Dlažba je vyspárovaná a čistě navazuje na původní dřevěné parkety. Kuchyňský kout je tak praktický na údržbu a obytná část si zachovala teplo dřeva.</p>
+                    </div>
+                </div>
+            </li>
+            <li class="timeline-step reveal">
+                <span class="timeline-num">6</span>
+                <div class="timeline-card">
+                    <button class="gallery-item"><img src="foto/podbaba-prubeh-6.jpg" alt="Rekonstrukce bytu, Praha 6 – Podbaba: Vyštukované a vymalované stěny s připravenými vývody pro kuchyň" loading="lazy" onerror="this.parentElement.remove()"></button>
+                    <div class="timeline-body">
+                        <span class="timeline-phase">Krok 6 · Dokončovací práce</span>
+                        <h3>Štuky, malby a vývody</h3>
+                        <p>Stěny jsme po drážkách vyspravili, vyštukovali a vymalovali. Vývody pro vodu a elektřinu jsou připravené přesně tam, kde bude stát kuchyňská linka.</p>
+                    </div>
+                </div>
+            </li>
+            <li class="timeline-step reveal">
+                <span class="timeline-num">7</span>
+                <div class="timeline-card">
+                    <button class="gallery-item"><img src="foto/podbaba-prubeh-7.jpg" alt="Rekonstrukce bytu, Praha 6 – Podbaba: Obývací část bytu po vymalování" loading="lazy" onerror="this.parentElement.remove()"></button>
+                    <div class="timeline-body">
+                        <span class="timeline-phase">Krok 7 · Dokončovací práce</span>
+                        <h3>Vymalovaná obytná část</h3>
+                        <p>Malování jsme dokončili i v obývací části. Původní parkety zůstaly díky ochraně z prvního dne nepoškozené.</p>
+                    </div>
+                </div>
+            </li>
+            <li class="timeline-step reveal">
+                <span class="timeline-num">8</span>
+                <div class="timeline-card">
+                    <button class="gallery-item"><img src="foto/podbaba-prubeh-8.jpg" alt="Rekonstrukce bytu, Praha 6 – Podbaba: Pohled od vstupu – prostor připravený pro montáž kuchyňské linky" loading="lazy" onerror="this.parentElement.remove()"></button>
+                    <div class="timeline-body">
+                        <span class="timeline-phase">Krok 8 · Předání</span>
+                        <h3>Připraveno pro montáž kuchyně</h3>
+                        <p>Prostor je uklizený a připravený pro truhláře. Montáž kuchyňské linky jsme zkoordinovali tak, aby plynule navázala na naše práce.</p>
+                    </div>
+                </div>
+            </li>
+            <li class="timeline-step reveal">
+                <span class="timeline-num done"><i class="fa-solid fa-check"></i></span>
+                <div class="timeline-card">
+                    <div class="timeline-body">
+                        <span class="timeline-phase">Výsledek</span>
+                        <h3>Montáž kuchyně a předání bytu</h3>
+                        <p>Po montáži nové kuchyňské linky jsme byt předali klientovi. Jak se proměnil, ukazuje <a href="#ba-slider">posuvník Před a po</a> výše.</p>
+                    </div>
+                </div>
+            </li>
+        </ol>
 
         <div style="margin: 0 var(--side) clamp(2.5rem, 4vw, 4.5rem);">
             <a href="reference.html#realizace" class="back-link"><i class="fa-solid fa-arrow-left"></i> Zpět na všechny reference</a>
@@ -1878,7 +2101,7 @@ if (lightbox) {
     document.addEventListener('click', (e) => {
         const item = e.target.closest('.gallery-item');
         if (!item) return;
-        album = item.closest('.gallery-album');
+        album = item.closest('.gallery-album, .timeline');
         showPhoto(items().indexOf(item));
         lightbox.classList.add('active');
         document.body.style.overflow = 'hidden';
