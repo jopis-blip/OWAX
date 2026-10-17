@@ -5,7 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>O nás | OWAX</title>
     <meta name="description" content="OWAX založili absolventi ČVUT s více než pětiletou praxí ve velkých stavebních firmách. Seznamte se s naším týmem.">
+    <link rel="canonical" href="https://www.owax.cz/o-nas.html">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.owax.cz/o-nas.html">
+    <meta property="og:title" content="O nás | OWAX">
+    <meta property="og:description" content="OWAX založili absolventi ČVUT s více než pětiletou praxí ve velkých stavebních firmách. Seznamte se s naším týmem.">
+    <meta property="og:image" content="https://www.owax.cz/logo.png">
+    <meta property="og:locale" content="cs_CZ">
 
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
@@ -1714,6 +1723,140 @@ footer {
 }
 
 /* ================================================
+   ÚVOD – fotka na pozadí
+   ================================================ */
+.hero.has-photo {
+    background:
+        linear-gradient(90deg, rgba(17, 24, 39, 0.96) 0%, rgba(17, 24, 39, 0.88) 45%, rgba(17, 24, 39, 0.55) 100%),
+        url('foto/podbaba-kuchyne.jpg') center / cover no-repeat;
+}
+
+/* ================================================
+   ÚVOD – ukázky práce
+   ================================================ */
+.home-showcase .case-study {
+    align-items: center;
+}
+
+.home-more {
+    text-align: center;
+    margin: calc(-1 * clamp(1rem, 2vw, 2rem)) var(--side) clamp(2.5rem, 4vw, 4rem);
+}
+
+.home-more a {
+    color: var(--brand-blue);
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.home-more a:hover {
+    color: var(--brand-blue-hover);
+}
+
+/* ================================================
+   SLUŽBY – odkaz na ukázkovou zakázku
+   ================================================ */
+.service-example {
+    margin-top: auto;
+    padding-top: 1.2rem;
+    color: #60a5fa;
+    font-weight: 700;
+    font-size: 0.9rem;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.service-example:hover {
+    color: white;
+}
+
+/* ================================================
+   GALERIE – filtr Realizace / Projekce
+   ================================================ */
+.gallery-filter {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin: 0 var(--side) clamp(1.5rem, 2.5vw, 2.5rem);
+}
+
+.gallery-filter button {
+    padding: 0.6rem 1.3rem;
+    border-radius: 50px;
+    border: 1px solid rgba(15, 23, 42, 0.15);
+    background: white;
+    color: #0f172a;
+    font-weight: 700;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.gallery-filter button:hover {
+    border-color: var(--brand-blue);
+}
+
+.gallery-filter button.active {
+    background: var(--brand-blue);
+    border-color: var(--brand-blue);
+    color: white;
+    box-shadow: 0 4px 12px var(--brand-blue-glow);
+}
+
+.gallery-album.filtered-out {
+    display: none;
+}
+
+.gallery-empty {
+    text-align: center;
+    color: #475569;
+    margin: 0 var(--side) clamp(2.5rem, 4vw, 4rem);
+}
+
+/* Karta zakázky bez fotky – menší plocha s ikonou */
+.project-img:not(:has(img)) {
+    height: 120px;
+}
+
+/* ================================================
+   PATIČKA – kontakty
+   ================================================ */
+.footer-contacts {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.8rem 2rem;
+    margin-bottom: 1.8rem;
+}
+
+.footer-contacts a {
+    color: #cbd5e1;
+    text-decoration: none;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.footer-contacts a:hover {
+    color: white;
+}
+
+.footer-contacts i {
+    color: #60a5fa;
+}
+
+/* ================================================
+   PLOVOUCÍ TLAČÍTKO ZAVOLAT (jen telefon)
+   ================================================ */
+.call-fab {
+    display: none;
+}
+
+/* ================================================
    RESPONZIVITA
    ================================================ */
 @media (min-width: 1441px) {
@@ -1874,6 +2017,28 @@ footer {
         top: 0.8rem;
         left: -2px;
         transform: none;
+    }
+
+    .call-fab {
+        position: fixed;
+        right: 16px;
+        bottom: calc(16px + env(safe-area-inset-bottom));
+        z-index: 900;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.85rem 1.2rem;
+        border-radius: 50px;
+        background: var(--brand-green);
+        color: white;
+        font-weight: 700;
+        text-decoration: none;
+        box-shadow: 0 8px 22px rgba(34, 197, 94, 0.45);
+    }
+
+    /* Aby tlačítko nepřekrylo konec patičky */
+    footer {
+        padding-bottom: 5.5rem;
     }
 
     .gallery-caption {
@@ -2037,14 +2202,23 @@ footer {
             <a href="index.html">Úvod</a>
             <a href="sluzby.html">Služby</a>
             <a href="reference.html">Reference</a>
+            <a href="galerie.html">Galerie</a>
             <a href="o-nas.html">O nás</a>
             <a href="kontakt.html">Kontakt</a>
+        </div>
+        <div class="footer-contacts">
+            <a href="tel:+420723557807"><i class="fa-solid fa-phone"></i> +420 723 557 807</a>
+            <a href="mailto:info@owax.cz"><i class="fa-solid fa-envelope"></i> info@owax.cz</a>
+            <span style="color:#94a3b8;"><i class="fa-solid fa-location-dot" style="color:#60a5fa;"></i> Praha a Středočeský kraj</span>
         </div>
         <div class="social-links">
             <a href="https://www.instagram.com/owaxproducts?stkn=czc5c2Y4d3oxOHNx" target="_blank" rel="noopener noreferrer" class="social-icon" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
         </div>
         <p>&copy; 2026 OWAX. Všechna práva vyhrazena.</p>
     </footer>
+
+    <!-- PLOVOUCÍ TLAČÍTKO ZAVOLAT (zobrazí se jen na telefonu) -->
+    <a href="tel:+420723557807" class="call-fab" aria-label="Zavolat +420 723 557 807"><i class="fa-solid fa-phone"></i> Zavolat</a>
 
     <script>
 /* ================================================
@@ -2082,6 +2256,34 @@ document.addEventListener('click', (e) => {
 document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') setMenu(false);
 });
+
+/* === GALERIE – filtr Realizace / Projekce (jen na stránce Galerie) === */
+const galleryFilter = document.querySelector('.gallery-filter');
+
+if (galleryFilter) {
+    galleryFilter.addEventListener('click', (e) => {
+        const btn = e.target.closest('button');
+        if (!btn) return;
+        galleryFilter.querySelectorAll('button').forEach(b => b.classList.toggle('active', b === btn));
+        const cat = btn.dataset.filter;
+        document.querySelectorAll('.gallery-album[data-cat]').forEach(a => {
+            a.classList.toggle('filtered-out', cat !== 'vse' && a.dataset.cat !== cat);
+        });
+        updateEmpty();
+    });
+
+    // Když v kategorii zatím nejsou fotky, ukáže se krátká zpráva.
+    // Chybějící fotky se odstraňují až po pokusu o načtení, proto se stav přepočítá i po chybě obrázku.
+    function updateEmpty() {
+        const empty = document.querySelector('.gallery-empty');
+        const any = [...document.querySelectorAll('.gallery-album[data-cat]')].some(a => a.offsetParent !== null);
+        if (empty) empty.hidden = any;
+    }
+
+    document.addEventListener('error', (e) => {
+        if (e.target.tagName === 'IMG') setTimeout(updateEmpty, 0);
+    }, true);
+}
 
 /* === REVEAL ANIMACE === */
 const observer = new IntersectionObserver((entries) => {
