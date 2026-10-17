@@ -1428,6 +1428,26 @@ footer {
     box-shadow: 0 12px 30px rgba(0, 0, 0, 0.06);
 }
 
+/* Krok s více fotkami: fotky vedle sebe na místě jedné fotky */
+.timeline-card .timeline-photos {
+    grid-column: 1;
+    grid-row: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.6rem;
+}
+
+.timeline-step:nth-of-type(even) .timeline-photos {
+    grid-column: 3;
+}
+
+.timeline-card .timeline-photos .gallery-item,
+.timeline-step:nth-of-type(even) .timeline-photos .gallery-item {
+    grid-column: auto;
+    grid-row: auto;
+    aspect-ratio: 4 / 5;
+}
+
 /* Sudé kroky: fotka vpravo, text vlevo */
 .timeline-step:nth-of-type(even) .gallery-item {
     grid-column: 3;
@@ -1550,6 +1570,52 @@ footer {
     100% { scale: 1; }
 }
 
+/* Rozsvícený krok: když čára dojde k číslu, rozsvítí se i fotka a text
+   a spojnice od čísla k nim – je hned vidět, co ke kterému číslu patří */
+.timeline-card::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: clamp(90px, 11vw, 150px);
+    height: 3px;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 86, 210, 0.15);
+    border-radius: 3px;
+    transition: background 0.5s, box-shadow 0.5s;
+    z-index: -1;
+}
+
+.timeline-card .gallery-item,
+.timeline-body {
+    transition: border-color 0.5s, box-shadow 0.5s, opacity 0.8s ease-out, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.timeline-step.reached .timeline-card::before {
+    background: var(--brand-blue);
+    box-shadow: 0 0 8px rgba(0, 86, 210, 0.6);
+}
+
+.timeline-step.reached .timeline-card .gallery-item,
+.timeline-step.reached .timeline-body {
+    border-color: rgba(96, 165, 250, 0.9);
+    box-shadow: 0 0 0 1px rgba(96, 165, 250, 0.5), 0 0 22px rgba(0, 86, 210, 0.35), 0 12px 30px rgba(0, 0, 0, 0.08);
+}
+
+.timeline-step.reached .timeline-phase {
+    color: #93c5fd;
+}
+
+.timeline-step.no-photo.reached .timeline-body {
+    border-color: rgba(34, 197, 94, 0.9);
+    box-shadow: 0 0 0 1px rgba(34, 197, 94, 0.5), 0 0 22px rgba(34, 197, 94, 0.35), 0 12px 30px rgba(0, 0, 0, 0.08);
+}
+
+.timeline-step.no-photo.reached .timeline-card::before {
+    background: var(--brand-green);
+    box-shadow: 0 0 8px rgba(34, 197, 94, 0.6);
+}
+
 /* Fotka se při najetí myší lehce přiblíží */
 .timeline-card .gallery-item img {
     transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
@@ -1562,7 +1628,7 @@ footer {
 /* Najíždění z boků */
 .timeline.anim .timeline-card .gallery-item,
 .timeline.anim .timeline-body {
-    transition: opacity 0.8s ease-out, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: border-color 0.5s, box-shadow 0.5s, opacity 0.8s ease-out, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .timeline.anim .timeline-body {
@@ -1799,6 +1865,21 @@ footer {
     .timeline-step.no-photo .timeline-body {
         grid-row: 1;
         border-radius: 16px;
+    }
+
+    .timeline-step .timeline-photos,
+    .timeline-step:nth-of-type(even) .timeline-photos {
+        grid-column: 1;
+        grid-row: 1;
+    }
+
+    .timeline-card .timeline-photos .gallery-item,
+    .timeline-step:nth-of-type(even) .timeline-photos .gallery-item {
+        border-radius: 12px;
+    }
+
+    .timeline-card::before {
+        display: none;
     }
 
     .timeline-num {
@@ -2202,7 +2283,11 @@ if (timeline) {
         progress.style.strokeDashoffset = total - len;
         timeline.style.setProperty('--fill', Math.max(0, Math.min(timeline.offsetHeight, full)) + 'px');
 
-        nums.forEach(n => n.classList.toggle('reached', center(n).y <= full));
+        nums.forEach(n => {
+            const on = center(n).y <= full;
+            n.classList.toggle('reached', on);
+            n.closest('.timeline-step').classList.toggle('reached', on);
+        });
     }
 
     // Fotka a text najedou z boků, když se krok objeví na obrazovce
