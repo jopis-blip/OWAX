@@ -1570,30 +1570,12 @@ footer {
     100% { scale: 1; }
 }
 
-/* Rozsvícený krok: když čára dojde k číslu, rozsvítí se i fotka a text
-   a spojnice od čísla k nim – je hned vidět, co ke kterému číslu patří */
-.timeline-card::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: clamp(90px, 11vw, 150px);
-    height: 3px;
-    transform: translate(-50%, -50%);
-    background: rgba(0, 86, 210, 0.15);
-    border-radius: 3px;
-    transition: background 0.5s, box-shadow 0.5s;
-    z-index: -1;
-}
-
+/* Poslední krok (.final) svítí zeleně.
+   Rozsvícený krok: když čára dojde k číslu, rozsvítí se i fotka a text
+   – je hned vidět, co ke kterému číslu patří */
 .timeline-card .gallery-item,
 .timeline-body {
     transition: border-color 0.5s, box-shadow 0.5s, opacity 0.8s ease-out, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.timeline-step.reached .timeline-card::before {
-    background: var(--brand-blue);
-    box-shadow: 0 0 8px rgba(0, 86, 210, 0.6);
 }
 
 .timeline-step.reached .timeline-card .gallery-item,
@@ -1606,14 +1588,10 @@ footer {
     color: #93c5fd;
 }
 
-.timeline-step.no-photo.reached .timeline-body {
+.timeline-step.final.reached .timeline-card .gallery-item,
+.timeline-step.final.reached .timeline-body {
     border-color: rgba(34, 197, 94, 0.9);
     box-shadow: 0 0 0 1px rgba(34, 197, 94, 0.5), 0 0 22px rgba(34, 197, 94, 0.35), 0 12px 30px rgba(0, 0, 0, 0.08);
-}
-
-.timeline-step.no-photo.reached .timeline-card::before {
-    background: var(--brand-green);
-    box-shadow: 0 0 8px rgba(34, 197, 94, 0.6);
 }
 
 /* Fotka se při najetí myší lehce přiblíží */
@@ -1878,10 +1856,6 @@ footer {
         border-radius: 12px;
     }
 
-    .timeline-card::before {
-        display: none;
-    }
-
     .timeline-num {
         top: 0.8rem;
         left: -2px;
@@ -2110,13 +2084,14 @@ footer {
                     </div>
                 </div>
             </li>
-            <li class="timeline-step no-photo" style="--dx: 8px">
+            <li class="timeline-step final" style="--dx: 8px">
                 <span class="timeline-num done"><i class="fa-solid fa-check"></i></span>
                 <div class="timeline-card">
+                    <button class="gallery-item"><img src="foto/podbaba-kuchyne.jpg" alt="Rekonstrukce bytu, Praha 6 – Podbaba: Montáž nové kuchyňské linky" loading="lazy" onerror="this.parentElement.remove()"></button>
                     <div class="timeline-body">
                         <span class="timeline-phase">Výsledek</span>
                         <h3>Montáž kuchyně a předání bytu</h3>
-                        <p>Po montáži nové kuchyňské linky jsme byt předali klientovi. Jak se proměnil, ukazuje <a href="#ba-slider">posuvník Před a po</a> výše.</p>
+                        <p>Na připravené vývody a novou dlažbu navázala montáž kuchyňské linky. Na fotce je ještě s ochrannými fóliemi a před osazením pracovní desky. Jak se byt proměnil, ukazuje <a href="#ba-slider">posuvník Před a po</a> výše.</p>
                     </div>
                 </div>
             </li>
