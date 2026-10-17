@@ -1382,10 +1382,6 @@ footer {
     font-size: 0.95rem;
 }
 
-.detail-ba {
-    margin-bottom: clamp(1rem, 1.6vw, 1.6rem);
-}
-
 /* ================================================
    RESPONZIVITA
    ================================================ */
@@ -1561,15 +1557,15 @@ footer {
         </div>
     </section>
 
-    <!-- FOTKY ZAKÁZKY – novou fotku přidáte zkopírováním jednoho řádku <button> -->
+    <!-- FOTKY ZAKÁZKY – posuvník Před/Po -->
     <section>
         <div class="section-header reveal">
             <span class="section-subtitle">Fotodokumentace</span>
             <h2 class="section-title">Fotky ze zakázky</h2>
         </div>
 
-        <div class="gallery-album reveal">
-            <div class="before-after-container detail-ba" id="ba-slider">
+        <div class="dark-card-container reveal">
+            <div class="before-after-container" id="ba-slider">
                 <div class="ba-image ba-after"></div>
                 <div class="ba-image ba-before" id="ba-before"></div>
                 <span class="ba-label ba-label-before">PŘED</span>
@@ -1577,10 +1573,6 @@ footer {
                 <div class="ba-slider-handle" id="ba-handle">
                     <i class="fa-solid fa-arrows-left-right"></i>
                 </div>
-            </div>
-            <div class="gallery-grid">
-                    <button class="gallery-item"><img src="Pred.JPG" alt="Rekonstrukce bytu, Praha 6 – Podbaba (před)" loading="lazy" onerror="this.parentElement.remove()"><span class="gallery-caption">Před</span></button>
-                    <button class="gallery-item"><img src="Po.JPEG" alt="Rekonstrukce bytu, Praha 6 – Podbaba (po)" loading="lazy" onerror="this.parentElement.remove()"><span class="gallery-caption">Po</span></button>
             </div>
         </div>
 
