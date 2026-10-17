@@ -1372,6 +1372,11 @@ footer {
     color: white;
 }
 
+/* Zakázka bez fotek: sekce s fotkami se nezobrazí */
+.detail-photos:not(:has(.gallery-item, .before-after-container)) .section-header {
+    display: none;
+}
+
 .back-link {
     display: inline-flex;
     align-items: center;
@@ -1609,7 +1614,7 @@ footer {
     </section>
 
     <!-- FOTKY ZAKÁZKY – novou fotku přidáte zkopírováním jednoho řádku <button> -->
-    <section>
+    <section class="detail-photos">
         <div class="section-header reveal">
             <span class="section-subtitle">Fotodokumentace</span>
             <h2 class="section-title">Fotky ze zakázky</h2>
@@ -1624,7 +1629,7 @@ footer {
         </div>
 
         <div style="margin: 0 var(--side) clamp(2.5rem, 4vw, 4.5rem);">
-            <a href="reference.html" class="back-link"><i class="fa-solid fa-arrow-left"></i> Zpět na všechny reference</a>
+            <a href="reference.html#realizace" class="back-link"><i class="fa-solid fa-arrow-left"></i> Zpět na všechny reference</a>
         </div>
     </section>
 

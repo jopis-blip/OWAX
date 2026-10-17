@@ -1,0 +1,1883 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Návrh zahrady firemní mateřské školy | OWAX</title>
+    <meta name="description" content="Projekce OWAX: koncepční návrh zahrady firemní mateřské školy s důrazem na bezpečnost, funkčnost a podnětné prostředí pro děti.">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+/* ================================================
+   OWAX – společné styly pro všechny stránky
+   ================================================ */
+
+:root {
+    --bg-page: #edf0f5;
+    --card-dark: #1e293b;
+    --card-inner: #283548;
+    --brand-blue: #0056d2;
+    --brand-blue-hover: #003882;
+    --brand-blue-glow: rgba(0, 86, 210, 0.3);
+    --brand-green: #22c55e;
+    --text-main: #ffffff;
+    --text-muted: #cbd5e1;
+    --border-card: rgba(255, 255, 255, 0.12);
+    --transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    --header-height: 95px;
+    --side: 8%;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: var(--bg-page);
+    color: #0f172a;
+    overflow-x: hidden;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* --- HLAVIČKA --- */
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: var(--header-height);
+    z-index: 1000;
+    padding: 0 var(--side);
+    background: #111827;
+    border-bottom: 1px solid var(--border-card);
+    display: flex;
+    align-items: center;
+}
+
+.header-content {
+    width: 100%;
+    max-width: 1440px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    height: 100%;
+}
+
+.logo-img {
+    height: clamp(70px, 6.5vw, 88px);
+    width: auto;
+    object-fit: contain;
+    filter: brightness(0) invert(1) drop-shadow(0 2px 8px rgba(255, 255, 255, 0.15));
+    transition: var(--transition);
+}
+
+.logo-container:hover .logo-img {
+    transform: scale(1.03);
+    filter: brightness(0) invert(1) drop-shadow(0 4px 14px rgba(0, 86, 210, 0.5));
+}
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+}
+
+.nav-btn {
+    background: var(--brand-blue);
+    color: #ffffff;
+    padding: 0.6rem 1.4rem;
+    border-radius: 50px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: var(--transition);
+    box-shadow: 0 4px 12px var(--brand-blue-glow);
+    font-size: clamp(0.85rem, 0.9vw, 1rem);
+    display: inline-block;
+}
+
+.nav-btn:hover {
+    background: var(--brand-blue-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(0, 56, 130, 0.4);
+}
+
+/* Vedlejší tlačítko v hlavičce (Galerie) */
+.nav-btn-outline {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    box-shadow: none;
+}
+
+.nav-btn-outline:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.6);
+    box-shadow: none;
+}
+
+.hamburger {
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid var(--border-card);
+    border-radius: 12px;
+    color: white;
+    font-size: 1.3rem;
+    cursor: pointer;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), background 0.2s;
+}
+
+.hamburger:hover {
+    background: rgba(255, 255, 255, 0.12);
+}
+
+.hamburger.active {
+    transform: rotate(90deg);
+}
+
+/* --- MENU (BURGER) --- */
+nav {
+    position: absolute;
+    top: 100%;
+    right: var(--side);
+    width: 340px;
+    background: #111827;
+    border: 1px solid var(--border-card);
+    border-top: none;
+    border-radius: 0 0 20px 20px;
+    padding: 0.8rem 1.6rem 1.6rem;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 25px 40px rgba(0, 0, 0, 0.45);
+
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-12px) scale(0.98);
+    transform-origin: top right;
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s ease, visibility 0.3s;
+}
+
+nav.active {
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+}
+
+nav a.nav-link {
+    color: #cbd5e1;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.05rem;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: color 0.2s, padding-left 0.2s;
+}
+
+nav a.nav-link::after {
+    content: '\f054';
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    font-size: 0.75rem;
+    opacity: 0.35;
+}
+
+nav a.nav-link:hover {
+    color: #ffffff;
+    padding-left: 6px;
+}
+
+nav a.nav-link.active {
+    color: #60a5fa;
+}
+
+nav a.nav-link.active::after {
+    opacity: 1;
+}
+
+.menu-contacts {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    padding-top: 1.2rem;
+    margin-top: 0.4rem;
+}
+
+.menu-contact-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: #e2e8f0;
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 600;
+    transition: var(--transition);
+}
+
+.menu-contact-item .contact-icon {
+    width: 38px;
+    height: 38px;
+    font-size: 0.95rem;
+    border-radius: 10px;
+}
+
+.menu-contact-item:hover {
+    color: #ffffff;
+}
+
+.menu-socials {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    margin-top: 1rem;
+}
+
+.menu-socials .social-icon {
+    font-size: 1.3rem;
+    width: 24px;
+    height: 24px;
+}
+
+/* Postupné objevení položek menu */
+@keyframes menuItemIn {
+    from { opacity: 0; transform: translateX(-12px); }
+    to   { opacity: 1; transform: none; }
+}
+
+nav.active > * { animation: menuItemIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) both; }
+nav.active > *:nth-child(2) { animation-delay: 0.05s; }
+nav.active > *:nth-child(3) { animation-delay: 0.10s; }
+nav.active > *:nth-child(4) { animation-delay: 0.15s; }
+nav.active > *:nth-child(5) { animation-delay: 0.20s; }
+nav.active > *:nth-child(6) { animation-delay: 0.25s; }
+nav.active > *:nth-child(7) { animation-delay: 0.30s; }
+
+/* --- HERO (ÚVODNÍ STRÁNKA) --- */
+.hero,
+.page-hero {
+    background: linear-gradient(135deg, rgba(17, 24, 39, 0.95) 0%, rgba(30, 41, 59, 0.92) 100%),
+                url('https://images.unsplash.com/photo-1541888946425-d0fbb186a5b3?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
+    color: white;
+}
+
+.hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: calc(var(--header-height) + 2rem) var(--side) 4rem;
+    overflow: hidden;
+    margin-bottom: 2rem;
+}
+
+.hero-content {
+    max-width: 900px;
+    width: 100%;
+    margin: 0 auto;
+    animation: fadeInUp 0.8s ease-out;
+}
+
+.hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(0, 86, 210, 0.2);
+    border: 1px solid rgba(0, 86, 210, 0.5);
+    color: #60a5fa;
+    padding: 6px 16px;
+    border-radius: 30px;
+    font-size: clamp(0.75rem, 1vw, 0.9rem);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 1.5rem;
+}
+
+.hero h1 {
+    font-size: clamp(2.2rem, 4.5vw, 4.5rem);
+    font-weight: 800;
+    line-height: 1.15;
+    margin-bottom: 1.5rem;
+    letter-spacing: -1px;
+}
+
+.hero h1 span,
+.page-hero h1 span {
+    color: #3b82f6;
+}
+
+.hero p {
+    font-size: clamp(1rem, 1.3vw, 1.35rem);
+    color: #cbd5e1;
+    margin-bottom: 2.5rem;
+    max-width: 750px;
+}
+
+.hero-btns {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.hero-btn {
+    padding: 1rem 2.2rem;
+    font-size: 1rem;
+    color: white;
+    border-radius: 50px;
+    text-decoration: none;
+    text-align: center;
+    transition: var(--transition);
+}
+
+.hero-btn-primary {
+    background: var(--brand-blue);
+    font-weight: 700;
+    box-shadow: 0 4px 15px var(--brand-blue-glow);
+}
+
+.hero-btn-primary:hover {
+    background: var(--brand-blue-hover);
+    transform: translateY(-2px);
+}
+
+.hero-btn-secondary {
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    font-weight: 600;
+}
+
+.hero-btn-secondary:hover {
+    border-color: rgba(255, 255, 255, 0.6);
+    transform: translateY(-2px);
+}
+
+.hero-stats {
+    display: flex;
+    gap: clamp(1.5rem, 3vw, 4rem);
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.stat-item h3 {
+    font-size: clamp(1.8rem, 2.5vw, 2.8rem);
+    font-weight: 800;
+    color: #3b82f6;
+}
+
+.stat-item p {
+    font-size: clamp(0.8rem, 1vw, 1rem);
+    color: #cbd5e1;
+    margin: 0;
+}
+
+/* --- ZÁHLAVÍ PODSTRÁNEK --- */
+.page-hero {
+    padding: calc(var(--header-height) + clamp(3rem, 6vw, 5rem)) var(--side) clamp(3rem, 5vw, 4.5rem);
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.page-hero-inner {
+    max-width: 800px;
+    margin: 0 auto;
+    animation: fadeInUp 0.8s ease-out;
+}
+
+.page-hero h1 {
+    font-size: clamp(2rem, 4vw, 3.4rem);
+    font-weight: 800;
+    letter-spacing: -1px;
+    line-height: 1.15;
+    margin-bottom: 0.9rem;
+}
+
+.page-hero p {
+    color: #cbd5e1;
+    max-width: 680px;
+    margin: 0 auto;
+    font-size: clamp(1rem, 1.2vw, 1.2rem);
+}
+
+/* --- SEKČNÍ HLAVIČKY --- */
+.section-header {
+    text-align: center;
+    max-width: 750px;
+    margin: clamp(2.5rem, 5vw, 4.5rem) auto clamp(1.8rem, 3vw, 3rem) auto;
+    padding: 0 1rem;
+}
+
+.section-subtitle {
+    color: var(--brand-blue);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: clamp(0.75rem, 1vw, 0.9rem);
+    margin-bottom: 0.5rem;
+    display: block;
+}
+
+.section-title {
+    font-size: clamp(1.8rem, 3vw, 2.8rem);
+    font-weight: 800;
+    color: #0f172a;
+    letter-spacing: -0.5px;
+}
+
+.section-lead {
+    color: #475569;
+    font-size: clamp(0.95rem, 1.1vw, 1.1rem);
+    margin-top: 0.8rem;
+}
+
+/* --- TMAVÉ DLAŽDICE --- */
+.dark-card-container {
+    background: var(--card-dark);
+    border-radius: clamp(18px, 2.5vw, 28px);
+    padding: clamp(2rem, 4vw, 4.5rem) clamp(1.5rem, 4vw, 4.5rem);
+    color: white;
+    box-shadow: 0 20px 40px rgba(17, 24, 39, 0.08);
+    border: 1px solid var(--border-card);
+    margin: 0 var(--side) clamp(2.5rem, 4vw, 4.5rem);
+}
+
+.card-title {
+    font-size: clamp(1.4rem, 2vw, 2rem);
+    margin-bottom: 1rem;
+    color: white;
+    line-height: 1.25;
+}
+
+.card-text {
+    color: var(--text-muted);
+    margin-bottom: 1.2rem;
+    font-size: clamp(0.9rem, 1vw, 1.05rem);
+    line-height: 1.7;
+}
+
+.check-list {
+    list-style: none;
+}
+
+.check-list li {
+    margin-bottom: 10px;
+    color: #e2e8f0;
+    font-weight: 600;
+    font-size: clamp(0.85rem, 1vw, 1rem);
+    display: flex;
+    gap: 10px;
+    align-items: baseline;
+}
+
+.check-list li i {
+    color: #60a5fa;
+}
+
+/* --- VÝZVA K AKCI --- */
+.cta-band {
+    text-align: center;
+}
+
+.cta-band h2 {
+    font-size: clamp(1.5rem, 2.5vw, 2.2rem);
+    font-weight: 800;
+    margin-bottom: 0.6rem;
+    line-height: 1.25;
+}
+
+.cta-band p {
+    color: var(--text-muted);
+    max-width: 620px;
+    margin: 0 auto 1.8rem;
+}
+
+.cta-band .hero-btns {
+    justify-content: center;
+}
+
+/* --- KARTY SLUŽEB --- */
+.services-grid,
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(clamp(280px, 25vw, 380px), 1fr));
+    gap: clamp(1.2rem, 2vw, 2.2rem);
+    margin: 0 var(--side) clamp(2.5rem, 4vw, 4.5rem);
+}
+
+.service-card {
+    background: var(--card-dark);
+    padding: clamp(2rem, 3vw, 3.2rem) clamp(1.5rem, 2.5vw, 2.5rem);
+    border-radius: clamp(18px, 2vw, 24px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.05);
+    border: 1px solid var(--border-card);
+    transition: var(--transition);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+}
+
+.service-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 40px rgba(0, 86, 210, 0.25);
+    border-color: rgba(0, 86, 210, 0.5);
+}
+
+.service-icon {
+    width: clamp(50px, 4vw, 65px);
+    height: clamp(50px, 4vw, 65px);
+    background: rgba(0, 86, 210, 0.2);
+    color: #60a5fa;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: clamp(1.3rem, 2vw, 1.8rem);
+    margin-bottom: 1.8rem;
+    border: 1px solid rgba(0, 86, 210, 0.3);
+    transition: var(--transition);
+}
+
+.service-card:hover .service-icon {
+    background: var(--brand-blue);
+    color: white;
+    transform: scale(1.05);
+}
+
+.service-card h3 {
+    font-size: clamp(1.2rem, 1.5vw, 1.5rem);
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: white;
+}
+
+.service-card p {
+    color: var(--text-muted);
+    font-size: clamp(0.9rem, 1vw, 1.05rem);
+    line-height: 1.7;
+}
+
+/* Odkaz „Zobrazit více“ na kartách rozcestníku */
+.card-more {
+    margin-top: auto;
+    padding-top: 1.4rem;
+    color: #60a5fa;
+    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.service-card:hover .card-more i {
+    transform: translateX(4px);
+}
+
+.card-more i {
+    transition: var(--transition);
+}
+
+/* --- JAK PRACUJEME --- */
+.steps-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: clamp(1.2rem, 2vw, 2rem);
+}
+
+.step-num {
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    background: var(--brand-blue);
+    color: white;
+    font-weight: 800;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.1rem;
+    box-shadow: 0 4px 15px var(--brand-blue-glow);
+}
+
+.step h4 {
+    color: white;
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 0.4rem;
+}
+
+.step p {
+    color: var(--text-muted);
+    font-size: 0.92rem;
+    line-height: 1.6;
+}
+
+/* --- REFERENCE / POROVNÁVAČ --- */
+.case-study {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(2rem, 4vw, 4rem);
+    align-items: center;
+}
+
+.case-tag {
+    display: inline-block;
+    background: rgba(0, 86, 210, 0.25);
+    color: #60a5fa;
+    border: 1px solid rgba(0, 86, 210, 0.4);
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-weight: 700;
+    font-size: 0.8rem;
+    margin-bottom: 1.2rem;
+    width: fit-content;
+}
+
+.before-after-container {
+    position: relative;
+    width: 100%;
+    height: clamp(280px, 30vw, 420px);
+    border-radius: 20px;
+    overflow: hidden;
+    user-select: none;
+    touch-action: pan-y;
+    background: #283548;
+    border: 1px solid var(--border-card);
+    cursor: ew-resize;
+}
+
+.ba-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+}
+
+.ba-before {
+    background-image: url('Pred.JPG');
+    width: 50%;
+    z-index: 2;
+    border-right: 3px solid white;
+    box-shadow: 5px 0 20px rgba(0, 0, 0, 0.3);
+}
+
+.ba-after {
+    background-image: url('Po.JPEG');
+    z-index: 1;
+}
+
+.ba-label {
+    position: absolute;
+    bottom: 15px;
+    padding: 6px 14px;
+    background: rgba(17, 24, 39, 0.85);
+    color: white;
+    font-size: 0.8rem;
+    font-weight: 700;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    z-index: 3;
+    transform: translateX(-50%);
+    white-space: nowrap;
+    pointer-events: none;
+    transition: opacity 0.2s ease-out;
+}
+
+.ba-label-before { left: 25%; }
+.ba-label-after { left: 75%; }
+
+.ba-slider-handle {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 44px;
+    height: 44px;
+    background: white;
+    border-radius: 50%;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    z-index: 4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--brand-blue);
+    font-size: 1.1rem;
+}
+
+/* --- KARTY PROJEKTŮ --- */
+.project-card {
+    background: var(--card-dark);
+    border-radius: clamp(18px, 2vw, 24px);
+    border: 1px solid var(--border-card);
+    overflow: hidden;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    transition: var(--transition);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.05);
+}
+
+.project-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 40px rgba(0, 86, 210, 0.25);
+    border-color: rgba(0, 86, 210, 0.5);
+}
+
+/* Když fotka chybí, zobrazí se ikona */
+.project-img {
+    position: relative;
+    height: 210px;
+    background: linear-gradient(135deg, #283548 0%, #1a2436 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(96, 165, 250, 0.45);
+    font-size: 3rem;
+    border-bottom: 1px solid var(--border-card);
+}
+
+.project-img img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.project-body {
+    padding: clamp(1.5rem, 2.2vw, 2rem);
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.project-body .case-tag {
+    margin-bottom: 0.9rem;
+}
+
+.project-body h3 {
+    font-size: clamp(1.1rem, 1.4vw, 1.35rem);
+    font-weight: 700;
+    margin-bottom: 0.7rem;
+    line-height: 1.3;
+}
+
+.project-body p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    line-height: 1.65;
+}
+
+/* --- O NÁS --- */
+.about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(2rem, 4vw, 4rem);
+    align-items: center;
+}
+
+.about-features {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+}
+
+.about-feature-item {
+    background: var(--card-inner);
+    padding: 1.2rem;
+    border-radius: 16px;
+    border: 1px solid var(--border-card);
+}
+
+.about-feature-item i {
+    color: #60a5fa;
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    display: block;
+}
+
+.about-feature-item h4 {
+    color: white;
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 0.3rem;
+}
+
+.about-feature-item p {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+}
+
+/* --- TÝM --- */
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+}
+
+.team-card {
+    display: flex;
+    align-items: center;
+    gap: 1.4rem;
+    background: var(--card-inner);
+    border: 1px solid var(--border-card);
+    border-radius: 18px;
+    padding: 1.6rem 1.8rem;
+}
+
+.team-avatar {
+    width: 88px;
+    height: 88px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--brand-blue) 0%, #3b82f6 100%);
+    color: white;
+    font-weight: 800;
+    font-size: 1.6rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    overflow: hidden;
+    position: relative;
+}
+
+.team-avatar img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.team-card h4 {
+    color: white;
+    font-size: 1.15rem;
+    font-weight: 700;
+}
+
+.team-role {
+    color: #60a5fa;
+    font-size: 0.82rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 0.3rem;
+}
+
+.team-card p {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    line-height: 1.55;
+}
+
+/* --- KONTAKT A FORMULÁŘ --- */
+.contact-container {
+    margin: 0 var(--side) clamp(2.5rem, 4vw, 4.5rem);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(1.5rem, 3vw, 3rem);
+    align-items: stretch;
+}
+
+.contact-info-box,
+.contact-form-box {
+    background: var(--card-dark);
+    border-radius: clamp(18px, 2.5vw, 28px);
+    padding: clamp(2rem, 3.5vw, 3.5rem);
+    color: white;
+    border: 1px solid var(--border-card);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    box-shadow: 0 20px 40px rgba(17, 24, 39, 0.08);
+}
+
+.contact-info-card {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    margin-top: 1.2rem;
+}
+
+.contact-label {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+}
+
+.contact-info-card a {
+    color: white;
+    font-weight: 700;
+    text-decoration: none;
+    font-size: clamp(1.05rem, 1.2vw, 1.25rem);
+}
+
+.contact-icon {
+    width: 50px;
+    height: 50px;
+    background: rgba(0, 86, 210, 0.2);
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+    color: #60a5fa;
+    border: 1px solid rgba(0, 86, 210, 0.4);
+    flex-shrink: 0;
+}
+
+.company-info {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.company-info strong {
+    display: block;
+    margin-bottom: 0.3rem;
+    color: #f1f5f9;
+    font-weight: 600;
+}
+
+.company-info p {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.company-info i {
+    color: #60a5fa;
+}
+
+.contact-form-box h3 {
+    font-size: clamp(1.4rem, 2vw, 2rem);
+    font-weight: 800;
+    margin-bottom: 0.4rem;
+}
+
+.contact-form-box > p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    margin-bottom: 1.8rem;
+}
+
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.4rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.form-group label {
+    color: #ffffff;
+    font-size: 0.88rem;
+    font-weight: 700;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    background: #ffffff;
+    border: 1px solid #cbd5e1;
+    border-radius: 12px;
+    padding: 0.95rem 1.1rem;
+    color: #0f172a;
+    font-size: 0.95rem;
+    transition: var(--transition);
+    outline: none;
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+    color: #64748b;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    border-color: #0056d2;
+    box-shadow: 0 0 0 4px rgba(0, 86, 210, 0.2);
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 140px;
+}
+
+.submit-btn {
+    background: var(--brand-blue);
+    color: #ffffff;
+    border: none;
+    padding: 1rem 1.8rem;
+    border-radius: 12px;
+    font-size: 0.95rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: var(--transition);
+    box-shadow: 0 4px 15px var(--brand-blue-glow);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+}
+
+.submit-btn:hover {
+    background: var(--brand-blue-hover);
+    transform: translateY(-2px);
+}
+
+.submit-btn:disabled {
+    cursor: not-allowed;
+    transform: none;
+}
+
+.form-status {
+    margin-top: 1rem;
+    padding: 0.8rem 1rem;
+    border-radius: 10px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    display: none;
+}
+
+.form-status.error {
+    display: block;
+    background: rgba(239, 68, 68, 0.15);
+    color: #f87171;
+    border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+/* --- PATIČKA --- */
+footer {
+    background: #0b0f19;
+    color: #64748b;
+    text-align: center;
+    padding: 3rem 2rem 2.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    font-size: 0.9rem;
+}
+
+.footer-nav {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.6rem 1.8rem;
+    margin-bottom: 1.8rem;
+}
+
+.footer-nav a {
+    color: #94a3b8;
+    text-decoration: none;
+    font-weight: 600;
+    transition: var(--transition);
+}
+
+.footer-nav a:hover {
+    color: #ffffff;
+}
+
+.social-links {
+    display: flex;
+    justify-content: center;
+    gap: 2.2rem;
+    margin-bottom: 2rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.social-icon {
+    color: #ffffff;
+    font-size: 1.8rem;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    opacity: 0.85;
+    width: 30px;
+    height: 30px;
+}
+
+.social-icon:hover {
+    color: #3b82f6;
+    transform: translateY(-3px);
+    opacity: 1;
+}
+
+/* --- ANIMACE --- */
+.reveal {
+    opacity: 0;
+    transform: translateY(30px) scale(0.98);
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.6s ease-out;
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: none;
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: none; }
+}
+
+/* ================================================
+   GALERIE
+   ================================================ */
+/* Jedno album = jedna zakázka */
+.gallery-album {
+    background: var(--card-dark);
+    border: 1px solid var(--border-card);
+    border-radius: clamp(18px, 2vw, 24px);
+    padding: clamp(1.4rem, 2.4vw, 2.4rem);
+    margin: 0 var(--side) clamp(1.5rem, 2.5vw, 2.5rem);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.05);
+}
+
+/* Album bez jediné fotky se nezobrazí */
+.gallery-album:not(:has(.gallery-item)) {
+    display: none;
+}
+
+.gallery-album-header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.4rem 1.5rem;
+    margin-bottom: clamp(1rem, 1.6vw, 1.6rem);
+}
+
+.gallery-album-header .case-tag {
+    margin-bottom: 0.6rem;
+}
+
+.gallery-album-header h3 {
+    color: white;
+    font-size: clamp(1.15rem, 1.5vw, 1.45rem);
+    font-weight: 700;
+}
+
+.gallery-album-header p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    margin-top: 0.3rem;
+}
+
+.gallery-album-link {
+    color: #60a5fa;
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.gallery-album-link:hover {
+    color: white;
+}
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(clamp(220px, 20vw, 300px), 1fr));
+    gap: clamp(0.8rem, 1.2vw, 1.2rem);
+}
+
+.gallery-item {
+    position: relative;
+    aspect-ratio: 4 / 3;
+    border-radius: clamp(14px, 1.6vw, 20px);
+    overflow: hidden;
+    border: 1px solid var(--border-card);
+    background: var(--card-dark);
+    cursor: zoom-in;
+    padding: 0;
+    transition: var(--transition);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.05);
+}
+
+.gallery-item:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px rgba(0, 86, 210, 0.25);
+    border-color: rgba(0, 86, 210, 0.5);
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.gallery-caption {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 1.6rem 1rem 0.8rem;
+    background: linear-gradient(transparent, rgba(17, 24, 39, 0.85));
+    color: white;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-align: left;
+}
+
+.lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+    background: rgba(10, 15, 25, 0.92);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 2rem 5rem;
+}
+
+.lightbox.active {
+    display: flex;
+}
+
+.lightbox img {
+    max-width: 100%;
+    max-height: 82vh;
+    border-radius: 12px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+.lightbox-caption {
+    color: var(--text-muted);
+    font-weight: 600;
+}
+
+.lightbox-btn {
+    position: absolute;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid var(--border-card);
+    color: white;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.lightbox-btn:hover {
+    background: var(--brand-blue);
+}
+
+.lightbox-close { top: 1.5rem; right: 1.5rem; }
+.lightbox-prev { left: 1.5rem; top: 50%; transform: translateY(-50%); }
+.lightbox-next { right: 1.5rem; top: 50%; transform: translateY(-50%); }
+
+/* ================================================
+   REFERENCE – ROZDĚLENÍ NA REALIZACE A PROJEKCE
+   ================================================ */
+.category-nav {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    margin-top: 2rem;
+}
+
+.category-nav a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.7rem 1.4rem;
+    border-radius: 50px;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    color: white;
+    font-weight: 700;
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+.category-nav a:hover {
+    border-color: rgba(255, 255, 255, 0.6);
+    transform: translateY(-2px);
+}
+
+.category-count {
+    background: var(--brand-blue);
+    border-radius: 20px;
+    padding: 1px 9px;
+    font-size: 0.8rem;
+}
+
+/* Kotvy sekcí nesmí zajet pod pevnou hlavičku */
+.category-section {
+    scroll-margin-top: var(--header-height);
+}
+
+.category-section + .category-section {
+    border-top: 1px solid rgba(15, 23, 42, 0.08);
+}
+
+/* ================================================
+   DETAIL ZAKÁZKY
+   ================================================ */
+/* Celá karta v Referencích je proklik na detail */
+.project-card {
+    position: relative;
+}
+
+.project-link {
+    margin-top: auto;
+    padding-top: 1.1rem;
+    color: #60a5fa;
+    font-weight: 700;
+    font-size: 0.9rem;
+    text-decoration: none;
+}
+
+.project-link::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+}
+
+.project-card:hover .project-link {
+    color: white;
+}
+
+/* Zakázka bez fotek: sekce s fotkami se nezobrazí */
+.detail-photos:not(:has(.gallery-item, .before-after-container)) .section-header {
+    display: none;
+}
+
+.back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #60a5fa;
+    font-weight: 600;
+    text-decoration: none;
+    margin-top: 1.5rem;
+}
+
+.back-link:hover {
+    color: white;
+}
+
+.detail-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: clamp(2rem, 4vw, 4rem);
+    align-items: start;
+}
+
+.detail-grid h3 {
+    color: white;
+    font-size: 1.1rem;
+    margin: 1.6rem 0 0.9rem;
+}
+
+.facts-list {
+    background: var(--card-inner);
+    border: 1px solid var(--border-card);
+    border-radius: 18px;
+    padding: clamp(1.2rem, 2vw, 1.8rem);
+}
+
+.facts-list h3 {
+    margin-top: 0;
+}
+
+.facts-list dl {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 0.75rem 1.2rem;
+}
+
+.facts-list dt {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+.facts-list dd {
+    color: white;
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+/* ================================================
+   RESPONZIVITA
+   ================================================ */
+@media (min-width: 1441px) {
+    .dark-card-container, .services-grid, .projects-grid, .contact-container {
+        margin-left: auto;
+        margin-right: auto;
+        max-width: 1440px;
+    }
+}
+
+@media (max-width: 1024px) {
+    :root {
+        --side: 5%;
+    }
+    .case-study, .about-grid, .contact-container, .detail-grid {
+        grid-template-columns: 1fr;
+    }
+    .steps-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --header-height: 80px;
+        --side: 4%;
+    }
+
+    .logo-img {
+        height: clamp(60px, 8vw, 72px);
+    }
+
+    .header-cta {
+        display: none;
+    }
+
+    nav {
+        left: 0;
+        right: 0;
+        width: 100%;
+        border-left: none;
+        border-right: none;
+        border-radius: 0 0 18px 18px;
+        padding: 0.6rem 1.5rem 1.5rem;
+    }
+
+    .about-features, .team-grid, .steps-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .hero {
+        min-height: auto;
+        padding-top: calc(var(--header-height) + 2.5rem);
+    }
+
+    .hero-stats {
+        flex-wrap: wrap;
+        gap: 1.5rem;
+    }
+
+    .hero-btns {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .hero-btns a {
+        width: 100%;
+    }
+
+    .services-grid, .projects-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .team-card {
+        padding: 1.3rem;
+    }
+
+    .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .gallery-caption {
+        font-size: 0.75rem;
+        padding: 1.2rem 0.6rem 0.5rem;
+    }
+}
+
+    </style>
+</head>
+<body>
+
+    <!-- HLAVIČKA -->
+    <header>
+        <div class="header-content">
+            <a href="index.html" class="logo-container" title="OWAX – Úvod">
+                <img src="logo.png" alt="OWAX Logo" class="logo-img">
+            </a>
+
+            <div class="header-actions">
+                <a href="galerie.html" class="nav-btn nav-btn-outline header-cta">Galerie</a>
+                <a href="kontakt.html" class="nav-btn header-cta">Nezávazná konzultace</a>
+                <button class="hamburger" id="hamburger-btn" aria-label="Otevřít menu" aria-expanded="false" aria-controls="nav-menu">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
+
+            <nav id="nav-menu">
+                <a href="index.html" class="nav-link">Úvod</a>
+                <a href="sluzby.html" class="nav-link">Služby</a>
+                <a href="reference.html" class="nav-link active">Reference</a>
+                <a href="galerie.html" class="nav-link">Galerie</a>
+                <a href="o-nas.html" class="nav-link">O nás</a>
+                <a href="kontakt.html" class="nav-link">Kontakt</a>
+
+                <div class="menu-contacts">
+                    <a href="tel:+420723557807" class="menu-contact-item">
+                        <div class="contact-icon"><i class="fa-solid fa-phone"></i></div>
+                        +420 723 557 807
+                    </a>
+                    <a href="mailto:info@owax.cz" class="menu-contact-item">
+                        <div class="contact-icon"><i class="fa-solid fa-envelope"></i></div>
+                        info@owax.cz
+                    </a>
+                </div>
+
+                <div class="menu-socials">
+                    <a href="https://www.instagram.com/owaxproducts?stkn=czc5c2Y4d3oxOHNx" target="_blank" rel="noopener noreferrer" class="social-icon" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ZÁHLAVÍ STRÁNKY -->
+    <section class="page-hero">
+        <div class="page-hero-inner">
+            <div class="hero-badge"><i class="fa-solid fa-tree"></i> Projekce · Návrh</div>
+            <h1>Návrh zahrady <span>mateřské školy</span></h1>
+            <p>Koncepční návrh venkovního prostoru, kde si děti mohou bezpečně hrát a pohybovat se.</p>
+        </div>
+    </section>
+
+    <!-- O ZAKÁZCE -->
+    <section>
+        <div class="dark-card-container reveal">
+            <div class="detail-grid">
+                <div>
+                    <span class="case-tag">Projekce · Návrh</span>
+                    <h2 class="card-title">O zakázce</h2>
+                    <p class="card-text">
+                        Pro firemní mateřskou školu jsme připravili koncepční návrh venkovního prostoru. Cílem bylo vytvořit zahradu, která bude pro děti bezpečná, praktická pro provoz školky a zároveň podnětná pro hru a pohyb.
+                    </p>
+                    <p class="card-text">
+                        Návrh rozděluje zahradu na zóny pro aktivní pohyb, klidnější hru a odpočinek a počítá s bezpečnými povrchy a prvky vhodnými pro předškolní děti.
+                    </p>
+                    <h3>Co jsme dělali</h3>
+                    <ul class="check-list">
+                        <li><i class="fa-solid fa-check"></i> Analýza prostoru a požadavků provozu školky</li>
+                        <li><i class="fa-solid fa-check"></i> Koncepční návrh rozvržení zahrady</li>
+                        <li><i class="fa-solid fa-check"></i> Návrh herních a pohybových zón</li>
+                        <li><i class="fa-solid fa-check"></i> Důraz na bezpečnost a vhodné povrchy</li>
+                    </ul>
+                </div>
+
+                <div class="facts-list">
+                    <h3>Parametry</h3>
+                    <dl>
+                            <dt>Typ zakázky</dt><dd>Projekce – koncepční návrh</dd>
+                            <dt>Objekt</dt><dd>Zahrada firemní MŠ</dd>
+                            <dt>Uživatelé</dt><dd>Děti předškolního věku</dd>
+                            <dt>Důraz</dt><dd>Bezpečnost, funkčnost, hra</dd>
+                    </dl>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOTKY ZAKÁZKY – fotky nahrajte do složky "foto" pod uvedeným názvem.
+         Dokud žádná fotka není, sekce se nezobrazí. Další fotku přidáte zkopírováním řádku <button>. -->
+    <section class="detail-photos">
+        <div class="section-header reveal">
+            <span class="section-subtitle">Fotodokumentace</span>
+            <h2 class="section-title">Fotky ze zakázky</h2>
+        </div>
+
+        <div class="gallery-album reveal">
+            <div class="gallery-grid">
+                    <button class="gallery-item"><img src="foto/skolka.jpg" alt="Návrh zahrady firemní mateřské školy" loading="lazy" onerror="this.parentElement.remove()"><span class="gallery-caption">Zahrada školky</span></button>
+            </div>
+        </div>
+
+        <div style="margin: 0 var(--side) clamp(2.5rem, 4vw, 4.5rem);">
+            <a href="reference.html#projekce" class="back-link"><i class="fa-solid fa-arrow-left"></i> Zpět na všechny reference</a>
+        </div>
+    </section>
+
+    <!-- ZVĚTŠENÁ FOTKA -->
+    <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Zvětšená fotka">
+        <button class="lightbox-btn lightbox-close" id="lightbox-close" aria-label="Zavřít"><i class="fa-solid fa-xmark"></i></button>
+        <button class="lightbox-btn lightbox-prev" id="lightbox-prev" aria-label="Předchozí fotka"><i class="fa-solid fa-chevron-left"></i></button>
+        <img id="lightbox-img" src="" alt="">
+        <div class="lightbox-caption" id="lightbox-caption"></div>
+        <button class="lightbox-btn lightbox-next" id="lightbox-next" aria-label="Další fotka"><i class="fa-solid fa-chevron-right"></i></button>
+    </div>
+
+    <!-- VÝZVA -->
+    <section>
+        <div class="dark-card-container cta-band reveal">
+            <h2>Chcete podobný výsledek?</h2>
+            <p>Rádi se podíváme i na váš projekt. Ozvěte se nám a domluvíme nezávaznou konzultaci.</p>
+            <div class="hero-btns">
+                <a href="kontakt.html" class="hero-btn hero-btn-primary">Kontaktujte nás</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- PATIČKA -->
+    <footer>
+        <div class="footer-nav">
+            <a href="index.html">Úvod</a>
+            <a href="sluzby.html">Služby</a>
+            <a href="reference.html">Reference</a>
+            <a href="o-nas.html">O nás</a>
+            <a href="kontakt.html">Kontakt</a>
+        </div>
+        <div class="social-links">
+            <a href="https://www.instagram.com/owaxproducts?stkn=czc5c2Y4d3oxOHNx" target="_blank" rel="noopener noreferrer" class="social-icon" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+        </div>
+        <p>&copy; 2026 OWAX. Všechna práva vyhrazena.</p>
+    </footer>
+
+    <script>
+/* ================================================
+   OWAX – společné skripty pro všechny stránky
+   ================================================ */
+
+/* === BURGER MENU === */
+const hamburgerBtn = document.getElementById('hamburger-btn');
+const navMenu = document.getElementById('nav-menu');
+
+function setMenu(open) {
+    navMenu.classList.toggle('active', open);
+    hamburgerBtn.classList.toggle('active', open);
+    hamburgerBtn.setAttribute('aria-expanded', open);
+    hamburgerBtn.setAttribute('aria-label', open ? 'Zavřít menu' : 'Otevřít menu');
+
+    const icon = hamburgerBtn.querySelector('i');
+    icon.classList.toggle('fa-bars', !open);
+    icon.classList.toggle('fa-xmark', open);
+}
+
+hamburgerBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    setMenu(!navMenu.classList.contains('active'));
+});
+
+// Zavření kliknutím mimo menu
+document.addEventListener('click', (e) => {
+    if (navMenu.classList.contains('active') && !navMenu.contains(e.target)) {
+        setMenu(false);
+    }
+});
+
+// Zavření klávesou Esc
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') setMenu(false);
+});
+
+/* === REVEAL ANIMACE === */
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        entry.target.classList.toggle('active', entry.isIntersecting);
+    });
+}, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+/* === POSUVNÍK PŘED / PO (jen na stránce Reference) === */
+const slider = document.getElementById('ba-slider');
+
+if (slider) {
+    const beforeImg = document.getElementById('ba-before');
+    const handle = document.getElementById('ba-handle');
+    const labelBefore = slider.querySelector('.ba-label-before');
+    const labelAfter = slider.querySelector('.ba-label-after');
+
+    let isDown = false;
+    let ticking = false;
+
+    // Nastaví posuvník na pozici v procentech (0–100)
+    function setSliderPercent(percent) {
+        percent = Math.min(100, Math.max(0, percent));
+
+        beforeImg.style.width = percent + '%';
+        handle.style.left = percent + '%';
+
+        // Popisky drží uprostřed své poloviny
+        labelBefore.style.left = (percent / 2) + '%';
+        labelAfter.style.left = (percent + (100 - percent) / 2) + '%';
+
+        // U kraje popisky schováme
+        labelBefore.style.opacity = percent < 12 ? '0' : '1';
+        labelAfter.style.opacity = percent > 88 ? '0' : '1';
+    }
+
+    function updateSlider(clientX) {
+        const rect = slider.getBoundingClientRect();
+        if (!rect.width) return;
+        setSliderPercent(((clientX - rect.left) / rect.width) * 100);
+    }
+
+    function getClientX(e) {
+        if (e.touches && e.touches.length) return e.touches[0].clientX;
+        return e.clientX;
+    }
+
+    function onMove(e) {
+        if (!isDown) return;
+        const clientX = getClientX(e);
+        if (typeof clientX !== 'number') return;
+
+        if (!ticking) {
+            window.requestAnimationFrame(() => {
+                updateSlider(clientX);
+                ticking = false;
+            });
+            ticking = true;
+        }
+    }
+
+    function onStart(e) {
+        isDown = true;
+        const clientX = getClientX(e);
+        if (typeof clientX === 'number') updateSlider(clientX);
+    }
+
+    function onEnd() {
+        isDown = false;
+    }
+
+    slider.addEventListener('mousedown', (e) => {
+        e.preventDefault();
+        onStart(e);
+    });
+    slider.addEventListener('touchstart', onStart, { passive: true });
+    window.addEventListener('mousemove', onMove);
+    slider.addEventListener('touchmove', onMove, { passive: true });
+    window.addEventListener('mouseup', onEnd);
+    window.addEventListener('touchend', onEnd);
+    window.addEventListener('touchcancel', onEnd);
+
+    setSliderPercent(50);
+}
+
+/* === ODESÍLÁNÍ FORMULÁŘE (jen na stránce Kontakt) === */
+const contactForm = document.getElementById('contact-form');
+
+if (contactForm) {
+    const submitBtn = document.getElementById('submit-btn');
+    const formStatus = document.getElementById('form-status');
+
+    contactForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        const originalBtnHtml = submitBtn.innerHTML;
+
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Odesílám...';
+        formStatus.className = 'form-status';
+
+        fetch(contactForm.action, {
+            method: 'POST',
+            body: new FormData(contactForm),
+            headers: { 'Accept': 'application/json' }
+        })
+        .then(response => {
+            if (!response.ok) throw new Error('Chyba odeslání');
+
+            submitBtn.style.backgroundColor = 'var(--brand-green)';
+            submitBtn.style.boxShadow = '0 4px 15px rgba(34, 197, 94, 0.4)';
+            submitBtn.innerHTML = '<i class="fa-solid fa-circle-check"></i> Poptávka úspěšně odeslána';
+            contactForm.reset();
+        })
+        .catch(() => {
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = originalBtnHtml;
+            formStatus.textContent = '✕ Při odesílání došlo k chybě. Zkuste to prosím znovu nebo nám zavolejte.';
+            formStatus.className = 'form-status error';
+        });
+    });
+}
+
+/* === GALERIE – zvětšení fotky (jen na stránce Galerie) === */
+const lightbox = document.getElementById('lightbox');
+
+if (lightbox) {
+    const lightboxImg = document.getElementById('lightbox-img');
+    const lightboxCaption = document.getElementById('lightbox-caption');
+    let current = 0;
+
+    let album = null;
+
+    // Listuje se jen fotkami otevřeného alba (chybějící fotky se samy odstraní)
+    const items = () => album ? [...album.querySelectorAll('.gallery-item')] : [];
+
+    function showPhoto(index) {
+        const list = items();
+        if (!list.length) return;
+        current = (index + list.length) % list.length;
+        const img = list[current].querySelector('img');
+        lightboxImg.src = img.src;
+        lightboxImg.alt = img.alt;
+        lightboxCaption.textContent = img.alt;
+    }
+
+    function closeLightbox() {
+        lightbox.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+
+    document.addEventListener('click', (e) => {
+        const item = e.target.closest('.gallery-item');
+        if (!item) return;
+        album = item.closest('.gallery-album');
+        showPhoto(items().indexOf(item));
+        lightbox.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    });
+
+    document.getElementById('lightbox-close').addEventListener('click', closeLightbox);
+    document.getElementById('lightbox-prev').addEventListener('click', () => showPhoto(current - 1));
+    document.getElementById('lightbox-next').addEventListener('click', () => showPhoto(current + 1));
+
+    // Kliknutí mimo fotku zavře
+    lightbox.addEventListener('click', (e) => {
+        if (e.target === lightbox) closeLightbox();
+    });
+
+    document.addEventListener('keydown', (e) => {
+        if (!lightbox.classList.contains('active')) return;
+        if (e.key === 'Escape') closeLightbox();
+        if (e.key === 'ArrowLeft') showPhoto(current - 1);
+        if (e.key === 'ArrowRight') showPhoto(current + 1);
+    });
+}
+
+    </script>
+</body>
+</html>

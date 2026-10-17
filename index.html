@@ -1378,6 +1378,11 @@ footer {
     color: white;
 }
 
+/* Zakázka bez fotek: sekce s fotkami se nezobrazí */
+.detail-photos:not(:has(.gallery-item, .before-after-container)) .section-header {
+    display: none;
+}
+
 .back-link {
     display: inline-flex;
     align-items: center;
