@@ -1428,6 +1428,26 @@ footer {
     box-shadow: 0 12px 30px rgba(0, 0, 0, 0.06);
 }
 
+/* Krok s více fotkami: fotky vedle sebe na místě jedné fotky */
+.timeline-card .timeline-photos {
+    grid-column: 1;
+    grid-row: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.6rem;
+}
+
+.timeline-step:nth-of-type(even) .timeline-photos {
+    grid-column: 3;
+}
+
+.timeline-card .timeline-photos .gallery-item,
+.timeline-step:nth-of-type(even) .timeline-photos .gallery-item {
+    grid-column: auto;
+    grid-row: auto;
+    aspect-ratio: 4 / 5;
+}
+
 /* Sudé kroky: fotka vpravo, text vlevo */
 .timeline-step:nth-of-type(even) .gallery-item {
     grid-column: 3;
@@ -1799,6 +1819,17 @@ footer {
     .timeline-step.no-photo .timeline-body {
         grid-row: 1;
         border-radius: 16px;
+    }
+
+    .timeline-step .timeline-photos,
+    .timeline-step:nth-of-type(even) .timeline-photos {
+        grid-column: 1;
+        grid-row: 1;
+    }
+
+    .timeline-card .timeline-photos .gallery-item,
+    .timeline-step:nth-of-type(even) .timeline-photos .gallery-item {
+        border-radius: 12px;
     }
 
     .timeline-num {

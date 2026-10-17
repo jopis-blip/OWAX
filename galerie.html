@@ -1428,6 +1428,26 @@ footer {
     box-shadow: 0 12px 30px rgba(0, 0, 0, 0.06);
 }
 
+/* Krok s více fotkami: fotky vedle sebe na místě jedné fotky */
+.timeline-card .timeline-photos {
+    grid-column: 1;
+    grid-row: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.6rem;
+}
+
+.timeline-step:nth-of-type(even) .timeline-photos {
+    grid-column: 3;
+}
+
+.timeline-card .timeline-photos .gallery-item,
+.timeline-step:nth-of-type(even) .timeline-photos .gallery-item {
+    grid-column: auto;
+    grid-row: auto;
+    aspect-ratio: 4 / 5;
+}
+
 /* Sudé kroky: fotka vpravo, text vlevo */
 .timeline-step:nth-of-type(even) .gallery-item {
     grid-column: 3;
@@ -1801,6 +1821,17 @@ footer {
         border-radius: 16px;
     }
 
+    .timeline-step .timeline-photos,
+    .timeline-step:nth-of-type(even) .timeline-photos {
+        grid-column: 1;
+        grid-row: 1;
+    }
+
+    .timeline-card .timeline-photos .gallery-item,
+    .timeline-step:nth-of-type(even) .timeline-photos .gallery-item {
+        border-radius: 12px;
+    }
+
     .timeline-num {
         top: 0.8rem;
         left: -2px;
@@ -1901,11 +1932,13 @@ footer {
                     <button class="gallery-item"><img src="foto/podbaba-prubeh-1.jpg" alt="Rekonstrukce bytu, Praha 6 – Podbaba: Původní stav po demontáži kuchyňské linky a obkladu" loading="lazy" onerror="this.parentElement.remove()"><span class="gallery-caption">1. Výchozí stav – demontovaná kuchyně</span></button>
                     <button class="gallery-item"><img src="foto/podbaba-prubeh-2.jpg" alt="Rekonstrukce bytu, Praha 6 – Podbaba: Zakrytí podlah a příprava prostoru před bouracími pracemi" loading="lazy" onerror="this.parentElement.remove()"><span class="gallery-caption">2. Příprava – zakrytí podlah</span></button>
                     <button class="gallery-item"><img src="foto/podbaba-prubeh-3.jpg" alt="Rekonstrukce bytu, Praha 6 – Podbaba: Nové rozvody elektroinstalace a vývody pro kuchyňskou linku" loading="lazy" onerror="this.parentElement.remove()"><span class="gallery-caption">3. Nové rozvody elektroinstalace</span></button>
-                    <button class="gallery-item"><img src="foto/podbaba-prubeh-4.jpg" alt="Rekonstrukce bytu, Praha 6 – Podbaba: Pokládka velkoformátové dlažby s nivelačním systémem" loading="lazy" onerror="this.parentElement.remove()"><span class="gallery-caption">4. Pokládka velkoformátové dlažby</span></button>
-                    <button class="gallery-item"><img src="foto/podbaba-prubeh-5.jpg" alt="Rekonstrukce bytu, Praha 6 – Podbaba: Nová velkoformátová dlažba v kuchyňském koutě navazující na parkety" loading="lazy" onerror="this.parentElement.remove()"><span class="gallery-caption">5. Nová dlažba v kuchyňském koutě</span></button>
-                    <button class="gallery-item"><img src="foto/podbaba-prubeh-6.jpg" alt="Rekonstrukce bytu, Praha 6 – Podbaba: Vyštukované a vymalované stěny s připravenými vývody pro kuchyň" loading="lazy" onerror="this.parentElement.remove()"><span class="gallery-caption">6. Hotové stěny a vývody pro kuchyň</span></button>
-                    <button class="gallery-item"><img src="foto/podbaba-prubeh-7.jpg" alt="Rekonstrukce bytu, Praha 6 – Podbaba: Obývací část bytu po vymalování" loading="lazy" onerror="this.parentElement.remove()"><span class="gallery-caption">7. Obývací část po malování</span></button>
-                    <button class="gallery-item"><img src="foto/podbaba-prubeh-8.jpg" alt="Rekonstrukce bytu, Praha 6 – Podbaba: Pohled od vstupu – prostor připravený pro montáž kuchyňské linky" loading="lazy" onerror="this.parentElement.remove()"><span class="gallery-caption">8. Připraveno pro montáž kuchyně</span></button>
+                    <button class="gallery-item"><img src="foto/podbaba-drazky-1.jpg" alt="Rekonstrukce bytu, Praha 6 – Podbaba: Zadělané drážky a otvory po osekání u okna" loading="lazy" onerror="this.parentElement.remove()"><span class="gallery-caption">4. Zadělání drážek po osekání</span></button>
+                    <button class="gallery-item"><img src="foto/podbaba-drazky-2.jpg" alt="Rekonstrukce bytu, Praha 6 – Podbaba: Zapravené drážky po elektroinstalaci v kuchyňském koutě" loading="lazy" onerror="this.parentElement.remove()"><span class="gallery-caption">4. Zadělání drážek po osekání</span></button>
+                    <button class="gallery-item"><img src="foto/podbaba-prubeh-4.jpg" alt="Rekonstrukce bytu, Praha 6 – Podbaba: Pokládka velkoformátové dlažby s nivelačním systémem" loading="lazy" onerror="this.parentElement.remove()"><span class="gallery-caption">5. Pokládka velkoformátové dlažby</span></button>
+                    <button class="gallery-item"><img src="foto/podbaba-prubeh-5.jpg" alt="Rekonstrukce bytu, Praha 6 – Podbaba: Nová velkoformátová dlažba v kuchyňském koutě navazující na parkety" loading="lazy" onerror="this.parentElement.remove()"><span class="gallery-caption">6. Nová dlažba v kuchyňském koutě</span></button>
+                    <button class="gallery-item"><img src="foto/podbaba-prubeh-6.jpg" alt="Rekonstrukce bytu, Praha 6 – Podbaba: Vyštukované a vymalované stěny s připravenými vývody pro kuchyň" loading="lazy" onerror="this.parentElement.remove()"><span class="gallery-caption">7. Hotové stěny a vývody pro kuchyň</span></button>
+                    <button class="gallery-item"><img src="foto/podbaba-prubeh-7.jpg" alt="Rekonstrukce bytu, Praha 6 – Podbaba: Obývací část bytu po vymalování" loading="lazy" onerror="this.parentElement.remove()"><span class="gallery-caption">8. Obývací část po malování</span></button>
+                    <button class="gallery-item"><img src="foto/podbaba-prubeh-8.jpg" alt="Rekonstrukce bytu, Praha 6 – Podbaba: Pohled od vstupu – prostor připravený pro montáž kuchyňské linky" loading="lazy" onerror="this.parentElement.remove()"><span class="gallery-caption">9. Připraveno pro montáž kuchyně</span></button>
                     <button class="gallery-item"><img src="Po.JPEG" alt="Rekonstrukce bytu, Praha 6 – Podbaba (po)" loading="lazy" onerror="this.parentElement.remove()"><span class="gallery-caption">Po – montáž kuchyně</span></button>
             </div>
         </div>
