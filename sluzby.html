@@ -2072,15 +2072,13 @@ footer {
     pointer-events: none;
 }
 
-/* Lišta po posunutí stránky zprůhlední a rozostří pozadí */
+/* Lišta po posunutí stránky dostane stín (plná barva – průhledné rozostření
+   v některých prohlížečích při posouvání problikávalo) */
 header {
-    transition: background 0.4s, box-shadow 0.4s, backdrop-filter 0.4s;
+    transition: box-shadow 0.4s;
 }
 
 header.scrolled {
-    background: rgba(17, 24, 39, 0.82);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
 }
 
