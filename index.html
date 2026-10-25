@@ -1858,7 +1858,7 @@ footer {
    ================================================ */
 .promo-video {
     display: grid;
-    grid-template-columns: 1.2fr 1fr;
+    grid-template-columns: 1fr 1fr;
     gap: clamp(2rem, 4vw, 4rem);
     align-items: center;
 }
@@ -1886,22 +1886,17 @@ footer {
     color: #60a5fa;
 }
 
-/* Video ve „vzhledu telefonu“ */
+/* Video – čtvercový výřez přes celou šířku sloupce.
+   Bez natočení a velké záře (to při přehrávání a posouvání problikávalo). */
 .promo-phone {
     position: relative;
-    justify-self: center;
-    width: min(100%, 320px);
-    aspect-ratio: 9 / 16;
-    border-radius: 34px;
-    padding: 10px;
-    background: linear-gradient(145deg, #334155, #0f172a);
-    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(255, 255, 255, 0.08), 0 0 60px rgba(0, 86, 210, 0.25);
-    transform: rotate(2deg);
-    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.promo-phone:hover {
-    transform: rotate(0deg) scale(1.02);
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    border-radius: 20px;
+    overflow: hidden;
+    background: #0f172a;
+    border: 1px solid var(--border-card);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
 }
 
 .promo-phone video {
@@ -1909,14 +1904,12 @@ footer {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    border-radius: 26px;
-    background: #0f172a;
 }
 
 .promo-badge {
     position: absolute;
-    top: 24px;
-    left: 24px;
+    top: 16px;
+    left: 16px;
     padding: 5px 12px;
     border-radius: 20px;
     background: rgba(17, 24, 39, 0.82);
@@ -1944,8 +1937,8 @@ footer {
     }
 
     .promo-phone {
-        width: min(100%, 280px);
-        transform: none;
+        max-width: 560px;
+        justify-self: center;
     }
 }
 
@@ -2693,6 +2686,43 @@ header.scrolled .logo-img {
                 <div class="stat-item">
                     <h3>1 partner</h3>
                     <p>Pro přípravu i realizaci</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROMO VIDEO – timelapse z realizace (video se přehrává samo, jen když je na obrazovce) -->
+    <section>
+        <div class="section-header reveal">
+            <span class="section-subtitle">Podívejte se, jak pracujeme</span>
+            <h2 class="section-title">Precizní práce v přímém přenosu</h2>
+        </div>
+
+        <div class="dark-card-container reveal">
+            <div class="promo-video">
+                <div>
+                    <span class="case-tag">Timelapse · Praha 6 — Podbaba</span>
+                    <h3 class="card-title">Obklad kuchyně za pár vteřin</h3>
+                    <p class="card-text">
+                        Hodiny pečlivé práce ve zrychleném záznamu. Obklad za novou kuchyňskou linkou pokládáme přesně v rovině, s rovnoměrnými spárami a čistým napojením na pracovní desku i skříňky.
+                    </p>
+                    <ul class="promo-points">
+                        <li><i class="fa-solid fa-check"></i> Přesnost na milimetry a čisté detaily</li>
+                        <li><i class="fa-solid fa-check"></i> Ochrana nábytku a podlah během prací</li>
+                        <li><i class="fa-solid fa-check"></i> Úklid po sobě – předáváme hotové</li>
+                    </ul>
+                    <div class="hero-btns">
+                        <a href="kontakt.html" class="hero-btn hero-btn-primary">Chci podobný výsledek</a>
+                        <a href="zakazka-byt-podbaba.html" class="hero-btn hero-btn-secondary">Celá zakázka</a>
+                    </div>
+                </div>
+
+                <div class="promo-phone">
+                    <video poster="video/podbaba-obklad-ctverec.jpg" muted loop playsinline preload="metadata" data-autoplay aria-label="Timelapse obkládání stěny za kuchyňskou linkou v Podbabě">
+                        <source src="video/podbaba-obklad-ctverec.webm" type="video/webm">
+                        <source src="video/podbaba-obklad-ctverec.mp4" type="video/mp4">
+                    </video>
+                    <span class="promo-badge"><i class="fa-solid fa-circle"></i> Timelapse</span>
                 </div>
             </div>
         </div>
