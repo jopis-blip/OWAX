@@ -1858,7 +1858,7 @@ footer {
    ================================================ */
 .promo-video {
     display: grid;
-    grid-template-columns: 1.2fr 1fr;
+    grid-template-columns: 1fr 1fr;
     gap: clamp(2rem, 4vw, 4rem);
     align-items: center;
 }
@@ -1886,22 +1886,17 @@ footer {
     color: #60a5fa;
 }
 
-/* Video ve „vzhledu telefonu“ */
+/* Video – čtvercový výřez přes celou šířku sloupce.
+   Bez natočení a velké záře (to při přehrávání a posouvání problikávalo). */
 .promo-phone {
     position: relative;
-    justify-self: center;
-    width: min(100%, 320px);
-    aspect-ratio: 9 / 16;
-    border-radius: 34px;
-    padding: 10px;
-    background: linear-gradient(145deg, #334155, #0f172a);
-    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(255, 255, 255, 0.08), 0 0 60px rgba(0, 86, 210, 0.25);
-    transform: rotate(2deg);
-    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.promo-phone:hover {
-    transform: rotate(0deg) scale(1.02);
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    border-radius: 20px;
+    overflow: hidden;
+    background: #0f172a;
+    border: 1px solid var(--border-card);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
 }
 
 .promo-phone video {
@@ -1909,14 +1904,12 @@ footer {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    border-radius: 26px;
-    background: #0f172a;
 }
 
 .promo-badge {
     position: absolute;
-    top: 24px;
-    left: 24px;
+    top: 16px;
+    left: 16px;
     padding: 5px 12px;
     border-radius: 20px;
     background: rgba(17, 24, 39, 0.82);
@@ -1944,8 +1937,8 @@ footer {
     }
 
     .promo-phone {
-        width: min(100%, 280px);
-        transform: none;
+        max-width: 560px;
+        justify-self: center;
     }
 }
 
@@ -2127,7 +2120,11 @@ header.scrolled .logo-img {
 
 .hero-slide.active {
     opacity: 1;
-    animation: hero-zoom 9s ease-out forwards;
+}
+
+/* Přiblížení běží i během prolnutí do další fotky – jinak by fotka na konci „cukla“ zpět */
+.hero-slide.zoom {
+    animation: hero-zoom 9s linear forwards;
 }
 
 @keyframes hero-zoom {
@@ -2879,12 +2876,14 @@ if (heroSlides) {
     }
 
     function show(i) {
-        slides[current].classList.remove('active');
+        const prev = slides[current];
+        prev.classList.remove('active');
+        setTimeout(() => { if (!prev.classList.contains('active')) prev.classList.remove('zoom'); }, 1800);
         if (slides[current].tagName === 'VIDEO') slides[current].pause();
         current = (i + slides.length) % slides.length;
         const s = slides[current];
         prepare(current);
-        s.classList.remove('active'); void s.offsetWidth; s.classList.add('active');
+        s.classList.remove('zoom'); void s.offsetWidth; s.classList.add('active', 'zoom');
         if (s.tagName === 'VIDEO') { s.currentTime = 0; s.play().catch(() => {}); }
         if (dotsBox) [...dotsBox.children].forEach((d, k) => d.classList.toggle('active', k === current));
         prepare((current + 1) % slides.length);
