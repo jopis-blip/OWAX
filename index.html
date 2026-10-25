@@ -1854,6 +1854,102 @@ footer {
 }
 
 /* ================================================
+   ÚVOD – PROMO VIDEO (timelapse)
+   ================================================ */
+.promo-video {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: clamp(2rem, 4vw, 4rem);
+    align-items: center;
+}
+
+.promo-video .card-text {
+    max-width: 520px;
+}
+
+.promo-points {
+    list-style: none;
+    margin: 1.4rem 0 1.8rem;
+    display: grid;
+    gap: 0.7rem;
+}
+
+.promo-points li {
+    display: flex;
+    gap: 0.7rem;
+    align-items: baseline;
+    color: #e2e8f0;
+    font-weight: 600;
+}
+
+.promo-points i {
+    color: #60a5fa;
+}
+
+/* Video ve „vzhledu telefonu“ */
+.promo-phone {
+    position: relative;
+    justify-self: center;
+    width: min(100%, 320px);
+    aspect-ratio: 9 / 16;
+    border-radius: 34px;
+    padding: 10px;
+    background: linear-gradient(145deg, #334155, #0f172a);
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(255, 255, 255, 0.08), 0 0 60px rgba(0, 86, 210, 0.25);
+    transform: rotate(2deg);
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.promo-phone:hover {
+    transform: rotate(0deg) scale(1.02);
+}
+
+.promo-phone video {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 26px;
+    background: #0f172a;
+}
+
+.promo-badge {
+    position: absolute;
+    top: 24px;
+    left: 24px;
+    padding: 5px 12px;
+    border-radius: 20px;
+    background: rgba(17, 24, 39, 0.82);
+    color: white;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    pointer-events: none;
+}
+
+.promo-badge i {
+    color: #ef4444;
+    margin-right: 5px;
+    animation: rec-blink 1.4s ease-in-out infinite;
+}
+
+@keyframes rec-blink {
+    50% { opacity: 0.2; }
+}
+
+@media (max-width: 1024px) {
+    .promo-video {
+        grid-template-columns: 1fr;
+    }
+
+    .promo-phone {
+        width: min(100%, 280px);
+        transform: none;
+    }
+}
+
+/* ================================================
    SLUŽBY – odkaz na ukázkovou zakázku
    ================================================ */
 .service-example {
@@ -2541,6 +2637,43 @@ header.scrolled .logo-img {
                 <div class="stat-item">
                     <h3>1 partner</h3>
                     <p>Pro přípravu i realizaci</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROMO VIDEO – timelapse z realizace (video se přehrává samo, jen když je na obrazovce) -->
+    <section>
+        <div class="section-header reveal">
+            <span class="section-subtitle">Podívejte se, jak pracujeme</span>
+            <h2 class="section-title">Precizní práce v přímém přenosu</h2>
+        </div>
+
+        <div class="dark-card-container reveal">
+            <div class="promo-video">
+                <div>
+                    <span class="case-tag">Timelapse · Praha 6 — Podbaba</span>
+                    <h3 class="card-title">Obklad kuchyně za pár vteřin</h3>
+                    <p class="card-text">
+                        Hodiny pečlivé práce ve zrychleném záznamu. Obklad za novou kuchyňskou linkou pokládáme přesně v rovině, s rovnoměrnými spárami a čistým napojením na pracovní desku i skříňky.
+                    </p>
+                    <ul class="promo-points">
+                        <li><i class="fa-solid fa-check"></i> Přesnost na milimetry a čisté detaily</li>
+                        <li><i class="fa-solid fa-check"></i> Ochrana nábytku a podlah během prací</li>
+                        <li><i class="fa-solid fa-check"></i> Úklid po sobě – předáváme hotové</li>
+                    </ul>
+                    <div class="hero-btns">
+                        <a href="kontakt.html" class="hero-btn hero-btn-primary">Chci podobný výsledek</a>
+                        <a href="zakazka-byt-podbaba.html" class="hero-btn hero-btn-secondary">Celá zakázka</a>
+                    </div>
+                </div>
+
+                <div class="promo-phone">
+                    <video poster="video/podbaba-obklad.jpg" muted loop playsinline preload="metadata" data-autoplay aria-label="Timelapse obkládání stěny za kuchyňskou linkou v Podbabě">
+                        <source src="video/podbaba-obklad.webm" type="video/webm">
+                        <source src="video/podbaba-obklad.mp4" type="video/mp4">
+                    </video>
+                    <span class="promo-badge"><i class="fa-solid fa-circle"></i> Timelapse</span>
                 </div>
             </div>
         </div>
