@@ -2072,15 +2072,13 @@ footer {
     pointer-events: none;
 }
 
-/* Lišta po posunutí stránky zprůhlední a rozostří pozadí */
+/* Lišta po posunutí stránky dostane stín (plná barva – průhledné rozostření
+   v některých prohlížečích při posouvání problikávalo) */
 header {
-    transition: background 0.4s, box-shadow 0.4s, backdrop-filter 0.4s;
+    transition: box-shadow 0.4s;
 }
 
 header.scrolled {
-    background: rgba(17, 24, 39, 0.82);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
 }
 
@@ -2092,13 +2090,12 @@ header.scrolled .logo-img {
     height: clamp(58px, 5.5vw, 74px);
 }
 
-/* Úvod: fotka se pomalu přibližuje (vrstvy: fotka → tmavý přechod → text) */
+/* Úvod: vrstvy pozadí – střídající se fotky → tmavý přechod → text */
 .hero.has-photo {
     background: #111827;
     isolation: isolate;
 }
 
-.hero.has-photo::before,
 .hero.has-photo::after {
     content: '';
     position: absolute;
@@ -2106,10 +2103,62 @@ header.scrolled .logo-img {
     pointer-events: none;
 }
 
-.hero.has-photo::before {
-    background: url('foto/podbaba-kuchyne.jpg') center / cover no-repeat;
+/* Úvod: střídající se fotky a videa v pozadí (seznam je v HTML úvodní stránky) */
+.hero-slides {
+    position: absolute;
+    inset: 0;
     z-index: -2;
-    animation: hero-zoom 24s ease-in-out infinite alternate;
+    overflow: hidden;
+    background: #111827;
+}
+
+.hero-slide {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    background-size: cover;
+    background-position: center;
+    opacity: 0;
+    transform: scale(1.04);
+    transition: opacity 1.6s ease-in-out;
+}
+
+.hero-slide.active {
+    opacity: 1;
+    animation: hero-zoom 9s ease-out forwards;
+}
+
+@keyframes hero-zoom {
+    from { transform: scale(1.04); }
+    to { transform: scale(1.14) translateX(-1.5%); }
+}
+
+/* Tečky ukazující, která fotka se právě ukazuje */
+.hero-dots {
+    position: absolute;
+    right: var(--side);
+    bottom: 2rem;
+    display: flex;
+    gap: 0.5rem;
+    z-index: 1;
+}
+
+.hero-dots button {
+    width: 10px;
+    height: 10px;
+    padding: 0;
+    border-radius: 10px;
+    border: none;
+    background: rgba(255, 255, 255, 0.35);
+    cursor: pointer;
+    transition: width 0.4s, background 0.4s;
+}
+
+.hero-dots button.active {
+    width: 28px;
+    background: #60a5fa;
 }
 
 .hero.has-photo::after {
@@ -2119,10 +2168,6 @@ header.scrolled .logo-img {
     z-index: -1;
 }
 
-@keyframes hero-zoom {
-    from { transform: scale(1); }
-    to { transform: scale(1.12) translateX(-2%); }
-}
 
 /* Úvod: prvky najíždějí postupně */
 .hero-content {
@@ -2830,6 +2875,48 @@ if (autoVideos.length) {
         });
     }, { threshold: 0.3 });
     autoVideos.forEach(v => videoObserver.observe(v));
+}
+
+/* === ÚVOD: střídání fotek a videí v pozadí === */
+const heroSlides = document.querySelector('.hero-slides');
+
+if (heroSlides) {
+    const slides = [...heroSlides.querySelectorAll('.hero-slide')];
+    const dotsBox = document.querySelector('.hero-dots');
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let current = 0, timer;
+
+    // Fotka se načte až těsně před zobrazením (rychlejší start stránky)
+    function prepare(i) {
+        const s = slides[i];
+        if (s.dataset.bg && !s.style.backgroundImage) s.style.backgroundImage = `url('${s.dataset.bg}')`;
+        if (s.tagName === 'VIDEO' && s.preload === 'none') { s.preload = 'auto'; s.load(); }
+    }
+
+    function show(i) {
+        slides[current].classList.remove('active');
+        if (slides[current].tagName === 'VIDEO') slides[current].pause();
+        current = (i + slides.length) % slides.length;
+        const s = slides[current];
+        prepare(current);
+        s.classList.remove('active'); void s.offsetWidth; s.classList.add('active');
+        if (s.tagName === 'VIDEO') { s.currentTime = 0; s.play().catch(() => {}); }
+        if (dotsBox) [...dotsBox.children].forEach((d, k) => d.classList.toggle('active', k === current));
+        prepare((current + 1) % slides.length);
+        clearTimeout(timer);
+        if (!reduce) timer = setTimeout(() => show(current + 1), +(s.dataset.duration || 6000));
+    }
+
+    if (dotsBox) {
+        slides.forEach((_, k) => {
+            const b = document.createElement('button');
+            b.type = 'button';
+            b.setAttribute('aria-label', 'Ukázka ' + (k + 1));
+            b.addEventListener('click', () => show(k));
+            dotsBox.appendChild(b);
+        });
+    }
+    show(0);
 }
 
 /* === REVEAL ANIMACE === */
