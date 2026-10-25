@@ -1526,6 +1526,57 @@ footer {
     aspect-ratio: 4 / 5;
 }
 
+/* Krok s videem (timelapse) – video na výšku na místě fotky */
+.timeline-video {
+    grid-column: 1;
+    grid-row: 1;
+    position: relative;
+    justify-self: center;
+    width: min(100%, 300px);
+    aspect-ratio: 9 / 16;
+    border-radius: 16px;
+    overflow: hidden;
+    background: var(--card-dark);
+    border: 1px solid var(--border-card);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+}
+
+.timeline-step:nth-of-type(even) .timeline-video {
+    grid-column: 3;
+}
+
+.timeline-video video {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.timeline-video-badge {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    padding: 4px 10px;
+    border-radius: 20px;
+    background: rgba(17, 24, 39, 0.8);
+    color: white;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    pointer-events: none;
+}
+
+.timeline-video-badge i {
+    color: #ef4444;
+    margin-right: 4px;
+}
+
+.timeline-step.reached .timeline-video {
+    border-color: rgba(96, 165, 250, 0.9);
+    box-shadow: 0 0 0 1px rgba(96, 165, 250, 0.5), 0 0 22px rgba(0, 86, 210, 0.35), 0 12px 30px rgba(0, 0, 0, 0.08);
+}
+
 /* Sudé kroky: fotka vpravo, text vlevo */
 .timeline-step:nth-of-type(even) .gallery-item {
     grid-column: 3;
@@ -2339,6 +2390,15 @@ header.scrolled .logo-img {
         border-radius: 12px;
     }
 
+    .timeline-video,
+    .timeline-step:nth-of-type(even) .timeline-video {
+        grid-column: 1;
+        grid-row: 1;
+        width: 100%;
+        max-width: 340px;
+        border-radius: 16px 16px 0 0;
+    }
+
     .timeline-num {
         top: 0.8rem;
         left: -2px;
@@ -2678,6 +2738,19 @@ document.querySelectorAll('.stat-item h3').forEach(el => {
     });
     console.log('%c😎 Luboš je frajer!', 'font-size:20px;font-weight:800;color:#0056d2;');
 })();
+
+/* === VIDEA: přehrávají se jen, když jsou vidět (šetří data i baterii) === */
+const autoVideos = document.querySelectorAll('video[data-autoplay]');
+
+if (autoVideos.length) {
+    const videoObserver = new IntersectionObserver(entries => {
+        entries.forEach(e => {
+            if (e.isIntersecting) e.target.play().catch(() => {});
+            else e.target.pause();
+        });
+    }, { threshold: 0.3 });
+    autoVideos.forEach(v => videoObserver.observe(v));
+}
 
 /* === REVEAL ANIMACE === */
 const observer = new IntersectionObserver((entries) => {
