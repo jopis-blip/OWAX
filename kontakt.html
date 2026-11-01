@@ -2670,10 +2670,10 @@ header.scrolled .logo-img {
                 <h3>Napište nám</h3>
                 <p>Popište nám stručně svůj záměr. Ozveme se vám obvykle do jednoho pracovního dne.</p>
 
-                <form id="contact-form" action="https://formsubmit.co/ajax/jopis@jopis.cz" method="POST" class="contact-form">
+                <form id="contact-form" action="https://formsubmit.co/ajax/info@owax.cz" method="POST" class="contact-form">
                     <input type="hidden" name="_subject" value="Nová poptávka z webu OWAX.cz">
-                    <!-- Poptávky chodí na hlavní adresu v action (u FormSubmit aktivovaná) a v kopii na adresy v _cc (oddělené čárkou) -->
-                    <input type="hidden" name="_cc" value="info@owax.cz,dav.pivonka@seznam.cz">
+                    <!-- Poptávky chodí jen na adresu v action. Při změně adresy je nutné ji u FormSubmit znovu aktivovat
+                         (po první odeslané poptávce přijde na novou adresu e-mail s tlačítkem „Activate Form“). -->
                     <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
                     <input type="hidden" name="_captcha" value="false">
 
