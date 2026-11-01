@@ -2672,7 +2672,8 @@ header.scrolled .logo-img {
 
                 <form id="contact-form" action="https://formsubmit.co/ajax/jopis@jopis.cz" method="POST" class="contact-form">
                     <input type="hidden" name="_subject" value="Nová poptávka z webu OWAX.cz">
-                    <input type="hidden" name="_cc" value="dav.pivonka@seznam.cz">
+                    <!-- Poptávky chodí na hlavní adresu v action (u FormSubmit aktivovaná) a v kopii na adresy v _cc (oddělené čárkou) -->
+                    <input type="hidden" name="_cc" value="info@owax.cz,dav.pivonka@seznam.cz">
                     <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
                     <input type="hidden" name="_captcha" value="false">
 
