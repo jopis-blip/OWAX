@@ -2568,6 +2568,16 @@ header.scrolled {
     width: min(100%, clamp(260px, 32vw, 460px));
 }
 
+.gallery-grid-center.cols-3 .gallery-item {
+    width: calc((100% - 2 * clamp(0.8rem, 1.2vw, 1.2rem)) / 3);
+}
+
+@media (max-width: 900px) {
+    .gallery-grid-center.cols-3 .gallery-item {
+        width: min(100%, 460px);
+    }
+}
+
 /* Legenda prvků na stránce zakázky (čísla podle výkresu) */
 .legend h3 {
     font-size: clamp(1.1rem, 1.4vw, 1.3rem);
@@ -2781,12 +2791,12 @@ header.scrolled {
             <div class="project-card reveal">
                 <div class="project-img">
                     <i class="fa-solid fa-ruler-combined"></i>
-                    <img src="../foto/ricany.jpg" alt="Survey of a family house in Říčany" onerror="this.remove()">
+                    <img src="../foto/ricany.jpg" alt="Loft conversion in Říčany – attic floor plan" onerror="this.remove()">
                 </div>
                 <div class="project-body">
-                    <span class="case-tag">Design · Survey · Říčany</span>
-                    <h3>As-built survey of a family house</h3>
-                    <p>An accurate survey of a family house and the documents for the occupancy approval, so the building could be put into use without complications.</p>
+                    <span class="case-tag">Design · Documentation · Říčany</span>
+                    <h3>Documentation of a family house loft conversion</h3>
+                    <p>A survey of an attic turned from unused loft space into a living room, plus as-built documentation – floor plans before and after, a section and a technical report.</p>
                     <a href="zakazka-zamereni-ricany.html" class="project-link">Project details <i class="fa-solid fa-arrow-right"></i></a>
                 </div>
             </div>
