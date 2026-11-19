@@ -530,6 +530,7 @@ EN = {
 'Rekonstrukce bytu': 'Turnkey apartment',
 'Rekonstrukce bytu na klíč': 'Turnkey apartment renovation',
 'Klikněte na zakázku a mapa ukáže, kde přibližně leží – na úrovni čtvrti nebo obce.': 'Click a project and the map shows roughly where it is – at district or town level.',
+'Najeďte na špendlík a uvidíte, o jakou zakázku jde. Kliknutím otevřete detail.': 'Hover over a pin to see the project, click to open the details.',
 }
 
 JS = {

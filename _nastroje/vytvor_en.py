@@ -10,7 +10,7 @@ sys.path.insert(0, os.path.dirname(__file__))
 from preklad_en import EN, JS
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-KEEP = {'vse', 'realizace', 'projekce', 'false', 'EN', 'English', 'DP', 'OV', 'Facebook', 'Instagram',
+KEEP = {'Brno', 'Ostrava', 'Plzeň', 'Liberec', 'Hradec Králové', 'České Budějovice', 'Olomouc', 'Ústí nad Labem', 'vse', 'realizace', 'projekce', 'false', 'EN', 'English', 'DP', 'OV', 'Facebook', 'Instagram',
         'info@owax.cz', 'Bc. David Pivoňka', 'Bc. Ondřej Vlček', 'OWAX – Bc. David Pivoňka & Bc. Ondřej Vlček',
         '&nbsp; +420 723 557 807', '&nbsp;·&nbsp;'}   # hodnoty pro skripty, nepřekládat
 TEXT_ATTRS = ('alt', 'title', 'aria-label', 'placeholder', 'content', 'value')
