@@ -2557,6 +2557,17 @@ header.scrolled {
     }
 }
 
+/* Málo fotek – karty vycentrované (např. výkresy u zakázky zahrady) */
+.gallery-grid-center {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.gallery-grid-center .gallery-item {
+    width: min(100%, clamp(260px, 32vw, 460px));
+}
+
 /* Legenda prvků na stránce zakázky (čísla podle výkresu) */
 .legend h3 {
     font-size: clamp(1.1rem, 1.4vw, 1.3rem);
@@ -2780,7 +2791,7 @@ header.scrolled {
         </div>
 
         <div class="gallery-album reveal">
-            <div class="gallery-grid">
+            <div class="gallery-grid gallery-grid-center">
                     <button class="gallery-item"><img src="../foto/skolka-pudorys.jpg" alt="Kindergarten garden modernisation, Most – garden plan 1:100" loading="lazy" onerror="this.parentElement.remove()"><span class="gallery-caption">Garden plan</span></button>
                     <button class="gallery-item"><img src="../foto/skolka.jpg" alt="Kindergarten garden modernisation, Most – detail of the play area and new features" loading="lazy" onerror="this.parentElement.remove()"><span class="gallery-caption">Play area detail</span></button>
             </div>
