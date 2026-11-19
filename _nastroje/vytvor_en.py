@@ -62,7 +62,7 @@ def tr_tag(tag):
         return tag
     return re.sub(r'([\w-]+)=(["\'])(.*?)\2', attr, tag)
 
-ASSET = re.compile(r'^(foto/|video/|logo\.png|favicon\.png|apple-touch-icon\.png|Pred\.JPG|Po\.JPEG)')
+ASSET = re.compile(r'^(foto/|video/|vendor/|logo\.png|favicon\.png|apple-touch-icon\.png|Pred\.JPG|Po\.JPEG)')
 
 def fix_paths(t):
     t = re.sub(r'(src|href|poster|data-bg)="([^"#:]+?)"',

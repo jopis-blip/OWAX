@@ -517,6 +517,18 @@ EN = {
 'Výkres TZB – voda, kanalizace, topení': 'Building services drawing – water, drainage, heating',
 'Zaměření a výkres původního stavu': 'Survey and drawing of the existing state',
 'cca 10,6 × 8,9 m': 'approx. 10.6 × 8.9 m',
+'Přibližná poloha': 'Approximate location',
+'Mapa – přibližná poloha zakázky': 'Map – approximate project location',
+'Kde jsme pracovali': 'Where we have worked',
+'Mapa zakázek': 'Project map',
+'Polohy jsou jen přibližné – na úrovni čtvrti nebo obce.': 'Locations are approximate only – at district or town level.',
+'Mapa zakázek OWAX': 'Map of OWAX projects',
+'Vchodová stříška': 'Entrance canopy',
+'Přestavba sklepa na byt': 'Basement conversion',
+'Modernizace zahrady MŠ': 'Kindergarten garden',
+'Praha 6 – Podbaba': 'Prague 6 – Podbaba',
+'Rekonstrukce bytu': 'Turnkey apartment',
+'Rekonstrukce bytu na klíč': 'Turnkey apartment renovation',
 }
 
 JS = {

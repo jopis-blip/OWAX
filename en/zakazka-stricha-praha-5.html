@@ -2639,6 +2639,118 @@ header.scrolled {
     }
 }
 
+/* Mapka zakázky – jen přibližná poloha (čtvrť / město) */
+.project-map {
+    position: relative;
+    z-index: 0;
+    isolation: isolate;
+    height: 230px;
+    margin-top: 1.5rem;
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid var(--border-card);
+    background: #e2e8f0;
+}
+
+.project-map .leaflet-tile-pane {
+    filter: grayscale(0.85) contrast(0.95) brightness(1.03);
+}
+
+.map-pin {
+    background: none;
+    border: none;
+}
+
+.map-pin i {
+    font-size: 40px;
+    color: var(--brand-blue);
+    filter: drop-shadow(0 3px 4px rgba(0, 0, 0, 0.35));
+}
+
+.map-note {
+    margin-top: 0.6rem;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+}
+
+.map-note i {
+    color: #60a5fa;
+    margin-right: 0.3rem;
+}
+
+/* Celková mapa zakázek (stránka Reference) */
+.projects-map-wrap {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: clamp(1.2rem, 2.5vw, 2.5rem);
+    align-items: stretch;
+}
+
+.projects-map {
+    position: relative;
+    z-index: 0;
+    isolation: isolate;
+    min-height: 420px;
+    border-radius: 18px;
+    overflow: hidden;
+    border: 1px solid var(--border-card);
+    background: #e2e8f0;
+}
+
+.projects-map .leaflet-tile-pane {
+    filter: grayscale(0.85) contrast(0.95) brightness(1.03);
+}
+
+.map-list {
+    list-style: none;
+    align-self: center;
+}
+
+.map-list li a {
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+    padding: 0.9rem 0;
+    border-bottom: 1px solid var(--border-card);
+    color: #e2e8f0;
+    font-weight: 600;
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+.map-list li a:hover {
+    color: white;
+    padding-left: 0.3rem;
+}
+
+.map-list li a i {
+    color: #60a5fa;
+    font-size: 1.1rem;
+}
+
+.map-list small {
+    display: block;
+    color: var(--text-muted);
+    font-weight: 500;
+    font-size: 0.85rem;
+}
+
+.leaflet-popup-content a {
+    color: var(--brand-blue);
+    font-weight: 700;
+    text-decoration: none;
+}
+
+@media (max-width: 900px) {
+    .projects-map-wrap {
+        grid-template-columns: 1fr;
+    }
+
+    .projects-map {
+        min-height: 340px;
+    }
+}
+
 /* Přepínač jazyka CZ / EN v hlavičce */
 .lang-switch {
     display: inline-flex;
@@ -2663,6 +2775,7 @@ header.scrolled {
 }
 
     </style>
+    <link rel="stylesheet" href="../vendor/leaflet/leaflet.css">
 </head>
 <body>
 
@@ -2759,6 +2872,8 @@ header.scrolled {
                             <dt>Anchoring</dt><dd>Brackets with plates into load-bearing masonry</dd>
                             <dt>Drainage</dt><dd>Drainage gutter</dd>
                     </dl>
+                    <div class="project-map" data-lat="50.064" data-lng="14.385" data-zoom="12" data-radius="1300" role="img" aria-label="Map – approximate project location"></div>
+                    <p class="map-note"><i class="fa-solid fa-location-dot"></i>Approximate location</p>
                 </div>
             </div>
         </div>
@@ -2829,6 +2944,7 @@ header.scrolled {
     <!-- PLOVOUCÍ TLAČÍTKO ZAVOLAT (zobrazí se jen na telefonu) -->
     <a href="tel:+420723557807" class="call-fab" aria-label="Call +420 723 557 807"><i class="fa-solid fa-phone"></i> Call</a>
 
+    <script src="../vendor/leaflet/leaflet.js"></script>
     <script>
 /* ================================================
    OWAX – společné skripty pro všechny stránky
@@ -3004,6 +3120,44 @@ if (heroSlides) {
         });
     }
     show(0);
+}
+
+/* === MAPKA ZAKÁZKY – přibližná poloha (jen na stránkách zakázek) === */
+document.querySelectorAll('.project-map').forEach(el => {
+    if (!window.L) return;
+    const pos = [+el.dataset.lat, +el.dataset.lng];
+    const map = L.map(el, { scrollWheelZoom: false, maxZoom: 15, minZoom: 8 }).setView(pos, +(el.dataset.zoom || 13));
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 15,
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    }).addTo(map);
+    L.circle(pos, { radius: +(el.dataset.radius || 1200), color: '#0056d2', weight: 1.5, fillColor: '#60a5fa', fillOpacity: 0.15 }).addTo(map);
+    L.marker(pos, {
+        keyboard: false,
+        icon: L.divIcon({ className: 'map-pin', html: '<i class="fa-solid fa-location-dot"></i>', iconSize: [34, 44], iconAnchor: [17, 42] })
+    }).addTo(map);
+});
+
+/* === CELKOVÁ MAPA ZAKÁZEK – špendlíky se berou ze seznamu vedle mapy === */
+const projectsMap = document.querySelector('.projects-map');
+
+if (projectsMap && window.L) {
+    const map = L.map(projectsMap, { scrollWheelZoom: false, maxZoom: 14, minZoom: 6 });
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 14,
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    }).addTo(map);
+    const pin = L.divIcon({ className: 'map-pin', html: '<i class="fa-solid fa-location-dot"></i>', iconSize: [34, 44], iconAnchor: [17, 42], popupAnchor: [0, -38] });
+    const points = [];
+    document.querySelectorAll('.map-list a[data-lat]').forEach(a => {
+        const pos = [+a.dataset.lat, +a.dataset.lng];
+        points.push(pos);
+        const link = document.createElement('a');
+        link.href = a.getAttribute('href');
+        link.textContent = a.querySelector('span').firstChild.textContent.trim();
+        L.marker(pos, { icon: pin }).addTo(map).bindPopup(link);
+    });
+    if (points.length) map.fitBounds(points, { padding: [40, 40] });
 }
 
 /* === REVEAL ANIMACE === */
