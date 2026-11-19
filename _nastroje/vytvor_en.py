@@ -109,7 +109,7 @@ def to_en(t, name):
             out.append(tr_tag(p))
         else:
             out.append(tr(p))
-    return fix_paths(''.join(out))
+    return fix_paths(''.join(out)).replace('&amp;hl=cs&amp;', '&amp;hl=en&amp;')
 
 os.makedirs(os.path.join(ROOT, 'en'), exist_ok=True)
 for path in sorted(glob.glob(os.path.join(ROOT, '*.html'))):
