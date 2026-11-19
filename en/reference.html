@@ -2639,12 +2639,9 @@ header.scrolled {
     }
 }
 
-/* Mapka zakázky – jen přibližná poloha (čtvrť / město) */
+/* Mapka zakázky – Google mapa, jen přibližná poloha (čtvrť / město) */
 .project-map {
-    position: relative;
-    z-index: 0;
-    isolation: isolate;
-    height: 230px;
+    height: 240px;
     margin-top: 1.5rem;
     border-radius: 16px;
     overflow: hidden;
@@ -2652,19 +2649,12 @@ header.scrolled {
     background: #e2e8f0;
 }
 
-.project-map .leaflet-tile-pane {
-    filter: grayscale(0.85) contrast(0.95) brightness(1.03);
-}
-
-.map-pin {
-    background: none;
-    border: none;
-}
-
-.map-pin i {
-    font-size: 40px;
-    color: var(--brand-blue);
-    filter: drop-shadow(0 3px 4px rgba(0, 0, 0, 0.35));
+.project-map iframe,
+.projects-map iframe {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border: 0;
 }
 
 .map-note {
@@ -2678,7 +2668,7 @@ header.scrolled {
     margin-right: 0.3rem;
 }
 
-/* Celková mapa zakázek (stránka Reference) */
+/* Celková mapa zakázek (stránka Reference) – kliknutím v seznamu se mapa přepne */
 .projects-map-wrap {
     display: grid;
     grid-template-columns: 2fr 1fr;
@@ -2687,9 +2677,6 @@ header.scrolled {
 }
 
 .projects-map {
-    position: relative;
-    z-index: 0;
-    isolation: isolate;
     min-height: 420px;
     border-radius: 18px;
     overflow: hidden;
@@ -2697,35 +2684,41 @@ header.scrolled {
     background: #e2e8f0;
 }
 
-.projects-map .leaflet-tile-pane {
-    filter: grayscale(0.85) contrast(0.95) brightness(1.03);
-}
-
 .map-list {
     list-style: none;
     align-self: center;
 }
 
-.map-list li a {
+.map-list button {
+    width: 100%;
     display: flex;
     align-items: center;
     gap: 0.9rem;
-    padding: 0.9rem 0;
+    padding: 0.9rem 0.6rem;
+    background: none;
+    border: none;
     border-bottom: 1px solid var(--border-card);
-    color: #e2e8f0;
+    color: #cbd5e1;
+    font: inherit;
     font-weight: 600;
-    text-decoration: none;
+    text-align: left;
+    cursor: pointer;
     transition: var(--transition);
 }
 
-.map-list li a:hover {
+.map-list button:hover,
+.map-list button.active {
     color: white;
-    padding-left: 0.3rem;
+    background: rgba(255, 255, 255, 0.05);
 }
 
-.map-list li a i {
+.map-list button i {
     color: #60a5fa;
     font-size: 1.1rem;
+}
+
+.map-list button.active i {
+    color: white;
 }
 
 .map-list small {
@@ -2735,8 +2728,12 @@ header.scrolled {
     font-size: 0.85rem;
 }
 
-.leaflet-popup-content a {
-    color: var(--brand-blue);
+.map-detail {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 1.2rem;
+    color: #60a5fa;
     font-weight: 700;
     text-decoration: none;
 }
@@ -2775,7 +2772,6 @@ header.scrolled {
 }
 
     </style>
-    <link rel="stylesheet" href="../vendor/leaflet/leaflet.css">
 </head>
 <body>
 
@@ -2934,19 +2930,22 @@ header.scrolled {
         <div class="section-header reveal">
             <span class="section-subtitle">Where we have worked</span>
             <h2 class="section-title">Project map</h2>
-            <p class="section-lead">Locations are approximate only – at district or town level.</p>
+            <p class="section-lead">Click a project and the map shows roughly where it is – at district or town level.</p>
         </div>
 
         <div class="dark-card-container reveal">
             <div class="projects-map-wrap">
-                <div class="projects-map" role="img" aria-label="Map of OWAX projects"></div>
-                <ul class="map-list">
-                    <li><a href="zakazka-byt-podbaba.html" data-lat="50.115" data-lng="14.394"><i class="fa-solid fa-location-dot"></i><span>Turnkey apartment renovation<small>Prague 6 – Podbaba</small></span></a></li>
-                    <li><a href="zakazka-stricha-praha-5.html" data-lat="50.064" data-lng="14.385"><i class="fa-solid fa-location-dot"></i><span>Entrance canopy<small>Prague 5</small></span></a></li>
-                    <li><a href="zakazka-sklep-bytova-jednotka.html" data-lat="49.9686" data-lng="14.5136"><i class="fa-solid fa-location-dot"></i><span>Basement conversion<small>Jesenice near Prague</small></span></a></li>
-                    <li><a href="zakazka-zamereni-ricany.html" data-lat="49.9915" data-lng="14.6542"><i class="fa-solid fa-location-dot"></i><span>Loft conversion<small>Říčany</small></span></a></li>
-                    <li><a href="zakazka-zahrada-skolky.html" data-lat="50.5032" data-lng="13.6363"><i class="fa-solid fa-location-dot"></i><span>Kindergarten garden<small>Most</small></span></a></li>
-                </ul>
+                <div class="projects-map"><iframe src="https://maps.google.com/maps?q=Podbaba%2C%20Praha%206&amp;z=14&amp;hl=en&amp;output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Map of OWAX projects"></iframe></div>
+                <div>
+                    <ul class="map-list">
+                    <li><button type="button" class="active" data-q="Podbaba, Praha 6" data-z="14" data-href="zakazka-byt-podbaba.html"><i class="fa-solid fa-location-dot"></i><span>Turnkey apartment renovation<small>Prague 6 – Podbaba</small></span></button></li>
+                    <li><button type="button" data-q="Praha 5" data-z="12" data-href="zakazka-stricha-praha-5.html"><i class="fa-solid fa-location-dot"></i><span>Entrance canopy<small>Prague 5</small></span></button></li>
+                    <li><button type="button" data-q="Jesenice u Prahy" data-z="13" data-href="zakazka-sklep-bytova-jednotka.html"><i class="fa-solid fa-location-dot"></i><span>Basement conversion<small>Jesenice near Prague</small></span></button></li>
+                    <li><button type="button" data-q="Říčany" data-z="13" data-href="zakazka-zamereni-ricany.html"><i class="fa-solid fa-location-dot"></i><span>Loft conversion<small>Říčany</small></span></button></li>
+                    <li><button type="button" data-q="Most" data-z="12" data-href="zakazka-zahrada-skolky.html"><i class="fa-solid fa-location-dot"></i><span>Kindergarten garden<small>Most</small></span></button></li>
+                    </ul>
+                    <a href="zakazka-byt-podbaba.html" class="map-detail">Project details <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
             </div>
         </div>
     </section>
@@ -2987,7 +2986,6 @@ header.scrolled {
     <!-- PLOVOUCÍ TLAČÍTKO ZAVOLAT (zobrazí se jen na telefonu) -->
     <a href="tel:+420723557807" class="call-fab" aria-label="Call +420 723 557 807"><i class="fa-solid fa-phone"></i> Call</a>
 
-    <script src="../vendor/leaflet/leaflet.js"></script>
     <script>
 /* ================================================
    OWAX – společné skripty pro všechny stránky
@@ -3165,42 +3163,20 @@ if (heroSlides) {
     show(0);
 }
 
-/* === MAPKA ZAKÁZKY – přibližná poloha (jen na stránkách zakázek) === */
-document.querySelectorAll('.project-map').forEach(el => {
-    if (!window.L) return;
-    const pos = [+el.dataset.lat, +el.dataset.lng];
-    const map = L.map(el, { scrollWheelZoom: false, maxZoom: 15, minZoom: 8 }).setView(pos, +(el.dataset.zoom || 13));
-    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        maxZoom: 15,
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-    }).addTo(map);
-    L.circle(pos, { radius: +(el.dataset.radius || 1200), color: '#0056d2', weight: 1.5, fillColor: '#60a5fa', fillOpacity: 0.15 }).addTo(map);
-    L.marker(pos, {
-        keyboard: false,
-        icon: L.divIcon({ className: 'map-pin', html: '<i class="fa-solid fa-location-dot"></i>', iconSize: [34, 44], iconAnchor: [17, 42] })
-    }).addTo(map);
-});
+/* === CELKOVÁ MAPA ZAKÁZEK – kliknutím na zakázku v seznamu se Google mapa přepne === */
+const mapList = document.querySelector('.map-list');
 
-/* === CELKOVÁ MAPA ZAKÁZEK – špendlíky se berou ze seznamu vedle mapy === */
-const projectsMap = document.querySelector('.projects-map');
-
-if (projectsMap && window.L) {
-    const map = L.map(projectsMap, { scrollWheelZoom: false, maxZoom: 14, minZoom: 6 });
-    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        maxZoom: 14,
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-    }).addTo(map);
-    const pin = L.divIcon({ className: 'map-pin', html: '<i class="fa-solid fa-location-dot"></i>', iconSize: [34, 44], iconAnchor: [17, 42], popupAnchor: [0, -38] });
-    const points = [];
-    document.querySelectorAll('.map-list a[data-lat]').forEach(a => {
-        const pos = [+a.dataset.lat, +a.dataset.lng];
-        points.push(pos);
-        const link = document.createElement('a');
-        link.href = a.getAttribute('href');
-        link.textContent = a.querySelector('span').firstChild.textContent.trim();
-        L.marker(pos, { icon: pin }).addTo(map).bindPopup(link);
+if (mapList) {
+    const frame = document.querySelector('.projects-map iframe');
+    const detail = document.querySelector('.map-detail');
+    const lang = document.documentElement.lang === 'en' ? 'en' : 'cs';
+    mapList.addEventListener('click', (e) => {
+        const btn = e.target.closest('button[data-q]');
+        if (!btn) return;
+        mapList.querySelectorAll('button').forEach(b => b.classList.toggle('active', b === btn));
+        frame.src = 'https://maps.google.com/maps?q=' + encodeURIComponent(btn.dataset.q) + '&z=' + (btn.dataset.z || 12) + '&hl=' + lang + '&output=embed';
+        if (detail) detail.href = btn.dataset.href;
     });
-    if (points.length) map.fitBounds(points, { padding: [40, 40] });
 }
 
 /* === REVEAL ANIMACE === */
