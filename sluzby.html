@@ -7,6 +7,9 @@
     <title>Služby | OWAX</title>
     <meta name="description" content="Rekonstrukce bytů a domů, novostavby, projekční činnost, rozpočty, koordinace profesí a stavební poradenství v Praze a Středočeském kraji.">
     <link rel="canonical" href="https://owax.cz/sluzby.html">
+    <link rel="alternate" hreflang="cs" href="https://owax.cz/sluzby.html">
+    <link rel="alternate" hreflang="en" href="https://owax.cz/en/sluzby.html">
+    <link rel="alternate" hreflang="x-default" href="https://owax.cz/sluzby.html">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://owax.cz/sluzby.html">
     <meta property="og:title" content="Služby | OWAX">
@@ -2554,6 +2557,29 @@ header.scrolled {
     }
 }
 
+/* Přepínač jazyka CZ / EN v hlavičce */
+.lang-switch {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 48px;
+    height: 40px;
+    padding: 0 0.8rem;
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    border-radius: 50px;
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 0.85rem;
+    letter-spacing: 0.06em;
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+.lang-switch:hover {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: #ffffff;
+}
+
     </style>
 </head>
 <body>
@@ -2575,6 +2601,7 @@ header.scrolled {
                 </div>
                 <a href="galerie.html" class="nav-btn nav-btn-outline header-cta">Galerie</a>
                 <a href="kontakt.html" class="nav-btn header-cta">Nezávazná konzultace</a>
+                <a href="en/sluzby.html" class="lang-switch" hreflang="en" lang="en" title="English">EN</a>
                 <button class="hamburger" id="hamburger-btn" aria-label="Otevřít menu" aria-expanded="false" aria-controls="nav-menu">
                     <i class="fa-solid fa-bars"></i>
                 </button>
