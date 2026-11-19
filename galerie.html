@@ -723,8 +723,8 @@ nav.active > *:nth-child(7) { animation-delay: 0.30s; }
 .before-after-container {
     position: relative;
     width: 100%;
-    /* Pevný poměr stran podle fotek – obě fotky leží přesně na sobě */
-    aspect-ratio: 16 / 10;
+    /* Pevný poměr stran podle fotek (4 : 3) – obě fotky leží přesně na sobě */
+    aspect-ratio: 4 / 3;
     border-radius: 20px;
     overflow: hidden;
     user-select: none;
@@ -745,7 +745,7 @@ nav.active > *:nth-child(7) { animation-delay: 0.30s; }
 }
 
 .ba-before {
-    background-image: url('Pred.JPG');
+    background-image: url('foto/podbaba-pred.jpg');
     z-index: 2;
     /* Fotka „před“ se nezmenšuje, jen se odkrývá zprava (ořez řídí skript) */
     clip-path: inset(0 50% 0 0);
@@ -766,7 +766,7 @@ nav.active > *:nth-child(7) { animation-delay: 0.30s; }
 }
 
 .ba-after {
-    background-image: url('Po.JPEG');
+    background-image: url('foto/podbaba-po.jpg');
     z-index: 1;
 }
 
@@ -2871,7 +2871,7 @@ header.scrolled {
                 <a href="zakazka-byt-podbaba.html" class="gallery-album-link">Více o zakázce <i class="fa-solid fa-arrow-right"></i></a>
             </div>
             <div class="gallery-grid">
-                    <button class="gallery-item"><img src="Pred.JPG" alt="Rekonstrukce bytu, Praha 6 – Podbaba (před)" loading="lazy" onerror="this.parentElement.remove()"><span class="gallery-caption">Před rekonstrukcí</span></button>
+                    <button class="gallery-item"><img src="foto/podbaba-pred.jpg" alt="Rekonstrukce bytu, Praha 6 – Podbaba (před)" loading="lazy" onerror="this.parentElement.remove()"><span class="gallery-caption">Před rekonstrukcí</span></button>
                     <button class="gallery-item"><img src="foto/podbaba-prubeh-1.jpg" alt="Rekonstrukce bytu, Praha 6 – Podbaba: Původní stav po demontáži kuchyňské linky a obkladu" loading="lazy" onerror="this.parentElement.remove()"><span class="gallery-caption">1. Výchozí stav – demontovaná kuchyně</span></button>
                     <button class="gallery-item"><img src="foto/podbaba-prubeh-2.jpg" alt="Rekonstrukce bytu, Praha 6 – Podbaba: Zakrytí podlah a příprava prostoru před bouracími pracemi" loading="lazy" onerror="this.parentElement.remove()"><span class="gallery-caption">2. Příprava – zakrytí podlah</span></button>
                     <button class="gallery-item"><img src="foto/podbaba-prubeh-3.jpg" alt="Rekonstrukce bytu, Praha 6 – Podbaba: Nové rozvody elektroinstalace a vývody pro kuchyňskou linku" loading="lazy" onerror="this.parentElement.remove()"><span class="gallery-caption">3. Nové rozvody elektroinstalace</span></button>
@@ -2888,7 +2888,7 @@ header.scrolled {
                     <button class="gallery-item"><img src="foto/podbaba-hotovo-4.jpg" alt="Rekonstrukce bytu, Praha 6 – Podbaba: Kuchyňská linka s vysokými skříněmi a velkoformátovou dlažbou" loading="lazy" onerror="this.parentElement.remove()"><span class="gallery-caption">Linka a dlažba</span></button>
                     <button class="gallery-item"><img src="foto/podbaba-hotovo-5.jpg" alt="Rekonstrukce bytu, Praha 6 – Podbaba: Detail rohu s obkladem a digestoří" loading="lazy" onerror="this.parentElement.remove()"><span class="gallery-caption">Detail rohu</span></button>
                     <button class="gallery-item"><img src="foto/podbaba-hotovo-6.jpg" alt="Rekonstrukce bytu, Praha 6 – Podbaba: Celkový pohled na hotovou kuchyň" loading="lazy" onerror="this.parentElement.remove()"><span class="gallery-caption">Celkový pohled</span></button>
-                    <button class="gallery-item"><img src="Po.JPEG" alt="Rekonstrukce bytu, Praha 6 – Podbaba (po)" loading="lazy" onerror="this.parentElement.remove()"><span class="gallery-caption">Po – montáž kuchyně</span></button>
+                    <button class="gallery-item"><img src="foto/podbaba-po.jpg" alt="Rekonstrukce bytu, Praha 6 – Podbaba (po)" loading="lazy" onerror="this.parentElement.remove()"><span class="gallery-caption">Po – montáž kuchyně</span></button>
             </div>
         </div>
         <div class="gallery-album reveal" data-cat="projekce">

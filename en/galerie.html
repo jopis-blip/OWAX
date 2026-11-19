@@ -723,8 +723,8 @@ nav.active > *:nth-child(7) { animation-delay: 0.30s; }
 .before-after-container {
     position: relative;
     width: 100%;
-    /* Pevný poměr stran podle fotek – obě fotky leží přesně na sobě */
-    aspect-ratio: 16 / 10;
+    /* Pevný poměr stran podle fotek (4 : 3) – obě fotky leží přesně na sobě */
+    aspect-ratio: 4 / 3;
     border-radius: 20px;
     overflow: hidden;
     user-select: none;
@@ -745,7 +745,7 @@ nav.active > *:nth-child(7) { animation-delay: 0.30s; }
 }
 
 .ba-before {
-    background-image: url('../Pred.JPG');
+    background-image: url('../foto/podbaba-pred.jpg');
     z-index: 2;
     /* Fotka „před“ se nezmenšuje, jen se odkrývá zprava (ořez řídí skript) */
     clip-path: inset(0 50% 0 0);
@@ -766,7 +766,7 @@ nav.active > *:nth-child(7) { animation-delay: 0.30s; }
 }
 
 .ba-after {
-    background-image: url('../Po.JPEG');
+    background-image: url('../foto/podbaba-po.jpg');
     z-index: 1;
 }
 
@@ -2871,7 +2871,7 @@ header.scrolled {
                 <a href="zakazka-byt-podbaba.html" class="gallery-album-link">More about the project <i class="fa-solid fa-arrow-right"></i></a>
             </div>
             <div class="gallery-grid">
-                    <button class="gallery-item"><img src="../Pred.JPG" alt="Apartment renovation, Prague 6 – Podbaba (before)" loading="lazy" onerror="this.parentElement.remove()"><span class="gallery-caption">Before the renovation</span></button>
+                    <button class="gallery-item"><img src="../foto/podbaba-pred.jpg" alt="Apartment renovation, Prague 6 – Podbaba (before)" loading="lazy" onerror="this.parentElement.remove()"><span class="gallery-caption">Before the renovation</span></button>
                     <button class="gallery-item"><img src="../foto/podbaba-prubeh-1.jpg" alt="Apartment renovation, Prague 6 – Podbaba: original condition after removing the kitchen units and tiles" loading="lazy" onerror="this.parentElement.remove()"><span class="gallery-caption">1. Starting point – kitchen removed</span></button>
                     <button class="gallery-item"><img src="../foto/podbaba-prubeh-2.jpg" alt="Apartment renovation, Prague 6 – Podbaba: covering the floors and preparing the space before demolition" loading="lazy" onerror="this.parentElement.remove()"><span class="gallery-caption">2. Preparation – floor protection</span></button>
                     <button class="gallery-item"><img src="../foto/podbaba-prubeh-3.jpg" alt="Apartment renovation, Prague 6 – Podbaba: new wiring and outlets for the kitchen" loading="lazy" onerror="this.parentElement.remove()"><span class="gallery-caption">3. New electrical wiring</span></button>
@@ -2888,7 +2888,7 @@ header.scrolled {
                     <button class="gallery-item"><img src="../foto/podbaba-hotovo-4.jpg" alt="Apartment renovation, Prague 6 – Podbaba: kitchen with tall cabinets and large-format tiles" loading="lazy" onerror="this.parentElement.remove()"><span class="gallery-caption">Kitchen units and tiles</span></button>
                     <button class="gallery-item"><img src="../foto/podbaba-hotovo-5.jpg" alt="Apartment renovation, Prague 6 – Podbaba: corner detail with tiles and cooker hood" loading="lazy" onerror="this.parentElement.remove()"><span class="gallery-caption">Corner detail</span></button>
                     <button class="gallery-item"><img src="../foto/podbaba-hotovo-6.jpg" alt="Apartment renovation, Prague 6 – Podbaba: overall view of the finished kitchen" loading="lazy" onerror="this.parentElement.remove()"><span class="gallery-caption">Overall view</span></button>
-                    <button class="gallery-item"><img src="../Po.JPEG" alt="Apartment renovation, Prague 6 – Podbaba (after)" loading="lazy" onerror="this.parentElement.remove()"><span class="gallery-caption">After – kitchen installed</span></button>
+                    <button class="gallery-item"><img src="../foto/podbaba-po.jpg" alt="Apartment renovation, Prague 6 – Podbaba (after)" loading="lazy" onerror="this.parentElement.remove()"><span class="gallery-caption">After – kitchen installed</span></button>
             </div>
         </div>
         <div class="gallery-album reveal" data-cat="projekce">
