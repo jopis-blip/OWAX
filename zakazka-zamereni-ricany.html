@@ -2668,57 +2668,158 @@ header.scrolled {
     margin-right: 0.3rem;
 }
 
-/* Celková mapa zakázek (stránka Reference) – kliknutím v seznamu se mapa přepne */
+/* Celková mapa zakázek – vlastní mapa ČR se špendlíky (úvod a Reference) */
 .projects-map-wrap {
     display: grid;
-    grid-template-columns: 2fr 1fr;
-    gap: clamp(1.2rem, 2.5vw, 2.5rem);
-    align-items: stretch;
+    grid-template-columns: 2.2fr 1fr;
+    gap: clamp(1.5rem, 3vw, 3rem);
+    align-items: center;
 }
 
-.projects-map {
-    min-height: 420px;
-    border-radius: 18px;
-    overflow: hidden;
-    border: 1px solid var(--border-card);
-    background: #e2e8f0;
+.cz-map {
+    position: relative;
+}
+
+.cz-map-svg {
+    display: block;
+    width: 100%;
+    height: auto;
+    overflow: visible;
+}
+
+.cz-land {
+    fill: #283548;
+    stroke: #60a5fa;
+    stroke-width: 2;
+    stroke-linejoin: round;
+}
+
+.cz-city {
+    fill: #64748b;
+}
+
+.cz-city-big {
+    fill: #94a3b8;
+}
+
+.cz-city-label {
+    fill: #94a3b8;
+    font-size: 15px;
+    font-weight: 600;
+    font-family: inherit;
+}
+
+.cz-city-main {
+    fill: #e2e8f0;
+    font-size: 20px;
+    font-weight: 800;
+}
+
+.cz-leader {
+    stroke: #60a5fa;
+    stroke-width: 1.5;
+    stroke-dasharray: 4 4;
+}
+
+.cz-spot {
+    fill: #60a5fa;
+    stroke: #1e293b;
+    stroke-width: 2;
+}
+
+.cz-pin {
+    position: absolute;
+    transform: translate(-50%, -100%);
+    line-height: 1;
+    text-decoration: none;
+    z-index: 1;
+}
+
+.cz-pin:hover,
+.cz-pin:focus-visible,
+.cz-pin.is-hot {
+    z-index: 5;
+}
+
+.cz-pin-icon {
+    display: block;
+    width: clamp(24px, 2.4vw, 34px);
+    height: auto;
+    fill: var(--brand-blue);
+    filter: drop-shadow(0 3px 5px rgba(0, 0, 0, 0.45));
+    transform-origin: 50% 100%;
+    transition: var(--transition);
+}
+
+.cz-pin-icon circle {
+    fill: white;
+}
+
+.cz-pin:hover .cz-pin-icon,
+.cz-pin:focus-visible .cz-pin-icon,
+.cz-pin.is-hot .cz-pin-icon {
+    fill: #3b82f6;
+    transform: scale(1.18);
+}
+
+.cz-pin-tip {
+    position: absolute;
+    left: 50%;
+    bottom: calc(100% + 12px);
+    transform: translate(-50%, 6px);
+    background: white;
+    color: #0f172a;
+    padding: 0.6rem 0.9rem;
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 0.9rem;
+    white-space: nowrap;
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35);
+    opacity: 0;
+    pointer-events: none;
+    transition: var(--transition);
+}
+
+.cz-pin-tip small {
+    display: block;
+    margin-top: 0.15rem;
+    color: #64748b;
+    font-weight: 600;
+    font-size: 0.78rem;
+}
+
+.cz-pin:hover .cz-pin-tip,
+.cz-pin:focus-visible .cz-pin-tip,
+.cz-pin.is-hot .cz-pin-tip {
+    opacity: 1;
+    transform: translate(-50%, 0);
 }
 
 .map-list {
     list-style: none;
-    align-self: center;
 }
 
-.map-list button {
-    width: 100%;
+.map-list a {
     display: flex;
     align-items: center;
     gap: 0.9rem;
     padding: 0.9rem 0.6rem;
-    background: none;
-    border: none;
     border-bottom: 1px solid var(--border-card);
     color: #cbd5e1;
-    font: inherit;
     font-weight: 600;
-    text-align: left;
-    cursor: pointer;
+    text-decoration: none;
     transition: var(--transition);
 }
 
-.map-list button:hover,
-.map-list button.active {
+.map-list a:hover,
+.map-list a:focus-visible {
     color: white;
     background: rgba(255, 255, 255, 0.05);
 }
 
-.map-list button i {
+.map-list a i {
     color: #60a5fa;
     font-size: 1.1rem;
-}
-
-.map-list button.active i {
-    color: white;
 }
 
 .map-list small {
@@ -2728,23 +2829,21 @@ header.scrolled {
     font-size: 0.85rem;
 }
 
-.map-detail {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    margin-top: 1.2rem;
-    color: #60a5fa;
-    font-weight: 700;
-    text-decoration: none;
-}
-
 @media (max-width: 900px) {
     .projects-map-wrap {
         grid-template-columns: 1fr;
     }
 
-    .projects-map {
-        min-height: 340px;
+    .cz-city-label {
+        font-size: 20px;
+    }
+
+    .cz-city-main {
+        font-size: 26px;
+    }
+
+    .cz-pin-icon {
+        width: 22px;
     }
 }
 
@@ -3139,21 +3238,13 @@ if (heroSlides) {
     show(0);
 }
 
-/* === CELKOVÁ MAPA ZAKÁZEK – kliknutím na zakázku v seznamu se Google mapa přepne === */
-const mapList = document.querySelector('.map-list');
-
-if (mapList) {
-    const frame = document.querySelector('.projects-map iframe');
-    const detail = document.querySelector('.map-detail');
-    const lang = document.documentElement.lang === 'en' ? 'en' : 'cs';
-    mapList.addEventListener('click', (e) => {
-        const btn = e.target.closest('button[data-q]');
-        if (!btn) return;
-        mapList.querySelectorAll('button').forEach(b => b.classList.toggle('active', b === btn));
-        frame.src = 'https://maps.google.com/maps?q=' + encodeURIComponent(btn.dataset.q) + '&z=' + (btn.dataset.z || 12) + '&hl=' + lang + '&output=embed';
-        if (detail) detail.href = btn.dataset.href;
-    });
-}
+/* === CELKOVÁ MAPA ZAKÁZEK – při najetí na zakázku v seznamu se zvýrazní její špendlík === */
+document.querySelectorAll('.map-list a').forEach(a => {
+    const pin = document.querySelector('.cz-pin[href="' + a.getAttribute('href') + '"]');
+    if (!pin) return;
+    a.addEventListener('mouseenter', () => pin.classList.add('is-hot'));
+    a.addEventListener('mouseleave', () => pin.classList.remove('is-hot'));
+});
 
 /* === REVEAL ANIMACE === */
 const observer = new IntersectionObserver((entries) => {
