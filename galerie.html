@@ -2568,6 +2568,16 @@ header.scrolled {
     width: min(100%, clamp(260px, 32vw, 460px));
 }
 
+.gallery-grid-center.cols-3 .gallery-item {
+    width: calc((100% - 2 * clamp(0.8rem, 1.2vw, 1.2rem)) / 3);
+}
+
+@media (max-width: 900px) {
+    .gallery-grid-center.cols-3 .gallery-item {
+        width: min(100%, 460px);
+    }
+}
+
 /* Legenda prvků na stránce zakázky (čísla podle výkresu) */
 .legend h3 {
     font-size: clamp(1.1rem, 1.4vw, 1.3rem);
@@ -2788,14 +2798,15 @@ header.scrolled {
         <div class="gallery-album reveal" data-cat="projekce">
             <div class="gallery-album-header">
                 <div>
-                    <span class="case-tag">Projekce · Zaměření · Říčany</span>
-                    <h3>Zaměření skutečného stavu rodinného domu</h3>
-                    <p>Zaměření a podklady pro kolaudační řízení.</p>
+                    <span class="case-tag">Projekce · Dokumentace · Říčany</span>
+                    <h3>Dokumentace půdní vestavby rodinného domu</h3>
+                    <p>Půdorysy před a po vestavbě a řez se skladbami konstrukcí.</p>
                 </div>
                 <a href="zakazka-zamereni-ricany.html" class="gallery-album-link">Více o zakázce <i class="fa-solid fa-arrow-right"></i></a>
             </div>
             <div class="gallery-grid">
-                    <button class="gallery-item"><img src="foto/ricany.jpg" alt="Zaměření rodinného domu v Říčanech" loading="lazy" onerror="this.parentElement.remove()"><span class="gallery-caption">Zaměření domu</span></button>
+                    <button class="gallery-item"><img src="foto/ricany-po.jpg" alt="Půdní vestavba, Říčany – půdorys podkroví po vestavbě" loading="lazy" onerror="this.parentElement.remove()"><span class="gallery-caption">Půdorys po vestavbě</span></button>
+                    <button class="gallery-item"><img src="foto/ricany-rez.jpg" alt="Půdní vestavba, Říčany – řez A–A′" loading="lazy" onerror="this.parentElement.remove()"><span class="gallery-caption">Řez A–A′</span></button>
             </div>
         </div>
         <div class="gallery-album reveal" data-cat="projekce">

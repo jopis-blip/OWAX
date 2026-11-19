@@ -2568,6 +2568,16 @@ header.scrolled {
     width: min(100%, clamp(260px, 32vw, 460px));
 }
 
+.gallery-grid-center.cols-3 .gallery-item {
+    width: calc((100% - 2 * clamp(0.8rem, 1.2vw, 1.2rem)) / 3);
+}
+
+@media (max-width: 900px) {
+    .gallery-grid-center.cols-3 .gallery-item {
+        width: min(100%, 460px);
+    }
+}
+
 /* Legenda prvků na stránce zakázky (čísla podle výkresu) */
 .legend h3 {
     font-size: clamp(1.1rem, 1.4vw, 1.3rem);
@@ -2788,14 +2798,15 @@ header.scrolled {
         <div class="gallery-album reveal" data-cat="projekce">
             <div class="gallery-album-header">
                 <div>
-                    <span class="case-tag">Design · Survey · Říčany</span>
-                    <h3>As-built survey of a family house</h3>
-                    <p>Survey and documents for the occupancy approval.</p>
+                    <span class="case-tag">Design · Documentation · Říčany</span>
+                    <h3>Documentation of a family house loft conversion</h3>
+                    <p>Floor plans before and after the conversion and a section with structural build-ups.</p>
                 </div>
                 <a href="zakazka-zamereni-ricany.html" class="gallery-album-link">More about the project <i class="fa-solid fa-arrow-right"></i></a>
             </div>
             <div class="gallery-grid">
-                    <button class="gallery-item"><img src="../foto/ricany.jpg" alt="Survey of a family house in Říčany" loading="lazy" onerror="this.parentElement.remove()"><span class="gallery-caption">House survey</span></button>
+                    <button class="gallery-item"><img src="../foto/ricany-po.jpg" alt="Loft conversion, Říčany – attic floor plan after the conversion" loading="lazy" onerror="this.parentElement.remove()"><span class="gallery-caption">Floor plan after</span></button>
+                    <button class="gallery-item"><img src="../foto/ricany-rez.jpg" alt="Loft conversion, Říčany – section A–A′" loading="lazy" onerror="this.parentElement.remove()"><span class="gallery-caption">Section A–A′</span></button>
             </div>
         </div>
         <div class="gallery-album reveal" data-cat="projekce">

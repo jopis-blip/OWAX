@@ -2568,6 +2568,16 @@ header.scrolled {
     width: min(100%, clamp(260px, 32vw, 460px));
 }
 
+.gallery-grid-center.cols-3 .gallery-item {
+    width: calc((100% - 2 * clamp(0.8rem, 1.2vw, 1.2rem)) / 3);
+}
+
+@media (max-width: 900px) {
+    .gallery-grid-center.cols-3 .gallery-item {
+        width: min(100%, 460px);
+    }
+}
+
 /* Legenda prvků na stránce zakázky (čísla podle výkresu) */
 .legend h3 {
     font-size: clamp(1.1rem, 1.4vw, 1.3rem);
