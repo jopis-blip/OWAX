@@ -2557,6 +2557,157 @@ header.scrolled {
     }
 }
 
+/* Legenda prvků na stránce zakázky (karty s čísly podle výkresu) */
+.legend-groups {
+    margin: 0 var(--side) clamp(2.5rem, 4vw, 4.5rem);
+    display: grid;
+    gap: clamp(2rem, 3vw, 3rem);
+}
+
+.legend-group-title {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    font-size: clamp(1.05rem, 1.3vw, 1.25rem);
+    font-weight: 800;
+    color: #0f172a;
+    margin-bottom: 1.1rem;
+}
+
+.legend-group-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: rgba(15, 23, 42, 0.12);
+}
+
+.legend-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: clamp(0.9rem, 1.5vw, 1.4rem);
+}
+
+@media (max-width: 1100px) {
+    .legend-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .legend-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.legend-tag {
+    display: inline-block;
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #60a5fa;
+    margin-bottom: 0.4rem;
+}
+
+.legend-card {
+    position: relative;
+    background: var(--card-dark);
+    border: 1px solid var(--border-card);
+    border-radius: 20px;
+    padding: 1.5rem 1.4rem 1.4rem;
+    color: white;
+    overflow: hidden;
+    transition: var(--transition);
+}
+
+.legend-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(96, 165, 250, 0.45);
+    box-shadow: 0 16px 34px rgba(0, 86, 210, 0.2);
+}
+
+.legend-icon {
+    width: 52px;
+    height: 52px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.35rem;
+    color: #60a5fa;
+    background: rgba(0, 86, 210, 0.2);
+    border: 1px solid rgba(0, 86, 210, 0.35);
+    margin-bottom: 1.1rem;
+    transition: var(--transition);
+}
+
+.legend-card:hover .legend-icon {
+    background: var(--brand-blue);
+    color: white;
+}
+
+.legend-num {
+    position: absolute;
+    top: 1.1rem;
+    right: 1.2rem;
+    min-width: 34px;
+    height: 34px;
+    padding: 0 0.5rem;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 0.9rem;
+    color: #93c5fd;
+    border: 1.5px solid rgba(147, 197, 253, 0.55);
+}
+
+.legend-card h4 {
+    font-size: 1.08rem;
+    font-weight: 700;
+    margin-bottom: 0.45rem;
+    line-height: 1.35;
+}
+
+.legend-card p {
+    color: var(--text-muted);
+    font-size: 0.92rem;
+    line-height: 1.6;
+}
+
+/* Zachované prvky – kompaktní štítky (čtvereček = značka ve výkresu) */
+.legend-kept {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.7rem;
+}
+
+.legend-kept span {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    background: white;
+    border: 1px solid rgba(15, 23, 42, 0.1);
+    border-radius: 14px;
+    padding: 0.55rem 1rem 0.55rem 0.55rem;
+    font-weight: 700;
+    color: #1e293b;
+    box-shadow: 0 6px 16px rgba(15, 23, 42, 0.05);
+}
+
+.legend-kept b {
+    width: 30px;
+    height: 30px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #e2e8f0;
+    color: #0f172a;
+    font-size: 0.85rem;
+}
+
 /* Přepínač jazyka CZ / EN v hlavičce */
 .lang-switch {
     display: inline-flex;
@@ -2737,7 +2888,6 @@ header.scrolled {
             </div>
             <div class="gallery-grid">
                     <button class="gallery-item"><img src="foto/skolka-pudorys.jpg" alt="Modernizace zahrady mateřské školy, Most – půdorys zahrady 1 : 100" loading="lazy" onerror="this.parentElement.remove()"><span class="gallery-caption">Půdorys zahrady</span></button>
-                    <button class="gallery-item"><img src="foto/skolka-legenda.jpg" alt="Modernizace zahrady mateřské školy, Most – legenda prvků a rozpiska výkresu" loading="lazy" onerror="this.parentElement.remove()"><span class="gallery-caption">Legenda a rozpiska</span></button>
             </div>
         </div>
     </section>

@@ -2557,6 +2557,157 @@ header.scrolled {
     }
 }
 
+/* Legenda prvků na stránce zakázky (karty s čísly podle výkresu) */
+.legend-groups {
+    margin: 0 var(--side) clamp(2.5rem, 4vw, 4.5rem);
+    display: grid;
+    gap: clamp(2rem, 3vw, 3rem);
+}
+
+.legend-group-title {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    font-size: clamp(1.05rem, 1.3vw, 1.25rem);
+    font-weight: 800;
+    color: #0f172a;
+    margin-bottom: 1.1rem;
+}
+
+.legend-group-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: rgba(15, 23, 42, 0.12);
+}
+
+.legend-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: clamp(0.9rem, 1.5vw, 1.4rem);
+}
+
+@media (max-width: 1100px) {
+    .legend-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .legend-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.legend-tag {
+    display: inline-block;
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #60a5fa;
+    margin-bottom: 0.4rem;
+}
+
+.legend-card {
+    position: relative;
+    background: var(--card-dark);
+    border: 1px solid var(--border-card);
+    border-radius: 20px;
+    padding: 1.5rem 1.4rem 1.4rem;
+    color: white;
+    overflow: hidden;
+    transition: var(--transition);
+}
+
+.legend-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(96, 165, 250, 0.45);
+    box-shadow: 0 16px 34px rgba(0, 86, 210, 0.2);
+}
+
+.legend-icon {
+    width: 52px;
+    height: 52px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.35rem;
+    color: #60a5fa;
+    background: rgba(0, 86, 210, 0.2);
+    border: 1px solid rgba(0, 86, 210, 0.35);
+    margin-bottom: 1.1rem;
+    transition: var(--transition);
+}
+
+.legend-card:hover .legend-icon {
+    background: var(--brand-blue);
+    color: white;
+}
+
+.legend-num {
+    position: absolute;
+    top: 1.1rem;
+    right: 1.2rem;
+    min-width: 34px;
+    height: 34px;
+    padding: 0 0.5rem;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 0.9rem;
+    color: #93c5fd;
+    border: 1.5px solid rgba(147, 197, 253, 0.55);
+}
+
+.legend-card h4 {
+    font-size: 1.08rem;
+    font-weight: 700;
+    margin-bottom: 0.45rem;
+    line-height: 1.35;
+}
+
+.legend-card p {
+    color: var(--text-muted);
+    font-size: 0.92rem;
+    line-height: 1.6;
+}
+
+/* Zachované prvky – kompaktní štítky (čtvereček = značka ve výkresu) */
+.legend-kept {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.7rem;
+}
+
+.legend-kept span {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    background: white;
+    border: 1px solid rgba(15, 23, 42, 0.1);
+    border-radius: 14px;
+    padding: 0.55rem 1rem 0.55rem 0.55rem;
+    font-weight: 700;
+    color: #1e293b;
+    box-shadow: 0 6px 16px rgba(15, 23, 42, 0.05);
+}
+
+.legend-kept b {
+    width: 30px;
+    height: 30px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #e2e8f0;
+    color: #0f172a;
+    font-size: 0.85rem;
+}
+
 /* Přepínač jazyka CZ / EN v hlavičce */
 .lang-switch {
     display: inline-flex;
@@ -2681,43 +2832,111 @@ header.scrolled {
         </div>
     </section>
 
-    <!-- CO NA ZAHRADĚ PŘIBYLO – čísla odpovídají kroužkům ve výkresu -->
+    <!-- CO NA ZAHRADĚ PŘIBYLO – čísla odpovídají číslům v kroužcích ve výkresu -->
     <section>
         <div class="section-header reveal">
             <span class="section-subtitle">Design legend</span>
             <h2 class="section-title">What's new in the garden</h2>
-            <p class="section-lead">In the drawing, numbers in circles are new features and numbers in squares are features that stayed in the garden.</p>
+            <p class="section-lead">Twelve new features that turn a play garden into a place for discovering nature. The numbers match the drawing.</p>
         </div>
 
-        <div class="dark-card-container reveal">
-            <div class="detail-grid">
-                <div>
-                    <h3>New features</h3>
-                    <ul class="check-list">
-                        <li><i class="fa-solid fa-umbrella-beach"></i> 1 · Shade – shade sail</li>
-                        <li><i class="fa-solid fa-chair"></i> 2 · Butterfly bush with wooden seating</li>
-                        <li><i class="fa-solid fa-seedling"></i> 3 · Raised herb planter</li>
-                        <li><i class="fa-solid fa-apple-whole"></i> 4 · Apple tree</li>
-                        <li><i class="fa-solid fa-leaf"></i> 5 · Currant bush</li>
-                        <li><i class="fa-solid fa-leaf"></i> 6 · Gooseberry bush</li>
-                        <li><i class="fa-solid fa-bug"></i> 7 · Bug house</li>
-                        <li><i class="fa-solid fa-chalkboard"></i> 8 · “Birds” writing board</li>
-                        <li><i class="fa-solid fa-table"></i> 9 · Table with a bench</li>
-                        <li><i class="fa-solid fa-dove"></i> 10 · Birdhouses</li>
-                        <li><i class="fa-solid fa-temperature-half"></i> 11 · Weather station and magnifiers</li>
-                        <li><i class="fa-solid fa-palette"></i> 12 · Drawing board</li>
-                    </ul>
+        <div class="legend-groups">
+            <div class="legend-grid">
+                <div class="legend-card reveal">
+                    <span class="legend-num">1</span>
+                    <div class="legend-icon"><i class="fa-solid fa-umbrella-beach"></i></div>
+                    <span class="legend-tag">Time outdoors</span>
+                    <h4>Shade</h4>
+                    <p>A shade sail where children can rest even on hot days.</p>
                 </div>
-                <div class="facts-list">
-                    <h3>Kept features</h3>
-                    <dl>
-                            <dt>1</dt><dd>Toy chest</dd>
-                            <dt>2</dt><dd>Mat</dd>
-                            <dt>3</dt><dd>Balance beam</dd>
-                            <dt>4</dt><dd>Playhouse</dd>
-                            <dt>5</dt><dd>Spring rocker (snail)</dd>
-                            <dt>6</dt><dd>Aeroplane</dd>
-                    </dl>
+                <div class="legend-card reveal">
+                    <span class="legend-num">2</span>
+                    <div class="legend-icon"><i class="fa-solid fa-spa"></i></div>
+                    <span class="legend-tag">Nature</span>
+                    <h4>Butterfly bush with wooden seating</h4>
+                    <p>A flowering shrub that attracts butterflies, surrounded by wooden seating for watching them.</p>
+                </div>
+                <div class="legend-card reveal">
+                    <span class="legend-num">3</span>
+                    <div class="legend-icon"><i class="fa-solid fa-seedling"></i></div>
+                    <span class="legend-tag">Nature</span>
+                    <h4>Raised herb planter</h4>
+                    <p>Children grow herbs at a height they can easily reach.</p>
+                </div>
+                <div class="legend-card reveal">
+                    <span class="legend-num">4</span>
+                    <div class="legend-icon"><i class="fa-solid fa-apple-whole"></i></div>
+                    <span class="legend-tag">Nature</span>
+                    <h4>Apple tree</h4>
+                    <p>A fruit tree where children can watch it blossom and the fruit ripen.</p>
+                </div>
+                <div class="legend-card reveal">
+                    <span class="legend-num">5</span>
+                    <div class="legend-icon"><i class="fa-solid fa-leaf"></i></div>
+                    <span class="legend-tag">Nature</span>
+                    <h4>Currant bush</h4>
+                    <p>A fruit bush children can pick from themselves.</p>
+                </div>
+                <div class="legend-card reveal">
+                    <span class="legend-num">6</span>
+                    <div class="legend-icon"><i class="fa-solid fa-leaf"></i></div>
+                    <span class="legend-tag">Nature</span>
+                    <h4>Gooseberry bush</h4>
+                    <p>Another fruit bush for a seasonal harvest with the children.</p>
+                </div>
+                <div class="legend-card reveal">
+                    <span class="legend-num">7</span>
+                    <div class="legend-icon"><i class="fa-solid fa-bug"></i></div>
+                    <span class="legend-tag">Discovery</span>
+                    <h4>Bug house</h4>
+                    <p>A shelter for insects that children can observe up close.</p>
+                </div>
+                <div class="legend-card reveal">
+                    <span class="legend-num">8</span>
+                    <div class="legend-icon"><i class="fa-solid fa-feather-pointed"></i></div>
+                    <span class="legend-tag">Discovery</span>
+                    <h4>“Birds” writing board</h4>
+                    <p>A board for identifying and recording the birds that visit the garden.</p>
+                </div>
+                <div class="legend-card reveal">
+                    <span class="legend-num">9</span>
+                    <div class="legend-icon"><i class="fa-solid fa-chair"></i></div>
+                    <span class="legend-tag">Time outdoors</span>
+                    <h4>Table with a bench</h4>
+                    <p>A spot for outdoor lessons, snacks and crafts.</p>
+                </div>
+                <div class="legend-card reveal">
+                    <span class="legend-num">10</span>
+                    <div class="legend-icon"><i class="fa-solid fa-dove"></i></div>
+                    <span class="legend-tag">Discovery</span>
+                    <h4>Birdhouses</h4>
+                    <p>Nesting boxes that attract birds to the garden.</p>
+                </div>
+                <div class="legend-card reveal">
+                    <span class="legend-num">11</span>
+                    <div class="legend-icon"><i class="fa-solid fa-cloud-sun"></i></div>
+                    <span class="legend-tag">Discovery</span>
+                    <h4>Weather station and magnifiers</h4>
+                    <p>Children track the temperature and weather, and use magnifiers to explore nature.</p>
+                </div>
+                <div class="legend-card reveal">
+                    <span class="legend-num">12</span>
+                    <div class="legend-icon"><i class="fa-solid fa-palette"></i></div>
+                    <span class="legend-tag">Discovery</span>
+                    <h4>Drawing board</h4>
+                    <p>A large board for drawing outdoors.</p>
+                </div>
+            </div>
+
+            <div>
+                <h3 class="legend-group-title reveal">Existing play equipment kept</h3>
+                <div class="legend-kept reveal">
+                    <span><b>1</b> Toy chest</span>
+                    <span><b>2</b> Mat</span>
+                    <span><b>3</b> Balance beam</span>
+                    <span><b>4</b> Playhouse</span>
+                    <span><b>5</b> Spring rocker (snail)</span>
+                    <span><b>6</b> Aeroplane</span>
                 </div>
             </div>
         </div>
@@ -2735,7 +2954,6 @@ header.scrolled {
             <div class="gallery-grid">
                     <button class="gallery-item"><img src="../foto/skolka-pudorys.jpg" alt="Kindergarten garden modernisation, Most – garden plan 1:100" loading="lazy" onerror="this.parentElement.remove()"><span class="gallery-caption">Garden plan</span></button>
                     <button class="gallery-item"><img src="../foto/skolka.jpg" alt="Kindergarten garden modernisation, Most – detail of the play area and new features" loading="lazy" onerror="this.parentElement.remove()"><span class="gallery-caption">Play area detail</span></button>
-                    <button class="gallery-item"><img src="../foto/skolka-legenda.jpg" alt="Kindergarten garden modernisation, Most – legend and drawing title block" loading="lazy" onerror="this.parentElement.remove()"><span class="gallery-caption">Legend and title block</span></button>
             </div>
         </div>
 
