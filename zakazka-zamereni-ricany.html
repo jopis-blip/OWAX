@@ -2715,18 +2715,6 @@ header.scrolled {
     font-weight: 800;
 }
 
-.cz-leader {
-    stroke: #60a5fa;
-    stroke-width: 1.5;
-    stroke-dasharray: 4 4;
-}
-
-.cz-spot {
-    fill: #60a5fa;
-    stroke: #1e293b;
-    stroke-width: 2;
-}
-
 .cz-pin {
     position: absolute;
     transform: translate(-50%, -100%);
@@ -2793,6 +2781,70 @@ header.scrolled {
 .cz-pin.is-hot .cz-pin-tip {
     opacity: 1;
     transform: translate(-50%, 0);
+}
+
+.cz-pin-icon text {
+    fill: var(--brand-blue);
+    font-size: 10px;
+    font-weight: 800;
+    font-family: inherit;
+}
+
+/* Více zakázek na jednom místě (Praha a okolí) – jeden špendlík s číslem a seznamem */
+.cz-cluster {
+    cursor: pointer;
+    outline: none;
+}
+
+.cz-cluster .cz-pin-tip {
+    left: calc(100% + 14px);
+    bottom: auto;
+    top: 50%;
+    transform: translate(6px, -60%);
+    min-width: 250px;
+    padding: 0.8rem 1rem 0.4rem;
+    white-space: normal;
+    text-align: left;
+}
+
+.cz-cluster .cz-pin-tip::before {
+    content: '';
+    position: absolute;
+    right: 100%;
+    top: 0;
+    bottom: 0;
+    width: 18px;
+}
+
+.cz-cluster:hover .cz-pin-tip,
+.cz-cluster:focus-within .cz-pin-tip,
+.cz-cluster.is-hot .cz-pin-tip {
+    opacity: 1;
+    transform: translate(0, -60%);
+    pointer-events: auto;
+}
+
+.cz-cluster .cz-pin-tip strong {
+    display: block;
+    margin-bottom: 0.3rem;
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--brand-blue);
+}
+
+.cz-cluster .cz-pin-tip a {
+    display: block;
+    padding: 0.5rem 0;
+    border-top: 1px solid #e2e8f0;
+    color: #0f172a;
+    font-weight: 700;
+    font-size: 0.9rem;
+    text-decoration: none;
+}
+
+.cz-cluster .cz-pin-tip a:hover {
+    color: var(--brand-blue);
 }
 
 .map-list {
@@ -3240,7 +3292,8 @@ if (heroSlides) {
 
 /* === CELKOVÁ MAPA ZAKÁZEK – při najetí na zakázku v seznamu se zvýrazní její špendlík === */
 document.querySelectorAll('.map-list a').forEach(a => {
-    const pin = document.querySelector('.cz-pin[href="' + a.getAttribute('href') + '"]');
+    const href = a.getAttribute('href');
+    const pin = document.querySelector('.cz-pin[href="' + href + '"]') || document.querySelector('.cz-cluster a[href="' + href + '"]')?.closest('.cz-cluster');
     if (!pin) return;
     a.addEventListener('mouseenter', () => pin.classList.add('is-hot'));
     a.addEventListener('mouseleave', () => pin.classList.remove('is-hot'));
