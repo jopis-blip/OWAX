@@ -62,12 +62,12 @@ def tr_tag(tag):
         return tag
     return re.sub(r'([\w-]+)=(["\'])(.*?)\2', attr, tag)
 
-ASSET = re.compile(r'^(foto/|video/|vendor/|logo\.png|favicon\.png|apple-touch-icon\.png|Pred\.JPG|Po\.JPEG)')
+ASSET = re.compile(r'^(foto/|video/|vendor/|logo\.png|favicon\.png|apple-touch-icon\.png)')
 
 def fix_paths(t):
     t = re.sub(r'(src|href|poster|data-bg)="([^"#:]+?)"',
                lambda m: f'{m.group(1)}="../{m.group(2)}"' if ASSET.match(m.group(2)) else m.group(0), t)
-    t = re.sub(r"url\('((?:foto/|video/|Pred\.JPG|Po\.JPEG)[^']*)'\)", r"url('../\1')", t)
+    t = re.sub(r"url\('((?:foto/|video/)[^']*)'\)", r"url('../\1')", t)
     return t
 
 def page_url(name, en):
