@@ -396,7 +396,6 @@ EN = {
 'Modernizace zahrady mateřské školy, Most – legenda prvků a rozpiska výkresu': 'Kindergarten garden modernisation, Most – legend and drawing title block',
 'Modernizace zahrady mateřské školy, Most – půdorys zahrady 1 : 100': 'Kindergarten garden modernisation, Most – garden plan 1:100',
 'Modernizace zahrady mateřské školy, Most – výkres': 'Kindergarten garden modernisation, Most – drawing',
-'Most – Marš. Rybalka 1020': 'Most – Marš. Rybalka 1020',
 'Naučná zahrada s novými přírodními prvky a zachovanými herními prvky.': 'An educational garden with new nature features and the existing play equipment kept.',
 'Nové prvky': 'New features',
 'Návrh doplňuje zahradu o stínící plachtu, motýlí strom s dřevěným sezením, vysoké truhlíky na bylinky a ovocné rostliny – jabloň, rybíz a angrešt. Pro poznávání přírody přibyl domeček pro brouky, budky pro ptáky, meteorologická stanice s lupami a tabule na psaní a kreslení. U chodníku je stůl s lavičkou pro venkovní výuku.': 'The design adds a shade sail, a butterfly bush with wooden seating, raised herb planters and fruit plants – an apple tree, currants and gooseberries. To help children discover nature, there is a bug house, birdhouses, a weather station with magnifiers and boards for writing and drawing. A table with a bench by the path serves for outdoor lessons.',
@@ -450,6 +449,9 @@ EN = {
 'Úkryt pro hmyz, který si děti mohou prohlížet zblízka.': 'A shelter for insects that children can observe up close.',
 'Příroda': 'Nature',
 'Poznávání': 'Discovery',
+'Most': 'Most',
+'Zachované herní prvky:': 'Existing play equipment kept:',
+'bedna na hračky, rohož, kladina, domeček, houpací šnek a letadlo.': 'toy chest, mat, balance beam, playhouse, spring rocker (snail) and aeroplane.',
 }
 
 JS = {
