@@ -7,6 +7,9 @@
     <title>Vchodová stříška – Praha 5 | OWAX</title>
     <meta name="description" content="Realizace OWAX: dodávka a montáž vchodové stříšky s ocelovou konstrukcí, polykarbonátovou krytinou a odvodňovacím žlabem v Praze 5.">
     <link rel="canonical" href="https://owax.cz/zakazka-stricha-praha-5.html">
+    <link rel="alternate" hreflang="cs" href="https://owax.cz/zakazka-stricha-praha-5.html">
+    <link rel="alternate" hreflang="en" href="https://owax.cz/en/zakazka-stricha-praha-5.html">
+    <link rel="alternate" hreflang="x-default" href="https://owax.cz/zakazka-stricha-praha-5.html">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://owax.cz/zakazka-stricha-praha-5.html">
     <meta property="og:title" content="Vchodová stříška – Praha 5 | OWAX">
@@ -2021,7 +2024,8 @@ footer {
     margin-bottom: 1.8rem;
 }
 
-.footer-contacts a {
+.footer-contacts a,
+.footer-contacts span {
     color: #cbd5e1;
     text-decoration: none;
     font-weight: 600;
@@ -2050,21 +2054,6 @@ footer {
    Vše se vypne, pokud má návštěvník v systému omezené animace.
    ================================================ */
 
-/* Ukazatel, kolik stránky už návštěvník projel */
-.scroll-progress {
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 3px;
-    width: 100%;
-    transform-origin: left;
-    transform: scaleX(var(--p, 0));
-    background: linear-gradient(90deg, var(--brand-blue), #60a5fa);
-    box-shadow: 0 0 8px rgba(96, 165, 250, 0.6);
-    z-index: 1001;
-    pointer-events: none;
-}
-
 /* Lišta po posunutí stránky dostane stín (plná barva – průhledné rozostření
    v některých prohlížečích při posouvání problikávalo) */
 header {
@@ -2073,14 +2062,6 @@ header {
 
 header.scrolled {
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
-}
-
-.logo-img {
-    transition: var(--transition), height 0.4s;
-}
-
-header.scrolled .logo-img {
-    height: clamp(58px, 5.5vw, 74px);
 }
 
 /* Úvod: vrstvy pozadí – střídající se fotky → tmavý přechod → text */
@@ -2345,6 +2326,11 @@ header.scrolled .logo-img {
         animation-iteration-count: 1 !important;
         transition-duration: 0.01ms !important;
     }
+
+    /* Úvodní fotky se jemně prolínají i při omezených animacích (bez přibližování) */
+    .hero-slide {
+        transition-duration: 1.2s !important;
+    }
 }
 
 /* Skrytá vychytávka: po 5 kliknutích na „© OWAX“ v patičce vyskočí vzkaz */
@@ -2571,6 +2557,29 @@ header.scrolled .logo-img {
     }
 }
 
+/* Přepínač jazyka CZ / EN v hlavičce */
+.lang-switch {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 48px;
+    height: 40px;
+    padding: 0 0.8rem;
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    border-radius: 50px;
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 0.85rem;
+    letter-spacing: 0.06em;
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+.lang-switch:hover {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: #ffffff;
+}
+
     </style>
 </head>
 <body>
@@ -2578,7 +2587,7 @@ header.scrolled .logo-img {
     <!-- HLAVIČKA -->
     <header>
         <div class="header-content">
-            <a href="index.html" class="logo-container" title="OWAX – Úvod">
+            <a href="./" class="logo-container" title="OWAX – Úvod">
                 <img src="logo.png" alt="OWAX Logo" class="logo-img">
             </a>
 
@@ -2592,13 +2601,14 @@ header.scrolled .logo-img {
                 </div>
                 <a href="galerie.html" class="nav-btn nav-btn-outline header-cta">Galerie</a>
                 <a href="kontakt.html" class="nav-btn header-cta">Nezávazná konzultace</a>
+                <a href="en/zakazka-stricha-praha-5.html" class="lang-switch" hreflang="en" lang="en" title="English">EN</a>
                 <button class="hamburger" id="hamburger-btn" aria-label="Otevřít menu" aria-expanded="false" aria-controls="nav-menu">
                     <i class="fa-solid fa-bars"></i>
                 </button>
             </div>
 
             <nav id="nav-menu">
-                <a href="index.html" class="nav-link">Úvod</a>
+                <a href="./" class="nav-link">Úvod</a>
                 <a href="sluzby.html" class="nav-link">Služby</a>
                 <a href="reference.html" class="nav-link active">Reference</a>
                 <a href="galerie.html" class="nav-link">Galerie</a>
@@ -2715,7 +2725,7 @@ header.scrolled .logo-img {
     <!-- PATIČKA -->
     <footer>
         <div class="footer-nav">
-            <a href="index.html">Úvod</a>
+            <a href="./">Úvod</a>
             <a href="sluzby.html">Služby</a>
             <a href="reference.html">Reference</a>
             <a href="galerie.html">Galerie</a>
@@ -2725,7 +2735,7 @@ header.scrolled .logo-img {
         <div class="footer-contacts">
             <a href="tel:+420723557807"><i class="fa-solid fa-phone"></i> +420 723 557 807</a>
             <a href="mailto:info@owax.cz"><i class="fa-solid fa-envelope"></i> info@owax.cz</a>
-            <span style="color:#94a3b8;"><i class="fa-solid fa-location-dot" style="color:#60a5fa;"></i> Praha a Středočeský kraj</span>
+            <span><i class="fa-solid fa-location-dot"></i> Praha a Středočeský kraj</span>
         </div>
         <div class="social-links">
             <a href="https://www.instagram.com/owax.cz/" target="_blank" rel="noopener noreferrer" class="social-icon" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
@@ -2802,17 +2812,11 @@ if (galleryFilter) {
     }, true);
 }
 
-/* === ŽIVOST: lišta při posunu, ukazatel projetí stránky, postupné objevování karet, počítadla === */
+/* === ŽIVOST: stín lišty při posunu, postupné objevování karet, počítadla === */
 const pageHeader = document.querySelector('header');
-const progressBar = document.createElement('div');
-progressBar.className = 'scroll-progress';
-progressBar.setAttribute('aria-hidden', 'true');
-document.body.appendChild(progressBar);
 
 let scrollTicking = false;
 function onPageScroll() {
-    const max = document.documentElement.scrollHeight - window.innerHeight;
-    progressBar.style.setProperty('--p', max > 0 ? Math.min(1, window.scrollY / max) : 0);
     pageHeader.classList.toggle('scrolled', window.scrollY > 30);
     scrollTicking = false;
 }
@@ -2900,12 +2904,12 @@ if (heroSlides) {
         current = (i + slides.length) % slides.length;
         const s = slides[current];
         prepare(current);
-        s.classList.remove('zoom'); void s.offsetWidth; s.classList.add('active', 'zoom');
+        s.classList.remove('zoom'); void s.offsetWidth; s.classList.add('active'); if (!reduce) s.classList.add('zoom');
         if (s.tagName === 'VIDEO') { s.currentTime = 0; s.play().catch(() => {}); }
         if (dotsBox) [...dotsBox.children].forEach((d, k) => d.classList.toggle('active', k === current));
         prepare((current + 1) % slides.length);
         clearTimeout(timer);
-        if (!reduce) timer = setTimeout(() => show(current + 1), +(s.dataset.duration || 6000));
+        timer = setTimeout(() => show(current + 1), +(s.dataset.duration || 6000));
     }
 
     if (dotsBox) {
