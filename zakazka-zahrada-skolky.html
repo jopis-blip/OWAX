@@ -2557,155 +2557,65 @@ header.scrolled {
     }
 }
 
-/* Legenda prvků na stránce zakázky (karty s čísly podle výkresu) */
-.legend-groups {
-    margin: 0 var(--side) clamp(2.5rem, 4vw, 4.5rem);
-    display: grid;
-    gap: clamp(2rem, 3vw, 3rem);
+/* Legenda prvků na stránce zakázky (čísla podle výkresu) */
+.legend h3 {
+    font-size: clamp(1.1rem, 1.4vw, 1.3rem);
+    margin-bottom: 1.4rem;
 }
 
-.legend-group-title {
+.legend-list {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0 clamp(1.5rem, 3vw, 3rem);
+}
+
+.legend-list li {
     display: flex;
     align-items: center;
-    gap: 0.8rem;
-    font-size: clamp(1.05rem, 1.3vw, 1.25rem);
+    gap: 0.9rem;
+    padding: 0.85rem 0;
+    border-bottom: 1px solid var(--border-card);
+    color: #e2e8f0;
+    font-weight: 600;
+    font-size: clamp(0.9rem, 1vw, 1rem);
+}
+
+.legend-list li span {
+    flex: none;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 1.5px solid #60a5fa;
+    color: #93c5fd;
+    font-size: 0.82rem;
     font-weight: 800;
-    color: #0f172a;
-    margin-bottom: 1.1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.legend-group-title::after {
-    content: '';
-    flex: 1;
-    height: 1px;
-    background: rgba(15, 23, 42, 0.12);
+.legend-kept {
+    margin-top: 1.6rem;
+    color: var(--text-muted);
+    font-size: clamp(0.9rem, 1vw, 1rem);
+    line-height: 1.7;
 }
 
-.legend-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: clamp(0.9rem, 1.5vw, 1.4rem);
+.legend-kept strong {
+    color: white;
 }
 
-@media (max-width: 1100px) {
-    .legend-grid {
+@media (max-width: 1000px) {
+    .legend-list {
         grid-template-columns: repeat(2, 1fr);
     }
 }
 
 @media (max-width: 600px) {
-    .legend-grid {
+    .legend-list {
         grid-template-columns: 1fr;
     }
-}
-
-.legend-tag {
-    display: inline-block;
-    font-size: 0.72rem;
-    font-weight: 800;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: #60a5fa;
-    margin-bottom: 0.4rem;
-}
-
-.legend-card {
-    position: relative;
-    background: var(--card-dark);
-    border: 1px solid var(--border-card);
-    border-radius: 20px;
-    padding: 1.5rem 1.4rem 1.4rem;
-    color: white;
-    overflow: hidden;
-    transition: var(--transition);
-}
-
-.legend-card:hover {
-    transform: translateY(-4px);
-    border-color: rgba(96, 165, 250, 0.45);
-    box-shadow: 0 16px 34px rgba(0, 86, 210, 0.2);
-}
-
-.legend-icon {
-    width: 52px;
-    height: 52px;
-    border-radius: 14px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.35rem;
-    color: #60a5fa;
-    background: rgba(0, 86, 210, 0.2);
-    border: 1px solid rgba(0, 86, 210, 0.35);
-    margin-bottom: 1.1rem;
-    transition: var(--transition);
-}
-
-.legend-card:hover .legend-icon {
-    background: var(--brand-blue);
-    color: white;
-}
-
-.legend-num {
-    position: absolute;
-    top: 1.1rem;
-    right: 1.2rem;
-    min-width: 34px;
-    height: 34px;
-    padding: 0 0.5rem;
-    border-radius: 50px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 800;
-    font-size: 0.9rem;
-    color: #93c5fd;
-    border: 1.5px solid rgba(147, 197, 253, 0.55);
-}
-
-.legend-card h4 {
-    font-size: 1.08rem;
-    font-weight: 700;
-    margin-bottom: 0.45rem;
-    line-height: 1.35;
-}
-
-.legend-card p {
-    color: var(--text-muted);
-    font-size: 0.92rem;
-    line-height: 1.6;
-}
-
-/* Zachované prvky – kompaktní štítky (čtvereček = značka ve výkresu) */
-.legend-kept {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.7rem;
-}
-
-.legend-kept span {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.6rem;
-    background: white;
-    border: 1px solid rgba(15, 23, 42, 0.1);
-    border-radius: 14px;
-    padding: 0.55rem 1rem 0.55rem 0.55rem;
-    font-weight: 700;
-    color: #1e293b;
-    box-shadow: 0 6px 16px rgba(15, 23, 42, 0.05);
-}
-
-.legend-kept b {
-    width: 30px;
-    height: 30px;
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: #e2e8f0;
-    color: #0f172a;
-    font-size: 0.85rem;
 }
 
 /* Přepínač jazyka CZ / EN v hlavičce */
@@ -2819,7 +2729,7 @@ header.scrolled {
                 <div class="facts-list">
                     <h3>Parametry</h3>
                     <dl>
-                            <dt>Místo</dt><dd>Most – Marš. Rybalka 1020</dd>
+                            <dt>Místo</dt><dd>Most</dd>
                             <dt>Typ zakázky</dt><dd>Projekce – návrh modernizace</dd>
                             <dt>Objekt</dt><dd>Zahrada mateřské školy</dd>
                             <dt>Nové prvky</dt><dd>12 naučných a herních prvků</dd>
@@ -2837,107 +2747,26 @@ header.scrolled {
         <div class="section-header reveal">
             <span class="section-subtitle">Legenda návrhu</span>
             <h2 class="section-title">Co na zahradě přibylo</h2>
-            <p class="section-lead">Dvanáct nových prvků, se kterými se z hrací zahrady stává místo pro poznávání přírody. Čísla odpovídají výkresu.</p>
         </div>
 
-        <div class="legend-groups">
-            <div class="legend-grid">
-                <div class="legend-card reveal">
-                    <span class="legend-num">1</span>
-                    <div class="legend-icon"><i class="fa-solid fa-umbrella-beach"></i></div>
-                    <span class="legend-tag">Pobyt venku</span>
-                    <h4>Zastínění</h4>
-                    <p>Stínící plachta, pod kterou si děti odpočinou i v parných dnech.</p>
-                </div>
-                <div class="legend-card reveal">
-                    <span class="legend-num">2</span>
-                    <div class="legend-icon"><i class="fa-solid fa-spa"></i></div>
-                    <span class="legend-tag">Příroda</span>
-                    <h4>Motýlí strom s dřevěným sezením</h4>
-                    <p>Kvetoucí keř, který láká motýly. Kolem něj je dřevěné sezení k pozorování.</p>
-                </div>
-                <div class="legend-card reveal">
-                    <span class="legend-num">3</span>
-                    <div class="legend-icon"><i class="fa-solid fa-seedling"></i></div>
-                    <span class="legend-tag">Příroda</span>
-                    <h4>Vysoký truhlík na bylinky</h4>
-                    <p>Děti pěstují bylinky ve výšce, na kterou pohodlně dosáhnou.</p>
-                </div>
-                <div class="legend-card reveal">
-                    <span class="legend-num">4</span>
-                    <div class="legend-icon"><i class="fa-solid fa-apple-whole"></i></div>
-                    <span class="legend-tag">Příroda</span>
-                    <h4>Jabloň</h4>
-                    <p>Ovocný strom, na kterém děti sledují kvetení i zrání plodů.</p>
-                </div>
-                <div class="legend-card reveal">
-                    <span class="legend-num">5</span>
-                    <div class="legend-icon"><i class="fa-solid fa-leaf"></i></div>
-                    <span class="legend-tag">Příroda</span>
-                    <h4>Rybíz</h4>
-                    <p>Ovocný keř, ze kterého si děti mohou samy natrhat.</p>
-                </div>
-                <div class="legend-card reveal">
-                    <span class="legend-num">6</span>
-                    <div class="legend-icon"><i class="fa-solid fa-leaf"></i></div>
-                    <span class="legend-tag">Příroda</span>
-                    <h4>Angrešt</h4>
-                    <p>Další ovocný keř pro sezónní sklizeň s dětmi.</p>
-                </div>
-                <div class="legend-card reveal">
-                    <span class="legend-num">7</span>
-                    <div class="legend-icon"><i class="fa-solid fa-bug"></i></div>
-                    <span class="legend-tag">Poznávání</span>
-                    <h4>Domeček pro brouky</h4>
-                    <p>Úkryt pro hmyz, který si děti mohou prohlížet zblízka.</p>
-                </div>
-                <div class="legend-card reveal">
-                    <span class="legend-num">8</span>
-                    <div class="legend-icon"><i class="fa-solid fa-feather-pointed"></i></div>
-                    <span class="legend-tag">Poznávání</span>
-                    <h4>Psací tabule „ptáci“</h4>
-                    <p>Tabule k poznávání a zapisování ptáků, kteří na zahradu přilétají.</p>
-                </div>
-                <div class="legend-card reveal">
-                    <span class="legend-num">9</span>
-                    <div class="legend-icon"><i class="fa-solid fa-chair"></i></div>
-                    <span class="legend-tag">Pobyt venku</span>
-                    <h4>Stůl s lavičkou</h4>
-                    <p>Místo pro venkovní výuku, svačinu i tvoření.</p>
-                </div>
-                <div class="legend-card reveal">
-                    <span class="legend-num">10</span>
-                    <div class="legend-icon"><i class="fa-solid fa-dove"></i></div>
-                    <span class="legend-tag">Poznávání</span>
-                    <h4>Budky pro ptáky</h4>
-                    <p>Hnízdní budky, které přilákají ptáky do zahrady.</p>
-                </div>
-                <div class="legend-card reveal">
-                    <span class="legend-num">11</span>
-                    <div class="legend-icon"><i class="fa-solid fa-cloud-sun"></i></div>
-                    <span class="legend-tag">Poznávání</span>
-                    <h4>Meteorologická stanice a lupy</h4>
-                    <p>Děti sledují teplotu a počasí, lupy slouží k průzkumu přírody.</p>
-                </div>
-                <div class="legend-card reveal">
-                    <span class="legend-num">12</span>
-                    <div class="legend-icon"><i class="fa-solid fa-palette"></i></div>
-                    <span class="legend-tag">Poznávání</span>
-                    <h4>Kreslicí tabule</h4>
-                    <p>Velká tabule pro kreslení venku.</p>
-                </div>
-            </div>
-
-            <div>
-                <h3 class="legend-group-title reveal">Zachované herní prvky</h3>
-                <div class="legend-kept reveal">
-                    <span><b>1</b> Bedna na hračky</span>
-                    <span><b>2</b> Rohož</span>
-                    <span><b>3</b> Kladina</span>
-                    <span><b>4</b> Domeček</span>
-                    <span><b>5</b> Houpací šnek</span>
-                    <span><b>6</b> Letadlo</span>
-                </div>
+        <div class="dark-card-container reveal">
+            <div class="legend">
+                <h3>Nové prvky</h3>
+                <ol class="legend-list">
+                    <li><span>1</span>Zastínění</li>
+                    <li><span>2</span>Motýlí strom s dřevěným sezením</li>
+                    <li><span>3</span>Vysoký truhlík na bylinky</li>
+                    <li><span>4</span>Jabloň</li>
+                    <li><span>5</span>Rybíz</li>
+                    <li><span>6</span>Angrešt</li>
+                    <li><span>7</span>Domeček pro brouky</li>
+                    <li><span>8</span>Psací tabule „ptáci“</li>
+                    <li><span>9</span>Stůl s lavičkou</li>
+                    <li><span>10</span>Budky pro ptáky</li>
+                    <li><span>11</span>Meteorologická stanice a lupy</li>
+                    <li><span>12</span>Kreslicí tabule</li>
+                </ol>
+                <p class="legend-kept"><strong>Zachované herní prvky:</strong> bedna na hračky, rohož, kladina, domeček, houpací šnek a letadlo.</p>
             </div>
         </div>
     </section>
