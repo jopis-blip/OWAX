@@ -72,7 +72,7 @@ def fix_paths(t):
 
 def page_url(name, en):
     base = 'https://owax.cz/' + ('en/' if en else '')
-    return base if name == 'index.html' else base + name
+    return base if name == 'index.html' else base + name[:-5]   # adresy bez .html
 
 def add_switch(t, name, en):
     """Přepínač jazyka + odkazy hreflang (bezpečné spustit opakovaně)."""
@@ -83,7 +83,7 @@ def add_switch(t, name, en):
     alt = ''.join(f'\n    <link rel="alternate" hreflang="{l}" href="{u}">' for l, u in
                   (('cs', page_url(name, False)), ('en', page_url(name, True)), ('x-default', page_url(name, False))))
     t = re.sub(r'(\n    <link rel="canonical" href="[^"]+">)', lambda m: m.group(1) + alt, t, count=1)
-    other = '' if name == 'index.html' else name
+    other = '' if name == 'index.html' else name[:-5]   # adresy bez .html
     if en:
         link = f'<a href="../{other or "./"}" class="lang-switch" hreflang="cs" lang="cs" title="Česky">CZ</a>'
     else:
